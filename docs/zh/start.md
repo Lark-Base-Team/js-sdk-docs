@@ -33,7 +33,7 @@
 ![](../image/start/display-result.png)
 这个插件作用是：获取当前的 Table 名称，并展示出来，后面我们基于这个基础 Demo，来实现一个货币转换的插件
 ### 本地开发
-1. 点击进入这个 [Github项目](https://github.com/NasaRocket/base-js-sdk-learn-demo), Fork 此仓库，并 git clone 到本地
+1. 点击进入这个 [Github项目](https://github.com/Lark-Base-Team/js-sdk-learn-demo), Fork 此仓库，并 git clone 到本地
 2. 按照项目中 Readme.md 的内容，将项目运行起来，并按照提示复制对应的 URL 例如下图中的地址：
 
 ![](../image/start/local-url.png)
@@ -256,7 +256,7 @@ const transform = async () => {
 在设置货币值的时候，我们用 `CurrencyField.getValue` 来获取对应的数据，然后进行运算，回填的时候，也是调用了 `CurrencyField.setValue`，我们非常推荐
 开发者在对值进行增删改查的时候从字段入手，我们细化了非常多的字段类型，从而优化开发者的使用体验（例如附件字段，在 setValue 时支持直接传入文件，来达到设置对应值的目的）。
 
-[货币转换插件完整代码地址](https://github.com/NasaRocket/base-js-sdk-learn-demo/tree/feat-currency-plugin)
+[货币转换插件完整代码地址](https://github.com/Lark-Base-Team/js-sdk-learn-demo/tree/feat-currency-plugin)
 
 ## 发布插件
 ### Replit 官网开发的插件
