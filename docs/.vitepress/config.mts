@@ -159,9 +159,6 @@ export default defineConfig({
   base: '/js-sdk-docs/',
   lastUpdated: true,
   cleanUrls: true,
-  sitemap: {
-    hostname: 'https://basejsapi.com',
-  },
   head: [
     ['link', { rel: 'icon', href: 'logo.svg' }],
   ],
