@@ -156,9 +156,12 @@ const getZhSideBar = () => (
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/base-new-doc/',
+  base: '/js-sdk-docs/',
   lastUpdated: true,
   cleanUrls: true,
+  sitemap: {
+    hostname: 'https://basejsapi.com',
+  },
   head: [
     ['link', { rel: 'icon', href: 'logo.svg' }],
   ],
