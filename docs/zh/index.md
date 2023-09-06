@@ -7,7 +7,7 @@ hero:
   text: "Base 插件开发文档"
   tagline: 帮助开发者更轻松地开发插件
   image:
-    src: image.svg
+    src: public/image.svg
   actions:
     - theme: brand
       text: 快速入门

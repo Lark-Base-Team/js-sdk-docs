@@ -7,7 +7,7 @@ hero:
   text: "Base Plugin Development Documentation"
   tagline: "Helping Developers Build Plugins Easier"
   image:
-    src: image.svg
+    src: public/image.svg
   actions:
     - theme: brand
       text: "Quick Start"
