@@ -16,6 +16,9 @@ export default defineConfig({
       { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
     ],
   },
+  head: [
+    ['link', { rel: 'icon', href: 'logo.svg' }],
+  ],
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
   sitemap: {
