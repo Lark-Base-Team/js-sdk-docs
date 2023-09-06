@@ -12,6 +12,9 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
+    nav: [
+      { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
+    ],
   },
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
