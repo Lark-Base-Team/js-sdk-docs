@@ -26,9 +26,6 @@ export default defineConfig({
   },
   lang: 'zh',
   locales: {
-    // root: {
-    //   base: '/zh'
-    // },
     zh: {
       label: '中文',
       lang: 'zh',

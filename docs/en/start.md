@@ -16,7 +16,7 @@ Currently, we provide two development methods for beginners who have just starte
 1. Development on the Replit official website (recommended for new users)
 2. Development in a local editor (recommended for users with some programming experience)
 ### Development on the Replit official website
-1. Click to enter this [Replit project](https://replit.com/@RocketNasa1/base-js-sdk-learn-demo?v=1)
+1. Click to enter this [Replit project](https://replit.com/@RocketNasa1/js-sdk-learn-demo?v=1)
 2. Fork this repository (click the Fork button displayed in the red box)
    ![](../image/start/fork-replit-repl.jpg)
 3. Enter a name and description you like, and then click the Fork Repl button in the lower right corner.

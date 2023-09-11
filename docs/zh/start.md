@@ -16,7 +16,7 @@
 1. Replit 官网开发 (推荐新手用户使用)
 2. 本地编辑器开发 (推荐有一定编程经验的同学使用)
 ### Replit 官网开发
-1. 点击进入这个 [Replit 项目](https://replit.com/@RocketNasa1/base-js-sdk-learn-demo?v=1)
+1. 点击进入这个 [Replit 项目](https://replit.com/@RocketNasa1/js-sdk-learn-demo?v=1)
 2. Fork 这个仓库 (点击红框展示的 Fork 按钮)
 ![](../image/start/fork-replit-repl.jpg)
 3. 输入一个喜欢的名字以及描述，然后点击右下角的 Fork Repl
