@@ -7,6 +7,7 @@ import { getEnSideBar } from './en-sidebar';
 export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
+  base: '/js-sdk-docs/',
   themeConfig: {
     logo: 'logo.svg',
     search: {
