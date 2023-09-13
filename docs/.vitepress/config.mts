@@ -21,9 +21,9 @@ export default defineConfig({
   ],
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
-  sitemap: {
-    hostname: 'https://basejsapi.com',
-  },
+  // sitemap: {
+    // hostname: 'https://basejsapi.com',
+  // },
   lang: 'zh',
   locales: {
     zh: {
