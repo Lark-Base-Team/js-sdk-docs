@@ -34,7 +34,6 @@ export default defineConfig({
       title: 'Base JS SDK',
       description: 'Base JS SDK Docs',
       themeConfig: {
-        logo: 'logo.svg',
         search: {
           provider: 'local'
         },
@@ -51,7 +50,6 @@ export default defineConfig({
       title: 'Base JS SDK',
       description: 'Base JS SDK Docs',
       themeConfig: {
-        logo: 'logo.svg',
         search: {
           provider: 'local'
         },
