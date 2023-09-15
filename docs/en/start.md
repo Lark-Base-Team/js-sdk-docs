@@ -1,7 +1,25 @@
 # Quick Start
 
 Welcome to the Base JS SDK documentation! This section will introduce you to how to develop a Base plugin and master 80% of the concepts and core concepts of Base plugin development.
+## Upgrading from the old version:
+````shell
+# npm
+npm update @lark-base-open/js-sdk@0.3.0-alpha
+# yarn
+yarn upgrade @lark-base-open/js-sdk@0.3.0-alpha
+# pnpm 
+pnpm update @lark-base-open/js-sdk@0.3.0-alpha
+````
 
+## Package download:
+```shell
+# npm
+npm install @lark-base-open/js-sdk@0.3.0-alpha
+# yarn
+yarn add @lark-base-open/js-sdk@0.3.0-alpha
+# pnpm 
+pnpm add @lark-base-open/js-sdk@0.3.0-alpha
+```
 [NPM address](https://www.npmjs.com/package/@lark-base-open/js-sdk)
 
 Prerequisites:
