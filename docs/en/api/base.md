@@ -53,7 +53,7 @@ const tableList = await base.table.getTableList();
 ## getSelection
 Retrieves the current tableId and other information.
 ```typescript
-const { tableId } = await base.getSelection();
+const { tableId, viewId } = await base.getSelection();
 ```
 
 ## getTableMetaList
