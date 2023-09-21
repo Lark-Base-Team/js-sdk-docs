@@ -4,17 +4,26 @@ The `UI` module mainly involves UI-related operations at the plugin level, and c
 const ui = bitable.ui;
 ```
 
-## closeHostContainer
-```typescript
-closeHostContainer(): Promise<boolean>;
-```
-Closes the host container of the current plugin.
+[//]: # (## closeHostContainer)
 
-## setHostContainerSize
-```typescript
-setHostContainerSize(size: HostContainerSize): Promise<boolean>;
-```
-Sets the size of the host container for the current plugin.
+[//]: # (```typescript)
+
+[//]: # (closeHostContainer&#40;&#41;: Promise<boolean>;)
+
+[//]: # (```)
+
+[//]: # (Closes the host container of the current plugin.)
+
+[//]: # ()
+[//]: # (## setHostContainerSize)
+
+[//]: # (```typescript)
+
+[//]: # (setHostContainerSize&#40;size: HostContainerSize&#41;: Promise<boolean>;)
+
+[//]: # (```)
+
+[//]: # (Sets the size of the host container for the current plugin.)
 
 ## getSelectOptionColorInfoList
 ```typescript

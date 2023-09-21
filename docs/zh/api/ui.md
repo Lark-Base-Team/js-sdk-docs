@@ -4,17 +4,26 @@
 const ui = bitable.ui;
 ```
 
-## closeHostContainer
-```typescript
-closeHostContainer(): Promise<boolean>;
-```
-关闭当前插件的宿主容器
+[//]: # (## closeHostContainer)
 
-## setHostContainerSize
-```typescript
-setHostContainerSize(size: HostContainerSize): Promise<boolean>;
-```
-设置当前插件宿主容器大小
+[//]: # (```typescript)
+
+[//]: # (closeHostContainer&#40;&#41;: Promise<boolean>;)
+
+[//]: # (```)
+
+[//]: # (关闭当前插件的宿主容器)
+
+[//]: # ()
+[//]: # (## setHostContainerSize)
+
+[//]: # (```typescript)
+
+[//]: # (setHostContainerSize&#40;size: HostContainerSize&#41;: Promise<boolean>;)
+
+[//]: # (```)
+
+[//]: # (设置当前插件宿主容器大小)
 
 ##  getSelectOptionColorInfoList
 ```typescript
