@@ -299,8 +299,6 @@ getRecords(param: IGetRecordsParams): Promise<IGetRecordsResponse>;
 interface IGetRecordsParams {
   pageSize?: number; // 获取数量，默认 500，最大不得超过 500
   pageToken?: string; // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 pageToken，下次遍历可采用该 pageToken 获取查询结果
-  filter?: string; // 过滤条件
-  sort?: string; // 排序条件
   viewId?: string;  // 获取指定视图的 record，当传入 filter/sort 时，该属性会被忽略
 }
 ```

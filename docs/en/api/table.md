@@ -294,8 +294,6 @@ Batch retrieve records with a maximum limit of 500 records per request. The para
 interface IGetRecordsParams {
   pageSize?: number; // The number of records to retrieve, default is 500, maximum is 500
   pageToken?: string; // The page token used for pagination, not required for the first request, and will be returned in the response for subsequent requests
-  filter?: string; // The filter condition for the records
-  sort?: string; // The sort condition for the records
   viewId?: string;  // The viewId for retrieving records in a specific view, if filter/sort is provided, this will be ignored
 }
 ```
