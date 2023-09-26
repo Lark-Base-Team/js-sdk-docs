@@ -276,6 +276,15 @@ When setting the currency value, we use `CurrencyField.getValue` to get the corr
 
 ## Publishing the Plugin
 ### Publishing a Plugin on the Replit Website
+1. Click on the project name at the top, and the publish button will appear.
+   ![](../image/start/publish-plugin.png)
+2. After filling in the information, the Publish to Community button will appear, click on it.
+   ![](../image/start/publish-to-community.png)
+3. You will see a Repl published prompt with an accompanying URL. Click on the copy button next to it to copy the URL, which will be used in the next step
+   ![](../image/start/repl-published.png)
+4. After setting the project to public, fill out this [form](https://bytedance.feishu.cn/share/base/form/shrcnfhuWeBHoWTicKLFybn92Lb). We will contact you as soon as possible to help you officially launch your plugin in the application.
+   Copy the URl from step 8 and fill it into this field:
+   ![](../image/start/repl-url.png)
 ### Publishing a Locally Developed Plugin
 1. First, locally developed plugins need to be managed using GitHub. Submit your code to GitHub and then open this link [Replit](https://replit.com/~). After completing the registration and login, click on Create Repl.
    ![](../image/start/creat-repl.png)
