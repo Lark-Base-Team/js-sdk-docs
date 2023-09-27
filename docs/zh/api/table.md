@@ -6,13 +6,16 @@ Table 可以理解为当前数据表的一个数据库，其中并不涉及到�
 const table = await bitable.base.getActiveTable()
 ```
 
-## getName
+# Table 相关方法
+### getName
 ```typescript
 getName: () => Promise<string>;
 ```
 获取表名
 
-## addField
+# 字段相关
+## 新增字段
+### addField
 ```typescript
 addField: (fieldConfig: IAddFieldConfig) => Promise<IFieldRes>;
 ```
@@ -32,14 +35,31 @@ const singleField = await table.getField<ISingleSelectField>(singleSelectField);
 await singleField.addOption('Option1');
 ```
 如上所示的例子，我们先新增了一个单选字段，然后再在这个字段上新增了一个选项（推荐在获取字段的时候，指定对应的类型`<ISingleSelectField>` 等，以获得更好的语法提示）
+### onFieldAdd
+```typescript
+onFieldAdd(callback: (ev: IEventCbCtx) => void): () => void;
+```
+监听 Field 添加事件
 
-## setField
+## 设置字段
+### setField
 修改字段属性
 ```typescript
 setField(fieldId: string, fieldConfig: ISetFieldConfig): Promise<IFieldRes>;
 ```
+### onFieldModify
+```typescript
+onFieldModify(callback: (ev: IEventCbCtx) => void): () => void;
+```
+监听 Field 修改事件
 
-## getFieldMetaById
+## 获取字段信息
+### getFieldIdList
+```typescript
+getFieldIdList(): Promise<string[]>;
+```
+获取字段 id 数组
+### getFieldMetaById
 ```typescript
 getFieldMetaById(fieldId: string): Promise<IFieldMeta>;
 ```
@@ -54,7 +74,7 @@ interface IFieldMeta {
 }
 ```
 
-## getFieldMetaList
+### getFieldMetaList
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
 ```
@@ -69,14 +89,14 @@ interface IFieldMeta {
 }
 ```
 
-## isFieldExist
+### isFieldExist
 ```typescript
 isFieldExist(fieldId: string): Promise<boolean>;
 ```
 通过传入字段 id 判断字段是否存在
 
 
-## getFieldListByType
+### getFieldListByType
 ```typescript
 getFieldListByType: <T extends IField>(type: FieldType) => Promise<T[]>;
 ```
@@ -87,7 +107,7 @@ const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(Fie
 ```
 在这个例子中，我在获取字段的时候同时定义了预期的 `IAttachmentField` 类型，从而在后续开发中，我们就可以得到对于 `IAttachmentField` 字段类型的语法提示
 
-## getFieldMetaListByType  
+### getFieldMetaListByType
 ```typescript
 getFieldMetaListByType: <T extends IFieldMeta>(type: FieldType) => Promise<T[]>;
 ```
@@ -107,8 +127,7 @@ interface IFieldMeta {
 ```typescript
 const attachmentMetaList = await table.getFieldMetaListByType<IAttachmentFieldMeta>(FieldType.Attachment)
 ```
-
-## getField
+### getField
 ```typescript
 getField: <T extends IField>(idOrName: string) => Promise<T>;
 ```
@@ -117,7 +136,7 @@ getField: <T extends IField>(idOrName: string) => Promise<T>;
 const Field = await table.getField<IAttachmentField>(idOrName);
 ```
 
-## getFieldByName
+### getFieldByName
 ```typescript
 getFieldByName: <T extends IField>(name: string) => Promise<T>;
 ```
@@ -126,7 +145,7 @@ getFieldByName: <T extends IField>(name: string) => Promise<T>;
 const Field = await table.getFieldByName<IAttachmentField>(idOrName);
 ```
 
-## getFieldById
+### getFieldById
 ```typescript
 getFieldById: <T extends IField>(id: string) => Promise<T>;
 ```
@@ -135,7 +154,7 @@ getFieldById: <T extends IField>(id: string) => Promise<T>;
 const Field = await table.getFieldById<IAttachmentField>(idOrName);
 ```
 
-## getFieldByList 
+### getFieldByList
 ```typescript
 getFieldList: <T extends IField>() => Promise<T[]>;
 ```
@@ -145,7 +164,25 @@ getFieldList: <T extends IField>() => Promise<T[]>;
 const fieldList = await table.getFieldList();
 ```
 
-## addRecord
+## 删除字段
+### deleteField
+```typescript
+deleteField: (fieldOrId: string | IField) => Promise<boolean>;
+```
+删除一个字段(Field)
+```typescript
+await table.deleteField(attachmentField);
+```
+其中 attachmentField 可以通过 `table.getField` 方法获取到
+### onFieldDelete
+```typescript
+onFieldDelete(callback: (ev: IEventCbCtx) => void): () => void;
+```
+监听 Field 删除事件
+
+# 记录(Record)相关
+## 新增记录
+### addRecord
 ```typescript
 addRecord: (recordVale?: IRecordValue | ICell | ICell[]) => Promise<IRecordRes>;
 ```
@@ -168,7 +205,7 @@ const recordId = await table.addRecord(attachmentCell);
 ```
 其中 attachmentField 可以通过 `table.getField` 方法获取到
 
-## addRecords
+### addRecords
 ```typescript
 addRecords: (record?: IRecordValue[] | ICell[] | Array<ICell[]>) => Promise<IRecordRes[]>;
 ```
@@ -192,7 +229,7 @@ const recordIds = await table.addRecords([[attachmentCell1],[attachmentCell2]]);
 ```
 其中 attachmentField 可以通过 `table.getField` 方法获取到
 
-## addRecordByCell
+### addRecordByCell
 ```typescript
 addRecordByCell: (cells: ICell[]) => Promise<IRecordRes>;
 ```
@@ -203,7 +240,7 @@ const recordId = await table.addRecord(attachmentCell);
 ```
 其中 attachmentField 可以通过 `table.getField` 方法获取到
 
-## addRecordsByCell
+### addRecordsByCell
 ```typescript
 addRecordsByCell: (cells: Array<ICell[]>) => Promise<IRecordRes[]>;
 ```
@@ -215,69 +252,14 @@ const recordIds = await table.addRecords([[attachmentCell1],[attachmentCell2]]);
 ```
 其中 attachmentField 可以通过 `table.getField` 方法获取到
 
-## deleteField
+### onRecordAdd
 ```typescript
-deleteField: (fieldOrId: string | IField) => Promise<boolean>;
+onRecordAdd(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
 ```
-删除一个字段(Field)
-```typescript
-await table.deleteField(attachmentField);
-```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
+监听 Record 添加事件
 
-## getViewById
-```typescript
-getViewById: (id: string) => Promise<IView>;
-```
-通过 id 来获取 view 视图
-```typescript
-const view = await table.getViewById(id);
-```
-
-## getViewList
-```typescript
-getViewList: () => Promise<IView[]>;
-```
-获取 ViewList
-```typescript
-const viewList = await table.getViewList();
-```
-
-## getViewMetaById
-```typescript
-getViewMetaById(viewId: string): Promise<IViewMeta>;
-```
-通过 id 去获取视图的信息，其中 IViewMeta 的类型定义如下所示：
-```typescript
-interface IViewMeta {
-  id: string;
-  name: string;
-  type: ViewType;
-  property: IBaseViewProperty;
-}
-```
-
-## getViewMetaList
-```typescript
-getViewMetaList(): Promise<IViewMeta[]>;
-```
-获取所有的视图信息，并以数组返回，其中 IViewMeta 的类型定义如下所示：
-```typescript
-interface IViewMeta {
-  id: string;
-  name: string;
-  type: ViewType;
-  property: IBaseViewProperty;
-}
-```
-
-## isViewExist
-```typescript
-isViewExist(viewId: string): Promise<boolean>;
-```
-通过 viewId 判断视图是否存在
-
-## getRecordById
+## 获取记录
+### getRecordById
 ```typescript
 getRecordById(recordId: string): Promise<IRecordValue>;
 ```
@@ -290,7 +272,7 @@ type IRecordValue = {
 };
 ```
 
-## getRecords
+### getRecords
 ```typescript
 getRecords(param: IGetRecordsParams): Promise<IGetRecordsResponse>;
 ```
@@ -321,43 +303,41 @@ interface IRecord {
 }
 ```
 
-## getRecordIdList
+### getRecordIdList
 ```typescript
 getRecordIdList(filter?: string, sort?: string): Promise<string[]>;
 ```
 获取表中记录的 id
 
-## getCellValue
+### getCellValue
 ```typescript
 getCellValue(fieldId: string, recordId: string): Promise<IOpenCellValue>;
 ```
 获取单元格值 (更推荐通过 Field 来获取)
-
-## setCellValue
-```typescript
-setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordId: string, cellValue: T): Promise<boolean>;
-```
-设置单元格的值 (推荐通过 Field 来设置)
-
-## getAttachmentUrl
+### getAttachmentUrl
 ```typescript
 getAttachmentUrl(token: string, fieldId?: string, recordId?: string): Promise<string>;
 ```
 获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
-## getCellAttachmentUrls
+### getCellAttachmentUrls
 ```typescript
 getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
 ```
 获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
-## getCellThumbnailUrls
+### getCellThumbnailUrls
 ```typescript
 getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
 ```
 获取当前附件单元格中附件的预览 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
-
-## setRecord
+## 设置记录 `Record` 的值
+### setCellValue
+```typescript
+setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordId: string, cellValue: T): Promise<boolean>;
+```
+设置单元格的值 (推荐通过 Field 来设置)
+### setRecord
 ```typescript
 setRecord(recordId: string, recordValue?: IRecordValue): Promise<IRecordRes>;
 ```
@@ -371,7 +351,7 @@ type IRecordValue = {
 ```
 更推荐通过 Field 来设置 Value(Field.setValue)
 
-## setRecords
+### setRecords
 ```typescript
 setRecords(records?: IRecord[]): Promise<IRecordRes[]>;
 ```
@@ -384,62 +364,12 @@ interface IRecord {
   };
 }
 ```
-
-## deleteRecord
-```typescript
-deleteRecord(recordId: string): Promise<boolean>;
-```
-通过 RecordId 删除对应的记录
-
-## deleteRecords
-```typescript
-deleteRecords(recordIdList: string[]): Promise<boolean>;
-```
-通过 RecordId 数组，批量删除对应的记录
-
-## getCellString
+### getCellString
 ```typescript
 getCellString(fieldId: string, recordId: string): Promise<string>;
 ```
 获取 cellValue 并转化为 string 格式
-
-## getFieldIdList
-```typescript
-getFieldIdList(): Promise<string[]>;
-```
-获取字段 id 数组
-
-## onFieldAdd
-```typescript
-onFieldAdd(callback: (ev: IEventCbCtx) => void): () => void;
-```
-监听 Field 添加事件
-
-## onFieldDelete
-```typescript
-onFieldDelete(callback: (ev: IEventCbCtx) => void): () => void;
-```
-监听 Field 删除事件
-
-## onFieldModify
-```typescript
-onFieldModify(callback: (ev: IEventCbCtx) => void): () => void;
-```
-监听 Field 修改事件
-
-## onRecordAdd 
-```typescript
-onRecordAdd(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
-```
-监听 Record 添加事件
-
-## onRecordDelete
-```typescript
-onRecordDelete(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
-```
-监听 Record 删除事件
-
-## onRecordModify
+### onRecordModify
 ```typescript
 onRecordModify(callback: (ev: IEventCbCtx<{
   recordId: string;
@@ -447,3 +377,75 @@ onRecordModify(callback: (ev: IEventCbCtx<{
 }>) => void): () => void;
 ```
 监听 Record 修改事件
+
+## 删除记录
+### deleteRecord
+```typescript
+deleteRecord(recordId: string): Promise<boolean>;
+```
+通过 RecordId 删除对应的记录
+
+### deleteRecords
+```typescript
+deleteRecords(recordIdList: string[]): Promise<boolean>;
+```
+通过 RecordId 数组，批量删除对应的记录
+### onRecordDelete
+```typescript
+onRecordDelete(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
+```
+监听 Record 删除事件
+
+# 视图(View)相关
+## 获取视图
+### getViewById
+```typescript
+getViewById: (id: string) => Promise<IView>;
+```
+通过 id 来获取 view 视图
+```typescript
+const view = await table.getViewById(id);
+```
+
+### getViewList
+```typescript
+getViewList: () => Promise<IView[]>;
+```
+获取 ViewList
+```typescript
+const viewList = await table.getViewList();
+```
+
+### getViewMetaById
+```typescript
+getViewMetaById(viewId: string): Promise<IViewMeta>;
+```
+通过 id 去获取视图的信息，其中 IViewMeta 的类型定义如下所示：
+```typescript
+interface IViewMeta {
+  id: string;
+  name: string;
+  type: ViewType;
+  property: IBaseViewProperty;
+}
+```
+
+### getViewMetaList
+```typescript
+getViewMetaList(): Promise<IViewMeta[]>;
+```
+获取所有的视图信息，并以数组返回，其中 IViewMeta 的类型定义如下所示：
+```typescript
+interface IViewMeta {
+  id: string;
+  name: string;
+  type: ViewType;
+  property: IBaseViewProperty;
+}
+```
+
+### isViewExist
+```typescript
+isViewExist(viewId: string): Promise<boolean>;
+```
+通过 viewId 判断视图是否存在
