@@ -20,6 +20,10 @@ features:
     title: "Quick Start"
     details: "Get a quick understanding of the Base frontend plugin development model and core concepts to help external developers quickly build an interesting and useful plugin."
     link: en/start
+  - icon: 🌟
+    title: "Upgrade Guide for Old Versions"
+    details: "There is already a plugin upgrade guide, as well as optimizations for related APIs and core improvements."
+    link: en/update.md
 ---
 <style>
 :root {
