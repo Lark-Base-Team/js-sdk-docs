@@ -1,27 +1,6 @@
 # 快速入门
 
 欢迎来到 Base JS SDK 文档，本章节将为你介绍，如何开发一个 Base 插件，并掌握 Base 插件开发的 80% 概念以及设计的核心概念。
-
-## 旧版本升级方式：
-````shell
-# npm
-npm update @lark-base-open/js-sdk@0.3.0-alpha
-# yarn
-yarn upgrade @lark-base-open/js-sdk@0.3.0-alpha
-# pnpm 
-pnpm update @lark-base-open/js-sdk@0.3.0-alpha
-````
-
-## 包下载方式
-```shell
-# npm
-npm install @lark-base-open/js-sdk@0.3.0-alpha
-# yarn
-yarn add @lark-base-open/js-sdk@0.3.0-alpha
-# pnpm 
-pnpm add @lark-base-open/js-sdk@0.3.0-alpha
-```
-
 [NPM 地址](https://www.npmjs.com/package/@lark-base-open/js-sdk)
 
 前置学习：
