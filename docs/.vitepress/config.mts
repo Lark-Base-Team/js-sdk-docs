@@ -41,6 +41,9 @@ export default defineConfig({
         nav: [
           { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
         ],
+        head: [
+          ['link', { rel: 'icon', href: '/logo.svg' }],
+        ],
         sidebar: getZhSideBar(),
       },
     },
@@ -55,6 +58,9 @@ export default defineConfig({
         search: {
           provider: 'local'
         },
+        head: [
+          ['link', { rel: 'icon', href: '/logo.svg' }],
+        ],
         nav: [
           { text: 'API', link: '/en/api/guide.md' },
         ],
