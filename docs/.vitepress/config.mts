@@ -9,7 +9,7 @@ export default defineConfig({
   cleanUrls: true,
   base: '/js-sdk-docs/',
   themeConfig: {
-    logo: 'logo.svg',
+    logo: '/logo.svg',
     search: {
       provider: 'local'
     },
@@ -18,7 +18,7 @@ export default defineConfig({
     ],
   },
   head: [
-    ['link', { rel: 'icon', href: 'logo.svg' }],
+    ['link', { rel: 'icon', href: '/logo.svg' }],
   ],
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
@@ -34,6 +34,7 @@ export default defineConfig({
       title: 'Base JS SDK',
       description: 'Base JS SDK Docs',
       themeConfig: {
+        logo: '/logo.svg',
         search: {
           provider: 'local'
         },
@@ -50,6 +51,7 @@ export default defineConfig({
       title: 'Base JS SDK',
       description: 'Base JS SDK Docs',
       themeConfig: {
+        logo: '/logo.svg',
         search: {
           provider: 'local'
         },
