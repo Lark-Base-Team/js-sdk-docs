@@ -18,7 +18,7 @@ export default defineConfig({
     ],
   },
   head: [
-    ['link', { rel: 'icon', href: 'logo.svg' }],
+    ['link', { rel: 'icon', href: '/logo.svg' }],
   ],
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
