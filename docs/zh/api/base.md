@@ -148,7 +148,7 @@ batchUploadFile(file: File[] | FileList): Promise<string[]>;
 
 ## onTableAdd
 ```typescript
-onTableDelete(callback: () => void): () => void;
+onTableAdd(callback: () => void): () => void;
 ```
 监听 Table 添加事件
 

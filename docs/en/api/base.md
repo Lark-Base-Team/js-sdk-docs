@@ -146,15 +146,15 @@ batchUploadFile(file: File[] | FileList): Promise<string[]>;
 ```
 Uploads multiple files and returns a list of fileTokens corresponding to each file.
 
-## onTableAdd
+## onTableDelete
 ```typescript
 onTableDelete(callback: () => void): () => void;
 ```
 Listens for table add events.
 
-## onTableDelete
+## onTableAdd
 ```typescript
-onTableDelete(callback: () => void): () => void;
+onTableAdd(callback: () => void): () => void;
 ```
 Listens for table delete events.
 
