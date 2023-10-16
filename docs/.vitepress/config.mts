@@ -15,6 +15,7 @@ export default defineConfig({
     },
     nav: [
       { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
+      { text: 'ChangeLog', link: '/zh/changelog' },
     ],
   },
   head: [
@@ -23,7 +24,7 @@ export default defineConfig({
   title: 'Base JS SDK',
   description: 'Base JS SDK Docs',
   // sitemap: {
-    // hostname: 'https://basejsapi.com',
+  // hostname: 'https://basejsapi.com',
   // },
   lang: 'zh',
   locales: {
@@ -40,8 +41,8 @@ export default defineConfig({
         },
         nav: [
           { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
+          { text: 'ChangeLog', link: '/zh/changelog' },
         ],
-
         sidebar: getZhSideBar(),
       },
     },
@@ -58,6 +59,7 @@ export default defineConfig({
         },
         nav: [
           { text: 'API', link: '/en/api/guide.md' },
+          { text: 'ChangeLog', link: '/en/changelog' },
         ],
         sidebar: getEnSideBar(),
       },
