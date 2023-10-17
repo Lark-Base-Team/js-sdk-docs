@@ -51,5 +51,14 @@ features:
   }
 }
 </style>
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  import('./public/mounted').then((module) => {
+    // use code
+  })
+})
+</script>
 
 
