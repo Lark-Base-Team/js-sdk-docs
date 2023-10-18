@@ -14,6 +14,7 @@ export default defineConfig({
       provider: 'local'
     },
     nav: [
+      { text: 'Guide', link: '/zh/start', activeMatch: 'zh/start' },
       { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
       { text: 'ChangeLog', link: '/zh/changelog' },
     ],
@@ -40,6 +41,7 @@ export default defineConfig({
           provider: 'local'
         },
         nav: [
+          { text: 'Guide', link: '/zh/start', activeMatch: 'zh/start' },
           { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
           { text: 'ChangeLog', link: '/zh/changelog' },
         ],
@@ -58,6 +60,7 @@ export default defineConfig({
           provider: 'local'
         },
         nav: [
+          { text: 'Guide', link: '/en/start', activeMatch: 'en/start' },
           { text: 'API', link: '/en/api/guide.md' },
           { text: 'ChangeLog', link: '/en/changelog' },
         ],
