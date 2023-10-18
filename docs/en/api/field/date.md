@@ -19,7 +19,7 @@ Creates a cell for the date field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Retrieves the cell for the date field from the specified record.
 

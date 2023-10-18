@@ -25,7 +25,7 @@ Create a `Cell` for a user field
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Get the corresponding `Cell` for the given `Record`
 

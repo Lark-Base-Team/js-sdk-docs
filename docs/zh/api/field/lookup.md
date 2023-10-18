@@ -12,7 +12,7 @@ createCell: (val: IOpenFormulaCellValue) => Promise<ICell>;
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 通过对应的 `Record` 来获取对应的 `Cell`
 

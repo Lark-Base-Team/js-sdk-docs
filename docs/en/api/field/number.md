@@ -16,7 +16,7 @@ Creates a cell for the number field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell value for the specified record.
 

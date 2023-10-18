@@ -30,7 +30,7 @@ Creates a cell for the Multiple Select field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell value of the Multiple Select field for a given record.
 
