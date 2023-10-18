@@ -24,6 +24,6 @@ Get the value of the CreateUser field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Get the corresponding Cell using the corresponding Record.

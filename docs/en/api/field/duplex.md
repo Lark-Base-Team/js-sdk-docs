@@ -22,7 +22,7 @@ Create a cell for the bidirectional link field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Get the cell for the corresponding record.
 

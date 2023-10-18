@@ -28,7 +28,7 @@ Creates a cell for the single select field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell of the single select field for a given record.
 

@@ -22,7 +22,7 @@ Creates a cell for a URL field. Developers can specify the format by providing t
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell for the corresponding record.
 

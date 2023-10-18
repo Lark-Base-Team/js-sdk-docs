@@ -16,7 +16,7 @@ Creates a cell for the barcode field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell for the barcode field using the corresponding record.
 

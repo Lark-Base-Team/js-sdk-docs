@@ -29,7 +29,7 @@ Creates a new cell for the Group field.
 
 ## getCell
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<ICell>;
+getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
 Gets the cell value for the Group field based on a record.
 
