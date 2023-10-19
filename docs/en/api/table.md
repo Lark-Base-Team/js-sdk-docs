@@ -56,6 +56,7 @@ Listen to the Field modify event.
 
 ## Get Field Information
 ### getFieldIdList
+The `fieldIdList` obtained through this method is unordered because `table` is only at the database level and not at the view (UI display) level. Therefore, it is unordered. If you need to obtain an ordered list, you need to call `view.getFieldIdList` in the `View` to obtain the ordered field IDs.
 ```typescript
 getFieldIdList(): Promise<string[]>;
 ```
@@ -77,6 +78,7 @@ interface IFieldMeta {
 ```
 
 ### getFieldMetaList
+The `fieldMetaList` obtained through this method is unordered because the `table` is only at the database level and not at the view (UI display) level. Therefore, it is unordered. If you need to obtain an ordered list, you need to call `view.getFieldMetaList` in the `View` to obtain the corresponding ordered field `meta`.
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
 ```
