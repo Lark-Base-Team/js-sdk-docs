@@ -55,6 +55,7 @@ onFieldModify(callback: (ev: IEventCbCtx) => void): () => void;
 
 ## 获取字段信息
 ### getFieldIdList
+通过该方法获取的 `fieldIdList` 是无序的，因为 `table` 仅仅是数据库层面的，并不是视图（UI展示）层面的，因此是无序的，如果需要获取有序的，需要在 `View` 调用 `view.getFieldIdList` 来获取有序的字段 `Id`
 ```typescript
 getFieldIdList(): Promise<string[]>;
 ```
@@ -75,6 +76,7 @@ interface IFieldMeta {
 ```
 
 ### getFieldMetaList
+通过该方法获取的 `fieldMetaList` 是无序的，因为 `table` 仅仅是数据库层面的，并不是视图（UI展示）层面的，因此是无序的，如果需要获取有序的，需要在 `View` 调用 `view.getFieldMetaList` 来获取对应有序的字段 `meta`
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
 ```
