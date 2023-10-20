@@ -350,10 +350,7 @@ interface IRecord {
     [fieldId: string]: IOpenCellValue;
   };
 }
-  
-# Record Related
-
-## Get Record Information
+```
 
 ### getRecordIdList
 
@@ -394,6 +391,14 @@ getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string): Promi
 ```
 
 Get the preview URLs of the attachments in the current attachment cell (it is recommended to use AttachmentField to get the URLs, AttachmentField can get the attachment URLs by passing in the Record/RecordId parameter).
+
+### getRecordShareLink
+
+```typescript
+getRecordShareLink(recordId: string)
+```
+
+Get the sharing link for a specific record.
 
 ## Set Record Values
 

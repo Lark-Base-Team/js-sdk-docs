@@ -333,6 +333,13 @@ getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Prom
 getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
 ```
 获取当前附件单元格中附件的预览 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
+
+### getRecordShareLink
+```typescript
+getRecordShareLink(recordId: string)
+```
+获取指定记录的分享链接
+
 ## 设置记录 `Record` 的值
 ### setCellValue
 ```typescript
