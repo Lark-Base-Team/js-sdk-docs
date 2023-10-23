@@ -2,7 +2,7 @@
 
 > It is recommended to start reading from the [Quick Start](../start/core.md)
 
-Based on the knowledge from the [Quick Start](../start.md), you should have a preliminary understanding of the multidimensional table model. This article will help you reinforce your understanding of this model, making it easier to design plugins and query the API.
+Based on the knowledge from the [Quick Start](../start/core.md), you should have a preliminary understanding of the multidimensional table model. This article will help you reinforce your understanding of this model, making it easier to design plugins and query the API.
 
 `bitable` is the entry point for all APIs. It does not have any API interfaces itself, but it has three properties: `base`, `ui`, and `bridge`. We won't go into detail about the functions of these modules here, but we will explain some common usage patterns.
 
