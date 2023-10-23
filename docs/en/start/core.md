@@ -23,6 +23,9 @@ import { bitable } from '@lark-base-open/js-sdk'
 const table = await bitable.base.getActiveTable();
 const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(FieldType.Attachment);
 ```
+The modules such as `table`, `field`, etc. can be found in the following diagram:
+
+![](../../image/module-name.png)
 
 Let's introduce the concepts of each module:
 
