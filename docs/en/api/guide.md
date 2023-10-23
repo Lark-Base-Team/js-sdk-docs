@@ -1,6 +1,6 @@
 # API Guide
 
-> It is recommended to start reading from the [Quick Start](../start.md)
+> It is recommended to start reading from the [Quick Start](../start/core.md)
 
 Based on the knowledge from the [Quick Start](../start.md), you should have a preliminary understanding of the multidimensional table model. This article will help you reinforce your understanding of this model, making it easier to design plugins and query the API.
 

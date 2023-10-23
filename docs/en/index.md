@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: "Quick Start"
-      link: en/start
+      link: en/start/core
     - theme: alt
       text: "API Reference"
       link: en/api/guide
@@ -19,7 +19,7 @@ features:
   - icon: 📝
     title: "Quick Start"
     details: "Get a quick understanding of the Base frontend plugin development model and core concepts to help external developers quickly build an interesting and useful plugin."
-    link: en/start
+    link: en/start/core
   - icon: 🌟
     title: "Upgrade Guide for Old Versions"
     details: "There is already a plugin upgrade guide, as well as optimizations for related APIs and core improvements."

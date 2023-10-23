@@ -14,7 +14,7 @@ export default defineConfig({
       provider: 'local'
     },
     nav: [
-      { text: 'Guide', link: '/zh/start', activeMatch: 'zh/start' },
+      { text: 'Guide', link: '/zh/start/core', activeMatch: 'zh/start/core' },
       { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
       { text: 'ChangeLog', link: '/zh/changelog' },
       { text: '联系我们', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=c35kac73-d80b-4066-bcd0-2df6e6017188' },
@@ -42,7 +42,7 @@ export default defineConfig({
           provider: 'local'
         },
         nav: [
-          { text: 'Guide', link: '/zh/start', activeMatch: 'zh/start' },
+          { text: 'Guide', link: '/zh/start/core', activeMatch: 'zh/start/core' },
           { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
           { text: 'ChangeLog', link: '/zh/changelog' },
           { text: '联系我们', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=c35kac73-d80b-4066-bcd0-2df6e6017188' },
@@ -62,7 +62,7 @@ export default defineConfig({
           provider: 'local'
         },
         nav: [
-          { text: 'Guide', link: '/en/start', activeMatch: 'en/start' },
+          { text: 'Guide', link: '/en/start/core', activeMatch: 'en/start/core' },
           { text: 'API', link: '/en/api/guide.md' },
           { text: 'ChangeLog', link: '/en/changelog' },
           { text: 'Contact Us', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=ba0v0b79-adc7-4383-a8fc-14c75992441f' },

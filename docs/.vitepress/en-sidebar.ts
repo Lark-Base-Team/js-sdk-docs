@@ -1,5 +1,30 @@
 export const getEnSideBar = () => (
   {
+    'en/start': {
+      base: '/en/start/',
+      items: [
+        {
+          text: 'Core Knowledge',
+          link: 'core'
+        },
+        {
+          text: 'Setting up the Development Environment',
+          link: 'env',
+        },
+        {
+          text: 'Currency Conversion Plugin',
+          link: 'example',
+        },
+        {
+          text: 'Publishing a Plugin',
+          link: 'release',
+        },
+        {
+          text: 'finally',
+          link: 'finally',
+        }
+      ],
+    },
     'en/api': {
       base: '/en/api/',
       items: [

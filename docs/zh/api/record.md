@@ -1,17 +1,22 @@
 # Record 模块
-在 `Table` 中，可以通过 `getRecordList` 接口获取到 `RecordList`，`RecordList` 是可以遍历使用的，使用后方式如下
+::: warning 
+更推荐开发者们从 [`Field(字段)`](field/guide.md) 字段角度来考虑对数据的增删改查
+:::
+在 `Table` 中，可以通过 `getRecordList` 接口获取到 `RecordList`，`RecordList` 是可以遍历使用的，使用方式如下:
 ```typescript
 const recordList = await table.getRecordList();
 for (const record of recordList) {
+  const cell = await record.getCellByField(fieldId);
+  const val = await cell.getValue();
 }
 ```
-其中 `record` 中就有当前页面含有的 API，在 `RecordList` 中，还含有通过 `recordId` 来获取指定 `Record` 对象的 API
+`cell` 可以简单类比为表格中的单元格，其中有对应的值(关于 [`Cell`](cell.md))
 ```typescript
 const record = await recordList.getRecordById(recordId);
 ```
 不过，还是更推荐开发者在对数据进行增删改查时，从 [`Field(字段)`](field/guide.md) 来考虑
 
-## getCell
+## getCellList
 ```typescript
 getCellList: () => Promise<ICell[]>;
 ```

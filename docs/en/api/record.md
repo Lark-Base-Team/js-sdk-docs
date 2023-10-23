@@ -1,24 +1,29 @@
-# Record module
-In the `Table` module, you can use the `getRecordList` interface to get the `RecordList`. The `RecordList` can be iterated through using a `for...of` loop, as shown below:
+# Record Module
+::: warning
+It is recommended that developers consider data operations from the perspective of [`Field`](field/guide.md) fields.
+:::
+In the `Table` module, you can use the `getRecordList` interface to obtain a `RecordList`. The `RecordList` can be iterated through using the following method:
 ```typescript
 const recordList = await table.getRecordList();
 for (const record of recordList) {
+  const cell = await record.getCellByField(fieldId);
+  const val = await cell.getValue();
 }
 ```
-The `record` object contains the APIs available for the current page. In addition to this, the `RecordList` also contains APIs to retrieve specific `Record` objects using their `recordId`:
+The `cell` can be considered as a cell in the table, which has a corresponding value (see [`Cell`](cell.md)).
 ```typescript
 const record = await recordList.getRecordById(recordId);
 ```
-However, it is recommended to consider using [`Field`](field/guide.md) when performing data manipulation operations.
+However, it is still recommended that developers consider data operations from the perspective of [`Field`](field/guide.md) when performing CRUD operations on data.
 
-## getCell
+## getCellList
 ```typescript
 getCellList: () => Promise<ICell[]>;
 ```
-Retrieves all the `Cell` objects in the current record (see [`Cell`](cell.md)).
+Get all the `Cell`s in the current record (see [`Cell`](cell.md)).
 
 ## getCellByField
 ```typescript
 getCellByField: (fieldOrId: IField | string) => Promise<ICell>;
 ```
-Retrieves the `Cell` object for a specified Field (see [`Cell`](cell.md)).
+Get the `Cell` by the Field (see [`Cell`](cell.md)).
