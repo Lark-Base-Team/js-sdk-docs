@@ -340,7 +340,7 @@ getRecordShareLink(recordId: string)
 ```
 获取指定记录的分享链接
 
-## 设置记录 `Record` 的值
+## 设置记录
 ### setCellValue
 ```typescript
 setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordId: string, cellValue: T): Promise<boolean>;
@@ -407,6 +407,12 @@ onRecordDelete(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => v
 
 # 视图(View)相关
 ## 获取视图
+### getActiveView
+```typescript
+getActiveView: () => Promise<IView>;
+```
+获取当前选择的视图
+
 ### getViewById
 ```typescript
 getViewById: (id: string) => Promise<IView>;

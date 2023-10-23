@@ -9,7 +9,7 @@
 + [Typescript](https://www.typescriptlang.org/docs/)
 # 核心知识
 
-在开始搭建货币转换插件之前，我们先了解一下多维表格的核心概念以及相关知识
+我们先了解一下多维表格的核心概念以及相关知识
 
 下图所示的是 API 的设计模型:
 
@@ -22,6 +22,9 @@ import { bitable } from '@lark-base-open/js-sdk'
 const table = await bitable.base.getActiveTable();
 const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(FieldType.Attachment);
 ```
+其中，`table` `field` 等模块都都可以在下面这张图中找到对应的关系：
+
+![](../../image/module-name.png)
 
 下面介绍各个模块的概念：
 
