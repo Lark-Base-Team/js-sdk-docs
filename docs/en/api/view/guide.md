@@ -1,24 +1,23 @@
-# View 模块
+# View Module
 
-`View` 模块决定 `Table` 模块（可以理解为数据库），在 UI 层的展示方式(例如字段的展示顺序/记录的显隐) 等，因此在 View
-模块获取字段/记录的顺序都是有序的
+The `View` module determines the presentation of the `Table` module (which can be understood as a database) in the UI layer, such as the display order of fields/records, etc. Therefore, the order of fields/records obtained in the View module is sorted.
 
-`View` 模块可以在 `Table` 层通过 `getActiveView` 的方式获取
+The `View` module can be obtained in the `Table` layer through the `getActiveView` method.
 
 ```typescript
 const view = await table.getActiveView();
 ```
 
-View 可以通过下图在得知其在页面中是负责 UI 展示的，因此很多与 UI 展示形式相关的 API 都存在于 View 层，例如筛选/分组/排序等
+View is responsible for the UI presentation in the page, as shown in the figure below, so many APIs related to UI presentation, such as filtering/grouping/sorting, etc., are in the View layer.
 ![](../../../image/module-name.png)
 
 ::: warning
-在 View 层很多接口，例如 分组/筛选/排序等，在调用 API 之后如果需要保存或者同步给其他用户需要调用 `view.applySetting` 方法
+In the View layer, many interfaces, such as grouping/filtering/sorting, etc., need to call the `view.applySetting` method to save or synchronize to other users after calling the API.
 :::
 
-> 下面是一些基础能力的定义，可以略过，后续会在 API 涉及到的地方有指引
+> The following are some basic capabilities definitions, which can be skipped. There will be guidance in the APIs involved later.
 
-# View 模块相关类型定义
+# View Module Related Type Definitions
 
 ## IFilterInfo
 
@@ -29,7 +28,7 @@ interface IFilterInfo {
 }
 ```
 
-其中 FilterConjunction 的类型定义为
+The type definition of FilterConjunction is as follows:
 
 ```typescript
 enum FilterConjunction {
@@ -38,7 +37,7 @@ enum FilterConjunction {
 }
 ```
 
-`FilterInfoCondition` 会随着不同的字段有不同的定义，具体类型如下：
+`FilterInfoCondition` will have different definitions for different fields, with specific types as follows:
 
 | IFilterAttachmentCondition                                      | IFilterCheckboxCondition         | IFilterAutoNumberCondition                                                                                                                                                                                                        | IFilterDateTimeCondition                                                                                                                  | IFilterCreatedTimeCondition                                                                                                               | IFilterModifiedTimeCondition                                                                                                               | IFilterUserCondition           | IFilterCreatedUserCondition         | IFilterModifiedUserCondition         | IFilterDuplexLinkCondition         | IFilterSingleLinkCondition         | IFilterFormulaCondition         | IFilterGroupChatCondition         | IFilterLocationCondition         | IFilterLookupCondition         | IFilterMultiSelectCondition         | IFilterSingleSelectCondition                                                                                                                                             | IFilterPhoneCondition          | IFilterTextCondition           | IFilterNumberCondition                                                                                                                                                                                                           | IFilterUrlCondition            | IFilterCurrencyCondition                                                                                                                                                                                                         | IFilterBarcodeCondition         | IFilterProgressCondition                                                                                                                                                                                                         | IFilterRatingCondition                                                                                                                                                                                                           |
 |-----------------------------------------------------------------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|-------------------------------------|--------------------------------------|------------------------------------|------------------------------------|---------------------------------|-----------------------------------|----------------------------------|--------------------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,63 +47,63 @@ enum FilterConjunction {
 | `fieldType?: FieldType.Attachment`                              | `fieldType?: FieldType.Checkbox` | `fieldType?: FieldType.AutoNumber`                                                                                                                                                                                                | `fieldType?: FieldType.DateTime`                                                                                                          | `fieldType?: FieldType.CreatedTime`                                                                                                       | `fieldType?: FieldType.ModifiedTime`                                                                                                       | `fieldType?: FieldType.User`   | `fieldType?: FieldType.CreatedUser` | `fieldType?: FieldType.ModifiedUser` | `fieldType?: FieldType.DuplexLink` | `fieldType?: FieldType.SingleLink` | `fieldType?: FieldType.Formula` | `fieldType?: FieldType.GroupChat` | `fieldType?: FieldType.Location` | `fieldType?: FieldType.Lookup` | `fieldType?: FieldType.MultiSelect` | `fieldType?: FieldType.SingleSelect`                                                                                                                                     | `fieldType?: FieldType.Phone`  | `fieldType?: FieldType.Text`   | `fieldType?: FieldType.Number`                                                                                                                                                                                                   | `fieldType?: FieldType.Url`    | `fieldType?: FieldType.Currency`                                                                                                                                                                                                 | `fieldType?: FieldType.Barcode` | `fieldType?: FieldType.Progress`                                                                                                                                                                                                 | `fieldType?: FieldType.Rating`                                                                                                                                                                                                   |
 | `conditionId?: string`                                          | `conditionId?: string`           | `conditionId?: string`                                                                                                                                                                                                            | `conditionId?: string`                                                                                                                    | `conditionId?: string`                                                                                                                    | `conditionId?: string`                                                                                                                     | `conditionId?: string`         | `conditionId?: string`              | `conditionId?: string`               | `conditionId?: string`             | `conditionId?: string`             | `conditionId?: string`          | `conditionId?: string`            | `conditionId?: string`           | `conditionId?: string`         | `conditionId?: string`              | `conditionId?: string`                                                                                                                                                   | `conditionId?: string`         | `conditionId?: string`         | `conditionId?: string`                                                                                                                                                                                                           | `conditionId?: string`         | `conditionId?: string`                                                                                                                                                                                                           | `conditionId?: string`          | `conditionId?: string`                                                                                                                                                                                                           | `conditionId?: string`                                                                                                                                                                                                           |
 
-其中 `FilterOperator` 定义如下
+The `FilterOperator` is defined as follows:
 
 ```typescript
 enum FilterOperator {
-  /** 等于 */
+  /** Equal */
   Is = 'is',
-  /** 不等于 */
+  /** Not equal */
   IsNot = 'isNot',
-  /** 包含 */
+  /** Contains */
   Contains = 'contains',
-  /** 不包含 */
+  /** Does not contain */
   DoesNotContain = 'doesNotContain',
-  /** 为空 */
+  /** Is empty */
   IsEmpty = 'isEmpty',
-  /** 不为空 */
+  /** Is not empty */
   IsNotEmpty = 'isNotEmpty',
-  /** 大于 */
+  /** Greater than */
   IsGreater = 'isGreater',
-  /** 大于或等于 */
+  /** Greater than or equal to */
   IsGreaterEqual = 'isGreaterEqual',
-  /** 小于 */
+  /** Less than */
   IsLess = 'isLess',
-  /** 小于或等于 */
+  /** Less than or equal to */
   IsLessEqual = 'isLessEqual'
 }
 ```
 
-`FilterDuration` 定义如下
+`FilterDuration` is defined as follows:
 
 ```typescript
 enum FilterDuration {
-  /** 今天 */
+  /** Today */
   Today = "Today",
-  /** 明天 */
+  /** Tomorrow */
   Tomorrow = "Tomorrow",
-  /** 昨天 */
+  /** Yesterday */
   Yesterday = "Yesterday",
-  /** 过去7天 */
+  /** Past 7 days */
   TheLastWeek = "TheLastWeek",
-  /** 未来7天 */
+  /** Next 7 days */
   TheNextWeek = "TheNextWeek",
-  /** 过去30天 */
+  /** Past 30 days */
   TheLastMonth = "TheLastMonth",
-  /** 未来30天 */
+  /** Next 30 days */
   TheNextMonth = "TheNextMonth",
-  /** 本周 */
+  /** Current week */
   CurrentWeek = "CurrentWeek",
-  /** 上周 */
+  /** Last week */
   LastWeek = "LastWeek",
-  /** 本月 */
+  /** Current month */
   CurrentMonth = "CurrentMonth",
-  /** 上个月 */
+  /** Last month */
   LastMonth = "LastMonth"
 }
 ```
 
-`BaseFilterOperator` 定义如下：
+`BaseFilterOperator` is defined as follows:
 
 ```typescript
 type BaseFilterOperator =
@@ -121,7 +120,7 @@ type BaseFilterOperator =
 ```typescript
 interface ISortInfo {
   fieldId: string;
-  /** false: 正序 A -> Z;  true: 倒序 Z -> A */
+  /** false: Ascending A -> Z;  true: Descending Z -> A */
   desc: boolean;
 }
 ```
@@ -131,7 +130,7 @@ interface ISortInfo {
 ```typescript
 interface IGroupInfo {
   fieldId: string;
-  /** false: 正序 A -> Z;  true: 倒序 Z -> A */
+  /** false: Ascending A -> Z;  true: Descending Z -> A */
   desc: boolean;
 }
 ```
