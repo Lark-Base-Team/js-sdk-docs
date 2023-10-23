@@ -1,5 +1,30 @@
 export const getZhSideBar = () => (
   {
+    'zh/start': {
+      base: '/zh/start/',
+      items: [
+        {
+          text: '核心知识',
+          link: 'core'
+        },
+        {
+          text: '搭建开发环境',
+          link: 'env',
+        },
+        {
+          text: '开发一个货币转换插件',
+          link: 'example',
+        },
+        {
+          text: '发布一个插件',
+          link: 'release',
+        },
+        {
+          text: '最后',
+          link: 'finally',
+        }
+      ],
+    },
     'zh/api': {
       base: '/zh/api/',
       items: [

@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 快速入门
-      link: /zh/start
+      link: /zh/start/core
     - theme: alt
       text: API 参考
       link: /zh/api/guide
