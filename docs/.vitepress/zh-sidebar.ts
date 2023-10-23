@@ -67,6 +67,9 @@ export const getZhSideBar = () => (
           ]
         },
         {
+          text: '视图模块',
+        },
+        {
           text: '字段模块',
           collapsed: false,
           items: [
