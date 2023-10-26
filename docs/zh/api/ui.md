@@ -4,19 +4,30 @@
 const ui = bitable.ui;
 ```
 
-## switchBlock
+## switchToTable
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
 ```typescript
-switchBlock(blockId: string): Promise<boolean>;
+switchToTable(tableId: string): Promise<boolean>;
 ```
-切换当前的数据表，（可以切换到 `Dashboard仪表盘` 等）
+切换当前选中的数据表
 
 ## switchToView
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
 ```typescript
 switchToView(tableId: string, viewId: string): Promise<boolean>;
 ```
 切换到对应 `table(数据表)` 下对应的 `View(视图)`
 
 ## selectRecordIdList
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
 ```typescript
 selectRecordIdList(tableId: string, viewId: string): Promise<string[]>;
 ```
@@ -32,6 +43,10 @@ for (const recordId of recordIdList) {
 ```
 
 ## showToast
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
 ```typescript
 showToast(options: ShowToastOptions): Promise<boolean>;
 enum ToastType {

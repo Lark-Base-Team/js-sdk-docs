@@ -1,3 +1,64 @@
+# KanbanView 看板视图
+
+::: warning
+该模块测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
+## getName
+```typescript
+getName(): Promise<string>;
+```
+获取视图名
+
+## getType
+获取视图类型
+```typescript
+getType(): Promise<ViewType.Kanban>;
+```
+
+## getMeta
+```typescript
+getMeta(): Promise<IKanbanViewMeta>;
+```
+
+获取视图元数据，其中 `IKanbanViewMeta` 的类型定义为：
+
+```typescript
+interface IKanbanViewMeta {
+  id: string;
+  name: string;
+  type: ViewType.Kanban;
+  property: {
+    filterInfo: IFilterInfo | null;
+    sortInfo: ISortInfo[];
+  };
+}
+```
+
+## getFieldMetaList
+```typescript
+getFieldMetaList(): Promise<IFieldMeta[]>;
+```
+获取字段信息的列表，因为 `View` 层涉及到了 `UI` 的展示，所以此时获取的字段信息是有序的
+
+## getVisibleRecordIdList
+```typescript
+getVisibleRecordIdList(): Promise<(string | undefined)[]>;
+```
+获取可见记录的 ID 列表
+
+## getVisibleFieldIdList
+```typescript
+getVisibleFieldIdList(): Promise<string[]>;
+```
+获取可见字段的 ID 列表
+
+## applySetting
+```typescript
+applySetting(): Promise<void>;
+```
+将设置的分组/筛选/排序等视图配置提交，同步给其他用户
+
 ## getFilterInfo
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;

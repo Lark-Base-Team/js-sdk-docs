@@ -1,11 +1,43 @@
-# 表格视图
+# GridView 表格视图
+
+::: warning
+该模块测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
+## getName
+```typescript
+getName(): Promise<string>;
+```
+获取视图名
 
 ## getType
-获取视图类型，在当前的表格视图下返回 `ViewType.Grid`
+获取视图类型
 ```typescript
-getType(): Promise<ViewType>;
+getType(): Promise<ViewType.Grid>;
 ```
+
 ## getMeta
+```typescript
+getMeta(): Promise<IGridViewMeta>;
+```
+获取表格视图元信息，其中 `IGridViewMeta` 类型定义为：
+
+```typescript
+interface IGridViewMeta {
+    id: string;
+    name: string;
+    type: ViewType.Grid;
+    property: {
+        hierarchyConfig: {
+            fieldId: string | undefined;
+        };
+        filterInfo: IFilterInfo | null;
+        sortInfo: ISortInfo[];
+        groupInfo: IGroupInfo[];
+    }
+}
+```
+
 ## getFieldMetaList
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
@@ -14,15 +46,21 @@ getFieldMetaList(): Promise<IFieldMeta[]>;
 
 ## getVisibleRecordIdList
 ```typescript
-getVisibleRecordIdList(filterInfo?: IFilterInfo, sortInfo?: ISortInfo[]): Promise<(string | undefined)[]>;
+getVisibleRecordIdList(): Promise<(string | undefined)[]>;
 ```
-获取当前可见的 RecordId，可以传入过滤条件以及排序条件以获取根据条件筛选后的 recordId ([IFilterInfo 类型定义](./guide.md#ifilterinfo) 以及 [ISortInfo 类型定义](./guide.md#isortinfo))
+获取可见记录的 ID 列表
 
 ## getVisibleFieldIdList
 ```typescript
 getVisibleFieldIdList(): Promise<string[]>;
 ```
-获取当前可见的字段 ID 列表
+获取可见字段的 ID 列表
+
+## applySetting
+```typescript
+applySetting(): Promise<void>;
+```
+将设置的分组/筛选/排序等视图配置提交，同步给其他用户
 
 ## getChildRecordIdList
 ```typescript
@@ -40,19 +78,19 @@ getFilterInfo(): Promise<IFilterInfo | null>;
 ```typescript
 addFilterCondition: (param: IAddFilterConditionParams) => Promise<boolean>;
 ```
-新增筛选条件，如果新增失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`)
+新增筛选条件，如果新增失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting))
 
 ## deleteFilterCondition
 ```typescript
 deleteFilterCondition: (conditionId: string) => Promise<boolean>;
 ```
-删除筛选条件，如果删除失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`)
+删除筛选条件，如果删除失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting))
 
 ## updateFilterCondition
 ```typescript
 updateFilterCondition: (param: IUpdateFilterConditionParams) => Promise<boolean>;
 ```
-更新筛选条件，如果更新失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`)
+更新筛选条件，如果更新失败，则会返回 false (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting))
 
 ## setFilterConjunction
 ```typescript
@@ -65,7 +103,7 @@ enum FilterConjunction {
     Or = "or"
 }
 ```
-可以选择满足所有筛选条件或者其中某条件 (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`)
+可以选择满足所有筛选条件或者其中某条件 (调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting))
 
 ## getSortInfo
 ```typescript
@@ -77,25 +115,25 @@ getSortInfo(): Promise<ISortInfo[]>;
 ```typescript
 setAutoSort(param: boolean): Promise<boolean>;
 ```
-设置是否自动进行排序（在设置了排序条件之后，会自动设置为 true, 调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`)
+设置是否自动进行排序（在设置了排序条件之后，会自动设置为 true, 调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting))
 
 ## addSort
 ```typescript
 addSort: (param: ISortInfo | ISortInfo[]) => Promise<boolean>;
 ```
-新增排序条件（调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+新增排序条件（调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## deleteSort
 ```typescript
 deleteSort: (param: ISortInfo | string) => Promise<boolean>;
 ```
-删除排序条件 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+删除排序条件 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## updateSort
 ```typescript
 updateSort: (param: ISortInfo) => Promise<boolean>;
 ```
-更新排序条件 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+更新排序条件 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## getGroupInfo
 ```typescript
@@ -107,19 +145,19 @@ getGroupInfo(): Promise<IGroupInfo[]>;
 ```typescript
 addGroup: (param: IGroupInfo | IGroupInfo[]) => Promise<boolean>;
 ```
-新增分组 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+新增分组 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## deleteGroup
 ```typescript
 deleteGroup: (param: string | IGroupInfo) => Promise<boolean>;
 ```
-删除分组 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+删除分组 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## updateGroup
 ```typescript
 updateGroup: (param: IGroupInfo) => Promise<boolean>;
 ```
-更新分组（调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+更新分组（调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
 ## hideField
 ```typescript
@@ -143,7 +181,7 @@ setFieldWidth(fieldId: string, width: number): Promise<boolean>;
 ```typescript
 setRowHeight(rowHeight: RowHeightLevel): Promise<boolean>;
 ```
-设置行高，目前行高按照从矮到高有以下几种 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 `view.applySetting()`）
+设置行高，目前行高按照从矮到高有以下几种 （调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 ```typescript
 enum RowHeightLevel {
     Short = 1,
@@ -152,9 +190,3 @@ enum RowHeightLevel {
     ExtraTall = 4
 }
 ```
-
-## applySetting
-```typescript
-applySetting(): Promise<void>;
-```
-将设置的分组/筛选/排序 等提交，同步给其他用户
