@@ -1,11 +1,22 @@
-# View 模块
+# 视图基础模块
 
-`View` 模块决定 `Table` 模块（可以理解为数据库），在 UI 层的展示方式(例如字段的展示顺序/记录的显隐) 等，因此在 View 模块获取字段/记录的顺序都是有序的
+![](../../../image/all-view-type.png)
 
-`View` 模块可以在 `Table` 层通过 `getViewById` 的方式获取
+`View` 模块可以在 `Table` 层通过 `getViewById` 的方式获取：
 ```typescript
 const view = await table.getViewById(viewId);
 ```
+
+上述方法将获取到具体类型的 View 实例，目前支持以下 6 种不同类型的视图：
+- [GridView](./grid.md)：表格视图
+- [KanbanView](./kanban.md)：看板视图
+- [FormView](./form.md)：表单视图
+- [GalleryView](./gallery.md)：画册视图
+- [GanttView](./gantt.md)：甘特视图
+- [CalendarView](./calendar.md)：日历视图
+
+# 基础方法
+不同类型的视图可调用的 API 不同，以下是所有视图类型公共的基础方法：
 
 ## getName
 ```typescript
@@ -27,7 +38,6 @@ declare enum ViewType {
   Form = 3,
   Gallery = 4,
   Gantt = 5,
-  Hierarchy = 6,
   Calendar = 7,
   WidgetView = 100
 }
@@ -66,9 +76,8 @@ getVisibleFieldIdList(): Promise<string[]>;
 ```
 获取可见字段的 ID 列表
 
-## getChildRecordIdList
+## applySetting
 ```typescript
-getChildRecordIdList(parentRecordId: string): Promise<RecordId[] | undefined>;
+applySetting(): Promise<void>;
 ```
-获取指定记录的子记录 id 列表, undefined 则表示该记录无子记录
-
+将设置的分组/筛选/排序等视图配置提交，同步给其他用户

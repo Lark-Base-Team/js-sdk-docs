@@ -67,6 +67,40 @@ export const getZhSideBar = () => (
           ]
         },
         {
+          text: '视图模块',
+          collapsed: false,
+          items: [
+            {
+              text: '视图模块引导',
+              link: 'view/guide'
+            },
+            {
+              text: '表格视图',
+              link: 'view/grid'
+            },
+            {
+              text: '看板视图',
+              link: 'view/kanban',
+            },
+            {
+              text: '日历视图',
+              link: 'view/calendar',
+            },
+            {
+              text: '甘特视图',
+              link: 'view/gantt',
+            },
+            {
+              text: '画册视图',
+              link: 'view/gallery',
+            },
+            {
+              text: '表单视图',
+              link: 'view/form'
+            }
+          ],
+        },
+        {
           text: '字段模块',
           collapsed: false,
           items: [

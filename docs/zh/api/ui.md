@@ -4,26 +4,64 @@
 const ui = bitable.ui;
 ```
 
-[//]: # (## closeHostContainer)
+## switchToTable
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
+```typescript
+switchToTable(tableId: string): Promise<boolean>;
+```
+切换当前选中的数据表
 
-[//]: # (```typescript)
+## switchToView
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
 
-[//]: # (closeHostContainer&#40;&#41;: Promise<boolean>;)
+```typescript
+switchToView(tableId: string, viewId: string): Promise<boolean>;
+```
+切换到对应 `table(数据表)` 下对应的 `View(视图)`
 
-[//]: # (```)
+## selectRecordIdList
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
 
-[//]: # (关闭当前插件的宿主容器)
+```typescript
+selectRecordIdList(tableId: string, viewId: string): Promise<string[]>;
+```
+交互式选择记录，调用这个 API 时会在全局唤起选择记录的 Model 框，方便当前用户选择对应的记录，当前用户选择完记录之后，会返回对应的记录 ID，下面展示一个使用案例：
+```typescript
+const { tableId, viewId } = await bitable.base.getSelection();
+const recordIdList = await bitable.ui.selectRecordIdList(tableId, viewId);
+const table = await bitable.base.getActiveTable();
+const recordValList = [];
+for (const recordId of recordIdList) {
+  recordValList.push(await table.getRecord(recordId));
+}
+```
 
-[//]: # ()
-[//]: # (## setHostContainerSize)
+## showToast
+::: warning
+该方法测试中，请使用 0.3.5-alpha.1 版本包
+:::
 
-[//]: # (```typescript)
-
-[//]: # (setHostContainerSize&#40;size: HostContainerSize&#41;: Promise<boolean>;)
-
-[//]: # (```)
-
-[//]: # (设置当前插件宿主容器大小)
+```typescript
+showToast(options: ShowToastOptions): Promise<boolean>;
+enum ToastType {
+  info = 'info',
+  success = 'success',
+  warning = 'warning',
+  error = 'error',
+  loading = 'loading',
+}
+type ShowToastOptions = {
+  toastType?: ToastType,
+  message: string,
+};
+```
+全局式消息提示，调用这个 API 时会在全局提示一条消息，内容由 message 来决定（目前仅支持字符串）
 
 ##  getSelectOptionColorInfoList
 ```typescript

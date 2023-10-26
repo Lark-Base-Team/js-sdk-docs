@@ -1,0 +1,31 @@
+# FormView 表单视图
+
+::: warning
+该模块测试中，请使用 0.3.5-alpha.1 版本包
+:::
+
+## getName
+```typescript
+getName(): Promise<string>;
+```
+获取视图名
+
+## getType
+获取视图类型
+```typescript
+getType(): Promise<ViewType.Form>;
+```
+
+## getMeta
+```typescript
+getMeta(): Promise<IFormViewMeta>;
+```
+获取视图元数据，其中 `IFormViewMeta` 的类型定义为：
+```typescript
+interface IFormViewMeta {
+  id: string;
+  name: string;
+  type: ViewType;
+  property: null;
+}
+```

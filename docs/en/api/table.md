@@ -494,8 +494,13 @@ Listen for Record deletion events.
 
 ## Get Views
 
-### getViewById
+### getActiveView
+```typescript
+getActiveView: () => Promise<IView>;
+```
+Get current view
 
+### getViewById
 ```typescript
 getViewById: (id: string) => Promise<IView>;
 ```
