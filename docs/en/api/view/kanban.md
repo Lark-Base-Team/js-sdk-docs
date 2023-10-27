@@ -75,7 +75,7 @@ Submit the view configuration of the set grouping/filtering/sorting, etc., and s
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-Get the current filter information ([IFilterInfo definition](./guide.md#ifilterinfo))
+Get the current filter information ([IFilterInfo definition](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
@@ -111,7 +111,7 @@ You can choose to meet all filter conditions or any one condition (when calling 
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-Get the current sorting conditions ([sortInfo definition](./guide.md#isortinfo))
+Get the current sorting conditions ([sortInfo definition](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript

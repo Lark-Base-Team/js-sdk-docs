@@ -44,7 +44,7 @@ Get the list of field metadata. The field metadata is ordered as it appears in t
 ```typescript
 getVisibleRecordIdList(filterInfo?: IFilterInfo, sortInfo?: ISortInfo[]): Promise<(string | undefined)[]>;
 ```
-Get the list of visible record IDs based on the filter and sort criteria. You can pass filter and sort information to get the filtered and sorted record IDs. ([IFilterInfo definition](./guide.md#ifilterinfo) and [ISortInfo definition](./guide.md#isortinfo))
+Get the list of visible record IDs based on the filter and sort criteria. You can pass filter and sort information to get the filtered and sorted record IDs. ([IFilterInfo definition](../view.md#ifilterinfo) and [ISortInfo definition](../view.md#isortinfo))
 
 ## getVisibleFieldIdList
 ```typescript
@@ -62,7 +62,7 @@ Get the list of child record IDs for a given parent record ID. Returns undefined
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-Get the current filter information. ([IFilterInfo definition](./guide.md#ifilterinfo))
+Get the current filter information. ([IFilterInfo definition](../view.md#ifilterinfo))
 
 ## showField
 ```typescript
@@ -111,7 +111,7 @@ You can choose to satisfy all filter conditions or any of the conditions. (Calli
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-Get the current sort information. ([ISortInfo definition](./guide.md#isortinfo))
+Get the current sort information. ([ISortInfo definition](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript
