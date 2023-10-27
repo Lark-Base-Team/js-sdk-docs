@@ -13,7 +13,7 @@ const view = await table.getActiveView();
 ```
 
 View 可以通过下图在得知其在页面中是负责 UI 展示的，因此很多与 UI 展示形式相关的 API 都存在于 View 层，例如筛选/分组/排序等
-![](../../../image/module-name.png)
+![](../../image/module-name.png)
 
 ::: warning
 在 View 层很多接口，例如 分组/筛选/排序等，在调用 API 之后如果需要保存或者同步给其他用户需要调用 `view.applySetting` 方法

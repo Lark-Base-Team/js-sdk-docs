@@ -13,7 +13,7 @@ const view = await table.getActiveView();
 ```
 
 View can be seen through the following figure as responsible for the UI display on the page, so many APIs related to the UI display format exist in the View layer, such as filtering/grouping/sorting, etc.
-![](../../../image/module-name.png)
+![](../../image/module-name.png)
 
 ::: warning
 In the View layer, many interfaces, such as grouping/filtering/sorting, etc., need to call the `view.applySetting` method if you need to save or synchronize with other users after calling the API.
