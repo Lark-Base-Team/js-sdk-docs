@@ -78,7 +78,7 @@ getChildRecordIdList(parentRecordId: string): Promise<RecordId[] | undefined>;
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-获取当前的筛选信息([IFilterInfo 定义](./guide.md#ifilterinfo))
+获取当前的筛选信息([IFilterInfo 定义](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
@@ -115,7 +115,7 @@ enum FilterConjunction {
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-获取当前的排序条件([sortInfo定义](./guide.md#isortinfo))
+获取当前的排序条件([sortInfo定义](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript
@@ -145,7 +145,7 @@ updateSort: (param: ISortInfo) => Promise<boolean>;
 ```typescript
 getGroupInfo(): Promise<IGroupInfo[]>;
 ```
-获取分组信息([IGroupInfo定义](./guide.md#igroupinfo))
+获取分组信息([IGroupInfo定义](../view.md#igroupinfo))
 
 ## addGroup
 ```typescript

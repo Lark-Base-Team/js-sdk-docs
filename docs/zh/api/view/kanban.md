@@ -80,7 +80,7 @@ applySetting(): Promise<void>;
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-获取当前的筛选信息([IFilterInfo 定义](./guide.md#ifilterinfo))
+获取当前的筛选信息([IFilterInfo 定义](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
@@ -116,7 +116,7 @@ enum FilterConjunction {
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-获取当前的排序条件([sortInfo定义](./guide.md#isortinfo))
+获取当前的排序条件([sortInfo定义](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript

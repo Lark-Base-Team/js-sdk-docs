@@ -79,7 +79,7 @@ applySetting(): Promise<void>;
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-获取当前的筛选信息([IFilterInfo 定义](./guide.md#ifilterinfo))
+获取当前的筛选信息([IFilterInfo 定义](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
