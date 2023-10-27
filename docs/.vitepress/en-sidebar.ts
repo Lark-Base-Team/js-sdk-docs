@@ -70,10 +70,10 @@ export const getEnSideBar = () => (
           text: 'View Module',
           collapsed: false,
           items: [
-            {
-              text: 'View Guide',
-              link: 'view/guide'
-            },
+            // {
+            //   text: 'View Guide',
+            //   link: 'view/guide'
+            // },
             {
               text: 'Grid view',
               link: 'view/grid'

@@ -1,8 +1,14 @@
 # GridView 表格视图
 
 ::: warning
-该模块测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
+
+## id
+当前视图的 id
+
+## tableId
+当前视图所属的数据表 id
 
 ## getName
 ```typescript
@@ -159,17 +165,17 @@ updateGroup: (param: IGroupInfo) => Promise<boolean>;
 ```
 更新分组（调用该 API 时，并不会保存修改的设置，如果需要保存则需要额外调用 [view.applySetting](./grid.md#applysetting)）
 
+## showField
+```typescript
+showField: (fieldId: string | string[]) => Promise<boolean>;
+```
+显示字段
+
 ## hideField
 ```typescript
 hideField: (fieldId: string | string[]) => Promise<boolean>;
 ```
 隐藏字段
-
-## showField
-```typescript
-showField: (fieldId: string | string[]) => Promise<boolean>;
-```
- 显示字段
 
 ## setFieldWidth
 ```typescript

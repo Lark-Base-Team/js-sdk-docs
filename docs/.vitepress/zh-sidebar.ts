@@ -70,10 +70,10 @@ export const getZhSideBar = () => (
           text: '视图模块',
           collapsed: false,
           items: [
-            {
-              text: '视图模块引导',
-              link: 'view/guide'
-            },
+            // {
+            //   text: '视图模块引导',
+            //   link: 'view/guide'
+            // },
             {
               text: '表格视图',
               link: 'view/grid'
