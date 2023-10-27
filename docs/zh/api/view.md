@@ -15,10 +15,6 @@ const view = await table.getActiveView();
 View 可以通过下图在得知其在页面中是负责 UI 展示的，因此很多与 UI 展示形式相关的 API 都存在于 View 层，例如筛选/分组/排序等
 ![](../../image/module-name.png)
 
-::: warning
-在 View 层很多接口，例如 分组/筛选/排序等，在调用 API 之后如果需要保存或者同步给其他用户需要调用 `view.applySetting` 方法
-:::
-
 ## 不同类型的视图
 目前支持以下 6 种不同类型的视图，不同类型的视图可用能力存在差异：
 
@@ -29,11 +25,12 @@ View 可以通过下图在得知其在页面中是负责 UI 展示的，因此�
 - [GanttView](./view/gantt.md)：甘特视图
 - [CalendarView](./view/calendar.md)：日历视图
 
-## View 基础类型定义
+## View 基础能力
 
-> 下面是一些基础能力的定义，后续会在 API 涉及到的地方给出指引
+视图中最基础的能力包括`筛选`、`排序`和`分组`，下面将简介其用法，相关 API 定义在具体类型的模块中，如 [GridView](./view/grid.md)。
 
-### IFilterInfo
+### 筛选
+视图根据筛选条件过滤出数据表中符合条件的记录，主要由 `FilterInfoCondition 过滤条件` 和 `FilterConjunction 生效条件` 两部分信息组成
 
 ```typescript
 interface IFilterInfo {
@@ -42,22 +39,9 @@ interface IFilterInfo {
 }
 ```
 
-#### FilterConjunction
-
-其中 `FilterConjunction` 代表过滤条件的生效条件，`FilterConjunction.And` 代表符合所有过滤条件，`FilterConjunction.Or` 代表符合任一过滤条件：
-
-```typescript
-enum FilterConjunction {
-  And = 'and',
-  Or = 'or'
-}
-```
-
-![](../../image/filter-conjunction.png)
-
 #### FilterInfoCondition
 
-`FilterInfoCondition` 代表过滤条件，**每个 Condition 由`字段` + `过滤操作符` + `匹配值`三个基本元素组成**。
+`FilterInfoCondition` 代表过滤条件，每个 Condition 由`字段` + `过滤操作符` + `匹配值`三个基本元素组成。
 
 ![](../../image/filter-conditions.png)
 
@@ -70,6 +54,19 @@ interface FilterInfoCondition {
 }
 ```
 
+#### FilterConjunction
+
+`FilterConjunction` 代表过滤条件的生效条件，`FilterConjunction.And` 代表符合所有过滤条件，`FilterConjunction.Or` 代表符合任一过滤条件：
+
+```typescript
+enum FilterConjunction {
+  And = 'and',
+  Or = 'or'
+}
+```
+
+![](../../image/filter-conjunction.png)
+
 不同的字段可匹配的过滤操作符和匹配值不同，具体类型如下：
 
 |              | IFilterAttachmentCondition                            | IFilterCheckboxCondition | IFilterAutoNumberCondition                                                                                                                                                                                              | IFilterDateTimeCondition                                                                                                        | IFilterCreatedTimeCondition                                                                                                     | IFilterModifiedTimeCondition                                                                                                     | IFilterUserCondition | IFilterCreatedUserCondition | IFilterModifiedUserCondition | IFilterDuplexLinkCondition | IFilterSingleLinkCondition | IFilterFormulaCondition | IFilterGroupChatCondition | IFilterLocationCondition | IFilterLookupCondition | IFilterMultiSelectCondition  | IFilterSingleSelectCondition                                                                                                                                   | IFilterPhoneCondition | IFilterTextCondition | IFilterNumberCondition                                                                                                                                                                                                 | IFilterUrlCondition  | IFilterCurrencyCondition                                                                                                                                                                                               | IFilterBarcodeCondition | IFilterProgressCondition                                                                                                                                                                                               | IFilterRatingCondition                                                                                                                                                                                                 |
@@ -77,7 +74,7 @@ interface FilterInfoCondition {
 | **operator** | `FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `FilterOperator.Is`      | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.IsGreater \| FilterOperator.IsGreaterEqual \| FilterOperator.IsLess \| FilterOperator.IsLessEqual \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty;` | `FilterOperator.Is \| FilterOperator.IsGreater \| FilterOperator.IsLess \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `FilterOperator.Is \| FilterOperator.IsGreater \| FilterOperator.IsLess \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `FilterOperator.Is  \| FilterOperator.IsGreater \| FilterOperator.IsLess \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `BaseFilterOperator` | `BaseFilterOperator`        | `BaseFilterOperator`         | `BaseFilterOperator`       | `BaseFilterOperator`       | `FilterOperator`        | `BaseFilterOperator`      | `BaseFilterOperator`     | `FilterOperator`       | `BaseFilterOperator`         | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.Contains \| FilterOperator.DoesNotContain \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `BaseFilterOperator`  | `BaseFilterOperator` | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.IsGreater \| FilterOperator.IsGreaterEqual \| FilterOperator.IsLess \| FilterOperator.IsLessEqual \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `BaseFilterOperator` | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.IsGreater \| FilterOperator.IsGreaterEqual \| FilterOperator.IsLess \| FilterOperator.IsLessEqual \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `BaseFilterOperator`    | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.IsGreater \| FilterOperator.IsGreaterEqual \| FilterOperator.IsLess \| FilterOperator.IsLessEqual \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` | `FilterOperator.Is \| FilterOperator.IsNot \| FilterOperator.IsGreater \| FilterOperator.IsGreaterEqual \| FilterOperator.IsLess \| FilterOperator.IsLessEqual \| FilterOperator.IsEmpty \| FilterOperator.IsNotEmpty` |
 | **value**    | `null `                                               | `boolean \| null`        | `number \| null`                                                                                                                                                                                                        | `IFilterDateTimeValue = number \| FilterDuration  \| null`                                                                      | `number \| FilterDuration \| null`                                                                                              | `number \| FilterDuration \| null`                                                                                               | `string[] \| null`   | `string[] \| null`          | `string[] \| null`           | `string[] \| null`         | `string[] \| null`         | `IFilterAll`            | `string[] \| null`        | `string \| null`         | `IFilterAll`           | `string[] \| null \| string` | `string[] \| string`                                                                                                                                           | `string \| null`      | `string \| null`     | `number \| null`                                                                                                                                                                                                       | `string \| null`     | `number \| null`                                                                                                                                                                                                       | `string \| null`        | `number \| null`                                                                                                                                                                                                       | `number \| null`                                                                                                                                                                                                       |
 
-其中 `FilterOperator` 定义如下：
+`FilterOperator` 定义如下：
 
 ```typescript
 enum FilterOperator {
@@ -145,7 +142,10 @@ type BaseFilterOperator =
   | FilterOperator.IsNotEmpty;
 ```
 
-### ISortInfo
+### 排序
+视图按照一定的规则将数据表中的记录进行排序，一条排序规则由 `字段ID` + `顺序` 组成：
+![](../../image/view-sort.png)
+
 
 ```typescript
 interface ISortInfo {
@@ -155,7 +155,10 @@ interface ISortInfo {
 }
 ```
 
-### IGroupInfo
+### 分组
+视图按照一定的规则将数据表中的记录进行分组，一条分组规则由 `字段ID` + `顺序` 组成：
+![](../../image/view-group.png)
+
 
 ```typescript
 interface IGroupInfo {
@@ -165,3 +168,9 @@ interface IGroupInfo {
 }
 ```
 
+### 同步配置
+::: warning
+View 模块中分组/筛选/排序等能力，在调用写入 API 之后如果**希望保存或者同步给其他用户**需要调用 `applySetting` 方法
+:::
+
+![](../../image/view-applysetting.png)
