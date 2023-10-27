@@ -1,12 +1,43 @@
 # Grid View
 
+:::warning
+This module is under testing, please use the 0.3.5-alpha.2 version package for test
+:::
+
+## id
+Get the view id
+
+## tableId
+Get the id of current view belongs to
+
 ## getType
 Get the type of the view. Returns `ViewType.Grid` for table view.
 ```typescript
-getType(): Promise<ViewType>;
+getType(): Promise<ViewType.Grid>;
 ```
 
 ## getMeta
+```typescript
+getMeta(): Promise<IGridViewMeta>;
+```
+Get GridView meta information, where the `IGridViewMeta` type is defined as:
+
+```typescript
+interface IGridViewMeta {
+    id: string;
+    name: string;
+    type: ViewType.Grid;
+    property: {
+        hierarchyConfig: {
+            fieldId: string | undefined;
+        };
+        filterInfo: IFilterInfo | null;
+        sortInfo: ISortInfo[];
+        groupInfo: IGroupInfo[];
+    }
+}
+```
+
 ## getFieldMetaList
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
@@ -121,17 +152,17 @@ updateGroup: (param: IGroupInfo) => Promise<boolean>;
 ```
 Update group (when calling this API, the modified settings will not be saved. If you need to save, you need to call `view.applySetting()` separately)
 
-## hideField
-```typescript
-hideField: (fieldId: string | string[]) => Promise<boolean>;
-```
-Hide field
-
 ## showField
 ```typescript
 showField: (fieldId: string | string[]) => Promise<boolean>;
 ```
 Show field
+
+## hideField
+```typescript
+hideField: (fieldId: string | string[]) => Promise<boolean>;
+```
+Hide field
 
 ## setFieldWidth
 ```typescript

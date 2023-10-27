@@ -1,8 +1,14 @@
 # FormView 表单视图
 
 ::: warning
-该模块测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
+
+## id
+当前视图的 id
+
+## tableId
+当前视图所属的数据表 id
 
 ## getName
 ```typescript
