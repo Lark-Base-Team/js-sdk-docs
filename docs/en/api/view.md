@@ -30,11 +30,12 @@ Currently, 6 different types of views are supported, and the available capabilit
 - [CalendarView](./view/calendar.md): Calendar view
 
 
-## View Module Related Type Definitions
+## View basic abilities
 
-> The following are some basic capabilities definitions, which can be skipped. There will be guidance in the APIs involved later.
+The most basic capabilities in the view include `filtering`, `sorting` and `grouping`. Their usage will be introduced below. The relevant APIs are defined in specific types of modules, such as [GridView](./view/grid.md).
 
-### IFilterInfo
+### Filter
+The view filters out records that meet the conditions in the data table based on the filtering conditions, and is mainly composed of two parts of information: `FilterInfoCondition` and `FilterConjunction`
 
 ```typescript
 interface IFilterInfo {
@@ -43,22 +44,9 @@ interface IFilterInfo {
 }
 ```
 
-#### FilterConjunction
-
-Among them, `FilterConjunction`` represents the effective condition of the filter condition, `FilterConjunction.And`` represents that all filter conditions are met, and `FilterConjunction.Or`` represents that any filter condition is met:
-
-```typescript
-enum FilterConjunction {
-  And = 'and',
-  Or = 'or'
-}
-```
-
-![](../../image/filter-conjunction.png)
-
 #### FilterInfoCondition
 
-`FilterInfoCondition` represents the filter condition, **Each Condition consists of three basic elements: `field` + `filter operator` + `matching value`**.
+`FilterInfoCondition` represents the filter condition. Each Condition consists of three basic elements: `field` + `filter operator` + `matching value`.
 
 ![](../../image/filter-conditions.png)
 
@@ -70,6 +58,19 @@ interface FilterInfoCondition {
   operator: FilterOperator; // match operator
 }
 ```
+
+#### FilterConjunction
+
+Among them, `FilterConjunction` represents the effective condition of the filter condition, `FilterConjunction.And` represents that all filter conditions are met, and `FilterConjunction.Or` represents that any filter condition is met:
+
+```typescript
+enum FilterConjunction {
+  And = 'and',
+  Or = 'or'
+}
+```
+
+![](../../image/filter-conjunction.png)
 
 Different fields can match different filter operators and matching values. The specific types are as follows:
 
@@ -146,7 +147,8 @@ type BaseFilterOperator =
   | FilterOperator.IsNotEmpty;
 ```
 
-### ISortInfo
+### Sort
+The view sorts the records in the data table according to certain rules. A sorting rule consists of `field ID` + `order`:
 
 ```typescript
 interface ISortInfo {
@@ -156,7 +158,9 @@ interface ISortInfo {
 }
 ```
 
-### IGroupInfo
+### Group
+Views group records in the data table according to certain rules. A grouping rule consists of `field ID` + `order`:
+![](../../image/view-group.png)
 
 ```typescript
 interface IGroupInfo {
@@ -165,3 +169,10 @@ interface IGroupInfo {
   desc: boolean;
 }
 ```
+
+### Apply Settings
+::: warning
+For grouping/filtering/sorting capabilities in the View module, after calling the write API, if you want to save or synchronize to other users, you need to call the `applySetting` method
+:::
+
+![](../../image/view-applysetting.png)
