@@ -20,6 +20,9 @@ type IOpenAttachment = {
 ```
 
 ## getAttachmentThumbnailUrls
+::: danger
+The current API does not support the use of all Base.
+:::
 ```typescript
 getAttachmentThumbnailUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
 ```

@@ -385,6 +385,9 @@ getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Prom
 Get the URLs of the attachments in the current attachment cell (it is recommended to use AttachmentField to get the URLs, AttachmentField can get the attachment URLs by passing in the Record/RecordId parameter).
 
 ### getCellThumbnailUrls
+::: danger
+The current API does not support the use of all Base.
+:::
 
 ```typescript
 getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
