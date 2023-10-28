@@ -15,6 +15,9 @@ type IOpenAttachment = {
 ```
 
 ## getAttachmentThumbnailUrls
+::: danger
+当前该 API 暂不支持所有多维表格使用
+:::
 ```typescript
 getAttachmentThumbnailUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
 ```
