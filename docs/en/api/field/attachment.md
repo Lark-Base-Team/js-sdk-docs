@@ -19,15 +19,22 @@ type IOpenAttachment = {
 };
 ```
 
-## getAttachmentThumbnailUrls
-::: danger
-The current API does not support the use of all Base.
-:::
-```typescript
-getAttachmentThumbnailUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
-```
+[//]: # (## getAttachmentThumbnailUrls)
 
-This method retrieves the thumbnail URLs of the attachments associated with a record. It returns a Promise that resolves to an array of thumbnail URLs. This method is useful for displaying previews of attachments.
+[//]: # (::: danger)
+
+[//]: # (The current API does not support the use of all Base.)
+
+[//]: # (:::)
+
+[//]: # (```typescript)
+
+[//]: # (getAttachmentThumbnailUrls: &#40;recordOrId: IRecordType | string&#41; => Promise<string[]>;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (This method retrieves the thumbnail URLs of the attachments associated with a record. It returns a Promise that resolves to an array of thumbnail URLs. This method is useful for displaying previews of attachments.)
 
 ## getAttachmentUrls
 ```typescript

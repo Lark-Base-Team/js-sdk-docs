@@ -331,11 +331,15 @@ getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Prom
 ```
 获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
-### getCellThumbnailUrls
-```typescript
-getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
-```
-获取当前附件单元格中附件的预览 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
+[//]: # (### getCellThumbnailUrls)
+
+[//]: # (```typescript)
+
+[//]: # (getCellThumbnailUrls&#40;tokens: string[], fieldId: string, recordId: string&#41;: Promise<string[]>;)
+
+[//]: # (```)
+
+[//]: # (获取当前附件单元格中附件的预览 URL &#40;推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL&#41;)
 
 ### getRecordShareLink
 ```typescript
