@@ -6,10 +6,10 @@ A `View` is a presentation of a data `Table` (such as the display order of field
 Note the difference here with the Table module. In the View module, the order of fields/records is **ordered**.
 :::
 
-The `View` module can be obtained in the `Table` layer via the `getActiveView` method:
+The `View` module can be obtained in the `Table` layer via the `getViewById` method:
 
 ```typescript
-const view = await table.getActiveView();
+const view = await table.getViewById(viewId);
 ```
 
 View can be seen through the following figure as responsible for the UI display on the page, so many APIs related to the UI display format exist in the View layer, such as filtering/grouping/sorting, etc.

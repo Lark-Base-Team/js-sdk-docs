@@ -6,10 +6,10 @@
 注意此处与 Table 模块的差异，在 View 模块获取字段/记录的顺序都是**有序**的。
 :::
 
-`View` 模块可以在 `Table` 层通过 `getActiveView` 的方式获取
+`View` 模块可以在 `Table` 层通过 `getViewById` 的方式获取
 
 ```typescript
-const view = await table.getActiveView();
+const view = await table.getViewById(viewId);
 ```
 
 View 可以通过下图在得知其在页面中是负责 UI 展示的，因此很多与 UI 展示形式相关的 API 都存在于 View 层，例如筛选/分组/排序等
