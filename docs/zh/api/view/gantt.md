@@ -1,8 +1,14 @@
 # GanttView 甘特视图
 
 ::: warning
-该模块测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
+
+## id
+当前视图的 id
+
+## tableId
+当前视图所属的数据表 id
 
 ## getName
 ```typescript
@@ -33,6 +39,18 @@ interface IGanttViewMeta {
 }
 ```
 
+## showField
+```typescript
+showField: (fieldId: string | string[]) => Promise<boolean>;
+```
+显示字段
+
+## hideField
+```typescript
+hideField: (fieldId: string | string[]) => Promise<boolean>;
+```
+隐藏字段
+
 ## getFieldMetaList
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
@@ -61,7 +79,7 @@ applySetting(): Promise<void>;
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-获取当前的筛选信息([IFilterInfo 定义](./guide.md#ifilterinfo))
+获取当前的筛选信息([IFilterInfo 定义](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
@@ -98,7 +116,7 @@ enum FilterConjunction {
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-获取当前的排序条件([sortInfo定义](./guide.md#isortinfo))
+获取当前的排序条件([sortInfo定义](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript
@@ -128,7 +146,7 @@ updateSort: (param: ISortInfo) => Promise<boolean>;
 ```typescript
 getGroupInfo(): Promise<IGroupInfo[]>;
 ```
-获取分组信息([IGroupInfo定义](./guide.md#igroupinfo))
+获取分组信息([IGroupInfo定义](../view.md#igroupinfo))
 
 ## addGroup
 ```typescript

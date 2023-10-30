@@ -6,7 +6,7 @@ const ui = bitable.ui;
 
 ## switchToTable
 ::: warning
-该方法测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 ```typescript
 switchToTable(tableId: string): Promise<boolean>;
@@ -15,7 +15,7 @@ switchToTable(tableId: string): Promise<boolean>;
 
 ## switchToView
 ::: warning
-该方法测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 
 ```typescript
@@ -25,7 +25,7 @@ switchToView(tableId: string, viewId: string): Promise<boolean>;
 
 ## selectRecordIdList
 ::: warning
-该方法测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 
 ```typescript
@@ -44,7 +44,7 @@ for (const recordId of recordIdList) {
 
 ## showToast
 ::: warning
-该方法测试中，请使用 0.3.5-alpha.1 版本包
+该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 
 ```typescript

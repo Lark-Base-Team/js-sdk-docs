@@ -1,12 +1,43 @@
 # Grid View
 
+:::warning
+This module is under testing, please use the 0.3.5-alpha.2 version package for test
+:::
+
+## id
+Get the view id
+
+## tableId
+Get the id of current view belongs to
+
 ## getType
 Get the type of the view. Returns `ViewType.Grid` for table view.
 ```typescript
-getType(): Promise<ViewType>;
+getType(): Promise<ViewType.Grid>;
 ```
 
 ## getMeta
+```typescript
+getMeta(): Promise<IGridViewMeta>;
+```
+Get GridView meta information, where the `IGridViewMeta` type is defined as:
+
+```typescript
+interface IGridViewMeta {
+    id: string;
+    name: string;
+    type: ViewType.Grid;
+    property: {
+        hierarchyConfig: {
+            fieldId: string | undefined;
+        };
+        filterInfo: IFilterInfo | null;
+        sortInfo: ISortInfo[];
+        groupInfo: IGroupInfo[];
+    }
+}
+```
+
 ## getFieldMetaList
 ```typescript
 getFieldMetaList(): Promise<IFieldMeta[]>;
@@ -17,7 +48,7 @@ Get the list of field metadata. The field metadata is ordered as it appears in t
 ```typescript
 getVisibleRecordIdList(filterInfo?: IFilterInfo, sortInfo?: ISortInfo[]): Promise<(string | undefined)[]>;
 ```
-Get the list of visible record IDs based on the filter and sort criteria. You can pass filter and sort information to get the filtered and sorted record IDs. ([IFilterInfo definition](./guide.md#ifilterinfo) and [ISortInfo definition](./guide.md#isortinfo))
+Get the list of visible record IDs based on the filter and sort criteria. You can pass filter and sort information to get the filtered and sorted record IDs. ([IFilterInfo definition](../view.md#ifilterinfo) and [ISortInfo definition](../view.md#isortinfo))
 
 ## getVisibleFieldIdList
 ```typescript
@@ -35,7 +66,7 @@ Get the list of child record IDs for a given parent record ID. Returns undefined
 ```typescript
 getFilterInfo(): Promise<IFilterInfo | null>;
 ```
-Get the current filter information. ([IFilterInfo definition](./guide.md#ifilterinfo))
+Get the current filter information. ([IFilterInfo definition](../view.md#ifilterinfo))
 
 ## addFilterCondition
 ```typescript
@@ -72,7 +103,7 @@ You can choose to satisfy all filter conditions or any of the conditions. (Calli
 ```typescript
 getSortInfo(): Promise<ISortInfo[]>;
 ```
-Get the current sort information. ([ISortInfo definition](./guide.md#isortinfo))
+Get the current sort information. ([ISortInfo definition](../view.md#isortinfo))
 
 ## setAutoSort
 ```typescript
@@ -101,7 +132,7 @@ Update sorting condition (when calling this API, the modified settings will not 
 ```typescript
 getGroupInfo(): Promise<IGroupInfo[]>;
 ```
-Get group information ([IGroupInfo definition](./guide.md#igroupinfo))
+Get group information ([IGroupInfo definition](../view.md#igroupinfo))
 
 ## addGroup
 ```typescript
@@ -121,17 +152,17 @@ updateGroup: (param: IGroupInfo) => Promise<boolean>;
 ```
 Update group (when calling this API, the modified settings will not be saved. If you need to save, you need to call `view.applySetting()` separately)
 
-## hideField
-```typescript
-hideField: (fieldId: string | string[]) => Promise<boolean>;
-```
-Hide field
-
 ## showField
 ```typescript
 showField: (fieldId: string | string[]) => Promise<boolean>;
 ```
 Show field
+
+## hideField
+```typescript
+hideField: (fieldId: string | string[]) => Promise<boolean>;
+```
+Hide field
 
 ## setFieldWidth
 ```typescript
