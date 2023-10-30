@@ -14,14 +14,21 @@ type IOpenAttachment = {
 };
 ```
 
-## getAttachmentThumbnailUrls
-::: danger
-当前该 API 暂不支持所有多维表格使用
-:::
-```typescript
-getAttachmentThumbnailUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
-```
-通过 `Record` 获取附件的缩略图 URL 地址 (获取速度较快，可以用于预览展示)
+[//]: # (## getAttachmentThumbnailUrls)
+
+[//]: # (::: danger)
+
+[//]: # (当前该 API 暂不支持所有多维表格使用)
+
+[//]: # (:::)
+
+[//]: # (```typescript)
+
+[//]: # (getAttachmentThumbnailUrls: &#40;recordOrId: IRecordType | string&#41; => Promise<string[]>;)
+
+[//]: # (```)
+
+[//]: # (通过 `Record` 获取附件的缩略图 URL 地址 &#40;获取速度较快，可以用于预览展示&#41;)
 
 ## getAttachmentUrls
 ```typescript
