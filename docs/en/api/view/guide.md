@@ -2,10 +2,10 @@
 
 The `View` module determines the presentation of the `Table` module (which can be understood as a database) in the UI layer, such as the display order of fields/records, etc. Therefore, the order of fields/records obtained in the View module is sorted.
 
-The `View` module can be obtained in the `Table` layer through the `getActiveView` method.
+The `View` module can be obtained in the `Table` layer through the `getViewById` method.
 
 ```typescript
-const view = await table.getActiveView();
+const view = await table.getViewById(viewId);
 ```
 
 View is responsible for the UI presentation in the page, as shown in the figure below, so many APIs related to UI presentation, such as filtering/grouping/sorting, etc., are in the View layer.
