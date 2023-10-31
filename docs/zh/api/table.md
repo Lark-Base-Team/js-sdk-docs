@@ -305,6 +305,20 @@ interface IRecord {
 }
 ```
 
+### getRecordList
+```typescript
+getRecordsList(filter?: Formula, sort?: Sort): Promise<IRecordList>;
+```
+调用 `getRecordList` 可以获取当前的记录数组，然后使用封装方法对数据执行一些操作，例如：
+```typescript
+const recordList = await table.getRecordList();
+for (const record of recordList) {
+  const cell = await record.getCellByField(fieldId);
+  const val = await cell.getValue();
+}
+```
+可以通过查看 [Record 模块](./record.md) 获取更多的用法
+
 ### getRecordIdList
 ```typescript
 getRecordIdList(filter?: string, sort?: string): Promise<string[]>;

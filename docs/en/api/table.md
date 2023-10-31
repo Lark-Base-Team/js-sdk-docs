@@ -352,6 +352,20 @@ interface IRecord {
 }
 ```
 
+### getRecordList
+```typescript
+getRecordsList(filter?: Formula, sort?: Sort): Promise<IRecordList>;
+```
+Call `getRecordList` to retrieve the current array of records and then use the encapsulated methods to perform operations on the data, for example:
+```typescript
+const recordList = await table.getRecordList();
+for (const record of recordList) {
+  const cell = await record.getCellByField(fieldId);
+  const val = await cell.getValue();
+}
+```
+For more usage examples, you can refer to the [Record module](./record.md).
+
 ### getRecordIdList
 
 ```typescript
