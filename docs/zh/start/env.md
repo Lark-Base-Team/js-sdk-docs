@@ -23,8 +23,10 @@
    ![](../../image/start/fork-repl.png)
 4. 稍等一会，就可以进入如下所示的页面，此时点击顶部的 Run 按钮，稍等一会，Replit 就会将项目运行起来
    ![](../../image/start/project-dispaly.png)
-5. 此时，右侧会展示一个预览效果，还会有一个 URL 地址，将此 URL 地址复制
+5. 然后点击图中所示的 tab，然后将展示的 URL 复制，在第 6 步中使用
    ![](../../image/start/run-demo-preview.png)
+复制下面所示的 URL
+   ![](../../image/start/new-tab.jpg)
 6. 打开/新建 一个飞书多维表格，点击此处的扩展脚本按钮
    ![](../../image/start/base-page.png)
 7. 点击新增脚本，将 5 中复制的 URl 粘贴进去，然后点击确定

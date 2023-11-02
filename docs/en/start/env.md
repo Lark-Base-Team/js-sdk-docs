@@ -37,9 +37,10 @@ Currently, we provide two development methods for beginners:
 
 ![Project display](../../image/start/project-dispaly.png)
 
-5. Now, there will be a preview on the right side with a URL. Copy this URL.
-
-![Run demo preview](../../image/start/run-demo-preview.png)
+5. Then click on the tab as shown in the figure, and then copy the displayed URL. Use it in step 6.
+   ![](../../image/start/run-demo-preview.png)
+   Copy the URL shown below and translate it into English.
+   ![](../../image/start/new-tab.jpg)
 
 6. Open or create a Feishu multidimensional table, click on the extension script button, and then click "Add script" to paste the URL copied in step 5. Click "OK" to confirm.
 
