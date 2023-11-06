@@ -337,8 +337,8 @@ getAttachmentUrl(token: string, fieldId?: string, recordId?: string): Promise<st
 获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
 ### getCellAttachmentUrls
-::: danger 
-当前该 API 暂不支持所有多维表格使用
+::: warning
+接口返回的临时链接的有效时间是 10分钟
 :::
 ```typescript
 getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;

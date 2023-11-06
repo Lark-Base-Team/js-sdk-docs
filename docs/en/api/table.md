@@ -382,15 +382,11 @@ getCellValue(fieldId: string, recordId: string): Promise<IOpenCellValue>;
 
 Get the value of a cell (it is recommended to use Field to get the value instead).
 
-### getAttachmentUrl
-
-```typescript
-getAttachmentUrl(token: string, fieldId?: string, recordId?: string): Promise<string>;
-```
-
-Get the URL of the attachment in the current attachment cell (it is recommended to use AttachmentField to get the URL, AttachmentField can get the attachment URL by passing in the Record/RecordId parameter).
-
 ### getCellAttachmentUrls
+
+:::warning
+The temporary link returned by the interface is valid for 10 minutes.
+:::
 
 ```typescript
 getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
