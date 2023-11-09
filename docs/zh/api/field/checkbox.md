@@ -13,7 +13,7 @@ export type IOpenCheckbox = boolean;
 ```typescript
 createCell: (val: boolean) => Promise<ICell>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
 
@@ -28,7 +28,7 @@ await table.addRecord(cell);
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
 
@@ -42,7 +42,7 @@ const cell = await checkBoxField.getCell(recordId);
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: boolean) => Promise<boolean>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
 
@@ -57,7 +57,7 @@ getValue: (recordOrId: IRecordType | string) => Promise<IOpenCheckbox>;
 type IOpenCheckbox = boolean;
 ```
 通过 `Record` 来获取对应的值
-### 使用示例
+### 示例
 ```typescript
 import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
 

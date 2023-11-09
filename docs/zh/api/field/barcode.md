@@ -13,7 +13,7 @@ export type IOpenTextSegment = { type: IOpenSegmentType.Text; text: string };
 ```typescript
 createCell: (val: string | IOpenTextSegment[] | IOpenTextSegment) => Promise<ICell>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 
@@ -29,7 +29,7 @@ await table.addRecord(cell);
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 
@@ -43,7 +43,7 @@ const cell = await barcodeField.getCell(recordId);
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: string | IOpenTextSegment[] | IOpenTextSegment) => Promise<boolean>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 
@@ -62,7 +62,7 @@ type IOpenTextSegment = {
   text: string;
 };
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 
@@ -76,7 +76,7 @@ const val = await barcodeField.getValue(recordId);
 ```typescript
 setOnlyMobile: (onlyMobile: boolean) => Promise<boolean>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 
@@ -90,7 +90,7 @@ await barcodeField.setOnlyMobile(true);
 ```typescript
 getOnlyMobile: () => Promise<boolean>;
 ```
-### 使用示例
+### 示例
 ```typescript
 import { bitable, IBarcodeField } from '@lark-base-open/js-sdk';
 

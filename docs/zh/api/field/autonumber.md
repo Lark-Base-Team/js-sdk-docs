@@ -16,7 +16,7 @@ export type IOpenAutoNumber = string;
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenAutoNumber>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -30,7 +30,7 @@ const val = await autonumberField.getValue(recordId);
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 

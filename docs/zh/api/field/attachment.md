@@ -19,7 +19,7 @@ type IOpenAttachment = {
 ```typescript
 getAttachmentUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -33,7 +33,7 @@ const attachmentUrls = await attachmentField.getAttachmentUrls(recordId);
 ```typescript
 setOnlyMobile: (onlyMobile: boolean) => Promise<boolean>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -47,7 +47,7 @@ await attachmentField.setOnlyMobile(true);
 ```typescript
 getOnlyMobile: () => Promise<boolean>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -61,7 +61,7 @@ const isOnlyMobile = await attachmentField.getOnlyMobile();
 ```typescript
 createCell: (val: File | File[] | FileList | IOpenAttachment | IOpenAttachment[]) => Promise<ICell>;
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -76,7 +76,7 @@ const recordId = await table.addRecord(attachmentCell);
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -94,7 +94,7 @@ setValue: (recordOrId: IRecordType | string, val: AttachmentTransformVal ) => Pr
 ```typescript
 type AttachmentTransformVal = File | File[] | FileList | IOpenAttachment | IOpenAttachment[];
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
@@ -118,7 +118,7 @@ type IOpenAttachment = {
     timeStamp: number;
 };
 ```
-### 示例代码
+### 示例
 ```typescript
 import { bitable, IAttachmentField } from '@lark-base-open/js-sdk';
 
