@@ -9,25 +9,59 @@ export type IOpenCheckbox = boolean;
 ```
 
 ## createCell
+创建一个复选框字段的 `Cell`
 ```typescript
 createCell: (val: boolean) => Promise<ICell>;
 ```
-创建一个复选框字段的 `Cell`
+### 使用示例
+```typescript
+import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
+
+const table = await bitable.base.getActiveTable();
+const checkBoxField = await table.getField<ICheckBoxField >(fieldId);
+const cell = await checkBoxField.createCell(false);
+await table.addRecord(cell);
+```
 
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
+### 使用示例
+```typescript
+import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
+
+const table = await bitable.base.getActiveTable();
+const checkBoxField = await table.getField<ICheckBoxField>(fieldId);
+const cell = await checkBoxField.getCell(recordId);
+```
 
 ## setValue
+通过 `Record` 来设置对应的值
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: boolean) => Promise<boolean>;
 ```
-通过 `Record` 来设置对应的值
+### 使用示例
+```typescript
+import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
+
+const table = await bitable.base.getActiveTable();
+const checkBoxField = await table.getField<ICheckBoxField>(fieldId);
+await checkBoxField.setValue(recordId, false);
+```
 
 ## getValue
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenCheckbox>;
+type IOpenCheckbox = boolean;
 ```
 通过 `Record` 来获取对应的值
+### 使用示例
+```typescript
+import { bitable, ICheckBoxField } from '@lark-base-open/js-sdk';
+
+const table = await bitable.base.getActiveTable();
+const checkBoxField = await table.getField<ICheckBoxField>(fieldId);
+await checkBoxField.getValue(recordId);
+```
