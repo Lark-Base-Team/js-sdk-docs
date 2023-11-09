@@ -31,7 +31,7 @@ const attachmentUrls = await attachmentField.getAttachmentUrls(recordId);
 ## setOnlyMobile
 设置是否只允许手机填写，传入为 `true` 的时候设置为仅允许手机上传文件
 ```typescript
-setOnlyMobile: (onlyMobile: boolean) => Promise<IFieldRes>;
+setOnlyMobile: (onlyMobile: boolean) => Promise<boolean>;
 ```
 ### 示例代码
 ```typescript
