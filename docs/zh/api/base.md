@@ -144,7 +144,7 @@ const isEditable = await base.isEditable();
 ```typescript
 batchUploadFile(file: File[] | FileList): Promise<string[]>;
 ```
-批量上传文件，按序返回每个文件对应的 fileToken 列表，如果只是想创建一条带有附件的记录/修改附件单元格数据，建议查看 xxxx。
+批量上传文件，按序返回每个文件对应的 fileToken 列表，如果只是想创建一条带有附件的记录/修改附件单元格数据，建议查看 [AttachmentField](./field/attachment.md)。
 
 ## onTableAdd
 ```typescript
