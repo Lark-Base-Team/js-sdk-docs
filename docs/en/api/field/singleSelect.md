@@ -1,4 +1,4 @@
-# SingleSelect 单选字段
+# Single Select Field
 
 The definition of the `ISingleSelectField` type is as follows. To use it, you can use the following method:
 ```typescript

@@ -1,4 +1,4 @@
-# TextField
+# Text Field
 
 The definition of the `ITextField` type is as follows:
 

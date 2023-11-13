@@ -1,4 +1,4 @@
-# UserField 文本字段
+# UserField 人员字段
 类型定义 `IUserField`，使用方法示例：
 ```typescript
 const userField = await table.getField<IUserField>(fieldId);

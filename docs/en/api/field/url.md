@@ -1,4 +1,4 @@
-# UrlField Text Field
+# Url Field
 Definition of `IUrlField` with usage example:
 ```typescript
 const urlField = await table.getField<IUrlField>(fieldId);

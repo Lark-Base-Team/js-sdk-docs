@@ -1,4 +1,4 @@
-# UserField Text Field
+# User Field
 Definition of `IUserField`, usage example:
 ```typescript
 const userField = await table.getField<IUserField>(fieldId);

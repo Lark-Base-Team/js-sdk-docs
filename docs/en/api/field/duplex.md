@@ -1,4 +1,4 @@
-# Duplex Bidirectional Link Field
+# Duplex Link Field
 
 Type definition `IDuplexLinkField`, usage example:
 ```typescript

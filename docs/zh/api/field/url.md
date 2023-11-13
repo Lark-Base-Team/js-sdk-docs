@@ -1,4 +1,4 @@
-# UrlField 文本字段
+# UrlField 超链接字段
 类型定义 `IUrlField`，使用方法示例：
 ```typescript
 const urlField = await table.getField<IUrlField>(fieldId);
