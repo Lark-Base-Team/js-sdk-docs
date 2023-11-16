@@ -329,12 +329,6 @@ getRecordIdList(filter?: string, sort?: string): Promise<string[]>;
 ```typescript
 getCellValue(fieldId: string, recordId: string): Promise<IOpenCellValue>;
 ```
-获取单元格值 (更推荐通过 Field 来获取)
-### getAttachmentUrl
-```typescript
-getAttachmentUrl(token: string, fieldId?: string, recordId?: string): Promise<string>;
-```
-获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
 ### getCellAttachmentUrls
 ::: warning
