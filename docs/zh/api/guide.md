@@ -15,16 +15,16 @@ import { bitable } from '@lark-base-open/js-sdk';
 const table = await bitable.base.getActiveTable();
 ```
 
-`getActiveTable` 的作用是来获取当前页面已经选择的 `table`，在 `base` 上还有很多接口可以用来获取 `table`，可以在 `Base` 模块的 [文档](./base)内查看，
+`getActiveTable` 的作用是来获取当前页面已经选择的 `table`，在 `base` 上还有很多接口可以用来获取 `table`，可以在 `Base` 模块的[文档](./base)内查看。
 
 ## Table 模块与 Field 模块
-在获取到 `table` 之后，就可以在做很多对数据的增删改查操作
+在获取到 `table` 之后，就可以在做很多对数据的增删改查操作。
 
-这里再次强调，推荐开发者从 `field(字段)` 的角度来对数据进行增删改差，因为数据每一个单元格内的数据是由其所属的字段类型决定的，因此在通过字段来实现增删改查的时候，会有很多的优化，下面是一个例子
+这里再次强调，推荐开发者从 `field(字段)` 的角度来对数据进行增删改差，因为数据每一个单元格内的数据是由其所属的字段类型决定的，因此在通过字段来实现增删改查的时候，会有很多的优化，下面是一个例子：
 
 ```typescript
 const attachmentField = await table.getField<IAttachmentField>(fieldId);
-const attachemntCell = await attachmentField.createCell(file);
+const attachmentCell = await attachmentField.createCell(file);
 await table.addRecord(attachmentCell);
 ```
 在这个例子中，我们通过 `fieldId` 来获取了一个 `attachmentField(附件字段)`，在获取这个字段的时候，我们传入了一个很重要的东西 `IAttachemntField`，这是一个类型参数，告诉 ts 我们获取的是一个附件字段，
@@ -39,20 +39,20 @@ const attachmentUrls = await attachmentField.getAttachmentUrls(recordId)
 因为附件字段中存储的并不是真正的 URL，所以在获取真正的 URL 时，需要多步，但是从字段本身的角度去考虑，我们在实现这个 API 的时候，就可以把这些工作放在字段自身的方法里实现，
 所以还是非常推荐用户对数据的增删改查以及字段属性的设置可以从字段角度去考量。
 
-除了 `IAttachmentField(附件字段)` 以外，我们还细化了很多字段，可以从 [字段引导](field/guide.md) 阅读更多资料，Table 模块也有更多的 API 方法来供给开发者使用
+除了 `IAttachmentField(附件字段)` 以外，我们还细化了很多字段，可以从 [字段引导](field/guide.md) 阅读更多资料，Table 模块也有更多的 API 方法来供给开发者使用。
 
 ## Cell 模块
 在上文中，通过 `attachmentField.creatCell` 方法构造出来的 `Cell` 也是一个非常重要的模块，在进行插入数据的操作时，我们推荐开发者通过 `Field` 来构造 `Cell`，来插入数据，
-当一个 `Cell` 被成功插入到 `Table` 中去后，它会与一条数据进行关联，此时进行 `getValue/setValue` 时，都会与实时性的数据产生关联，按照上述的流程可以这样来改变对应单元格的值
+当一个 `Cell` 被成功插入到 `Table` 中去后，它会与一条数据进行关联，此时进行 `getValue/setValue` 时，都会与实时性的数据产生关联，按照上述的流程可以这样来改变对应单元格的值：
 ```typescript
 await attachmentCell.setValue(newFile)
 ```
-在 `setValue` 顺利执行之后，表格中对应单元格的值会发生改变，更多的 API 用法可以查看对应[文档](cell.md)
+在 `setValue` 顺利执行之后，表格中对应单元格的值会发生改变，更多的 API 用法可以查看对应[文档](cell.md)。
 
 ## Record 模块
-Record 模块主要时用来存储数据，API 可以查看对应[文档](record.md)
+Record 模块主要时用来存储数据，API 可以查看对应[文档](record.md)。
 
 ## UI 模块 和 Bridge 模块
-[UI 模块文档](ui.md)
+UI 模块提供与用户交互相关的能力，如切换数据表、切换视图等，详细 API 可查看[UI 模块文档](ui.md)。
 
-[Bridge 模块文档](bridge.md)
+Bridge 模块提供一些通用能力，如获取用户 id，获取当前环境信息等，详细 API 可查看 [Bridge 模块文档](bridge.md)。

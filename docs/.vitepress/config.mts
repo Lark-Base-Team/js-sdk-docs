@@ -19,6 +19,7 @@ export default defineConfig({
       { text: 'ChangeLog', link: '/zh/changelog' },
       { text: '联系我们', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=c35kac73-d80b-4066-bcd0-2df6e6017188' },
     ],
+    outline: [2, 3]
   },
   head: [
     ['link', { rel: 'icon', href: '/js-sdk-docs/logo.svg' }],

@@ -1,302 +1,379 @@
 # Table 模块
-Table 可以理解为当前数据表的一个数据库，其中并不涉及到各个视图的 UI 展示(例如在 table 下获取字段的顺序是无序的，在 View(视图) 下获取的字段是有序的)。
+`Table` 即数据表，可以将数据表理解成一个`数据源`，它负责维护数据与数据之间的联系，并不涉及 UI 展示(如字段顺序、记录顺序等，这些顺序信息保存在 [View 模块](./view.md)中)。
 
-在通过 `Base` 获取到 `Table` 之后，就可以调用 `Table` 中的 API，获取 `Table` 比较常见的方法就是 `getActiveTable`：
+通过 `Base` 获取到 `Table` 之后，就可以调用 `Table` 中的 API，可以通过 `getActiveTable` 方法来获取当前选中的数据表实例：
 ```typescript
 const table = await bitable.base.getActiveTable()
 ```
+当然也可以通过数据表 `id` 或名称来获取指定的数据表实例：
+```typescript
+const table = await bitable.base.getTable(tableId/tableName)
+```
 
-# Table 相关方法
-### getName
+## id
+
+数据表 id。
+```typescript
+id: string;
+```
+
+## getName
+获取数据表名。
 ```typescript
 getName: () => Promise<string>;
 ```
-获取表名
 
-# 字段相关
-## 新增字段
-### addField
+#### 示例
 ```typescript
-addField: (fieldConfig: IAddFieldConfig) => Promise<IFieldRes>;
-```
-新增字段，并返回对对应的字段 id
-```typescript
-type IAddFieldConfig = {
-  type: FieldType;
-  property?: FieldProperty;
-}
-
-type IFieldRes = string;
-```
-推荐只传入类型参数，属性设置在新建字段之后通过对应的字段特化方法新增
-```typescript
-const singleSelectField = await table.addField({ type: FieldType.SingleSelect });
-const singleField = await table.getField<ISingleSelectField>(singleSelectField);
-await singleField.addOption('Option1');
-```
-如上所示的例子，我们先新增了一个单选字段，然后再在这个字段上新增了一个选项（推荐在获取字段的时候，指定对应的类型`<ISingleSelectField>` 等，以获得更好的语法提示）
-### onFieldAdd
-```typescript
-onFieldAdd(callback: (ev: IEventCbCtx) => void): () => void;
-```
-监听 Field 添加事件
-
-## 设置字段
-### setField
-修改字段属性
-```typescript
-setField(fieldId: string, fieldConfig: ISetFieldConfig): Promise<IFieldRes>;
-```
-### onFieldModify
-```typescript
-onFieldModify(callback: (ev: IEventCbCtx) => void): () => void;
-```
-监听 Field 修改事件
-
-## 获取字段信息
-### getFieldIdList
-通过该方法获取的 `fieldIdList` 是无序的，因为 `table` 仅仅是数据库层面的，并不是视图（UI展示）层面的，因此是无序的，如果需要获取有序的，需要在 `View` 调用 `view.getFieldIdList` 来获取有序的字段 `Id`
-```typescript
-getFieldIdList(): Promise<string[]>;
-```
-获取字段 id 数组
-### getFieldMetaById
-```typescript
-getFieldMetaById(fieldId: string): Promise<IFieldMeta>;
-```
-通过 id 获取对应的字段信息，字段信息的数据结构定义
-```typescript
-interface IFieldMeta {
-  id: string;
-  type: FieldType;
-  name: string;
-  isPrimary: boolean;
-  description: IBaseFieldDescription;
-}
+const name = await table.getName();
 ```
 
-### getFieldMetaList
-通过该方法获取的 `fieldMetaList` 是无序的，因为 `table` 仅仅是数据库层面的，并不是视图（UI展示）层面的，因此是无序的，如果需要获取有序的，需要在 `View` 调用 `view.getFieldMetaList` 来获取对应有序的字段 `meta`
-```typescript
-getFieldMetaList(): Promise<IFieldMeta[]>;
-```
-获取所有的字段信息，字段信息的数据结构定义
-```typescript
-interface IFieldMeta {
-  id: string;
-  type: FieldType;
-  name: string;
-  isPrimary: boolean;
-  description: IBaseFieldDescription;
-}
-```
+## 获取字段
 
 ### isFieldExist
+判断指定字段 id 判断字段是否存在。
+
 ```typescript
 isFieldExist(fieldId: string): Promise<boolean>;
 ```
-通过传入字段 id 判断字段是否存在
 
+#### 示例
+```typescript
+const isExist = await table.isFieldExist('fieldId');
+```
 
-### getFieldListByType
-```typescript
-getFieldListByType: <T extends IField>(type: FieldType) => Promise<T[]>;
-```
-通过 FieldType(字段类型枚举) 来获取对应的字段，在调用的时候可以传入预期的字段类型，以便获得后续开发过程中的语法提示，下面是一个例子
-
-```typescript
-const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(FieldType.Attachment);
-```
-在这个例子中，我在获取字段的时候同时定义了预期的 `IAttachmentField` 类型，从而在后续开发中，我们就可以得到对于 `IAttachmentField` 字段类型的语法提示
-
-### getFieldMetaListByType
-```typescript
-getFieldMetaListByType: <T extends IFieldMeta>(type: FieldType) => Promise<T[]>;
-```
-通过 `FieldType(字段类型枚举)` 来获取对应的字段的 `meta` 数据，`meta` 数据的类型定义：
-```typescript
-interface IFieldMeta {
-  id: string;
-  type: FieldType;
-  name: string;
-  isPrimary: boolean;
-  description: IBaseFieldDescription;
-  // 根据字段类型来决定
-  property: T
-}
-```
-在获取对应的 `Meta` 数据时，可以通过传入对应的类型来获取确切的类型(主要是决定 `property` 类型)，下面展示一个例子：
-```typescript
-const attachmentMetaList = await table.getFieldMetaListByType<IAttachmentFieldMeta>(FieldType.Attachment)
-```
 ### getField
 ```typescript
 getField: <T extends IField>(idOrName: string) => Promise<T>;
 ```
-通过 `id` 或者 `name` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示
-```typescript
-const Field = await table.getField<IAttachmentField>(idOrName);
-```
+通过 `id` 或 `name` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示。
 
-### getFieldByName
+#### 示例
 ```typescript
-getFieldByName: <T extends IField>(name: string) => Promise<T>;
-```
-通过 `name` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示
-```typescript
-const Field = await table.getFieldByName<IAttachmentField>(idOrName);
+const field = await table.getField<IAttachmentField>(idOrName);
 ```
 
 ### getFieldById
+通过 `id` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示。
 ```typescript
 getFieldById: <T extends IField>(id: string) => Promise<T>;
 ```
-通过 `id` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示
+#### 示例
 ```typescript
-const Field = await table.getFieldById<IAttachmentField>(idOrName);
+const field = await table.getFieldById<IAttachmentField>(idOrName);
 ```
 
-### getFieldByList
+### getFieldByName
+通过 `name` 来获取对应的 `Field(字段)`，建议传入 `Field` 类型(例如示例中的 `<IAttachmentField>`)，来获得更好的语法提示
+```typescript
+getFieldByName: <T extends IField>(name: string) => Promise<T>;
+```
+#### 示例
+```typescript
+const field = await table.getFieldByName<IAttachmentField>(idOrName);
+```
+
+### getFieldList
+获取当前 table 下所有的字段列表。
 ```typescript
 getFieldList: <T extends IField>() => Promise<T[]>;
 ```
-
-获取当前 table 下 FieldList
+#### 示例
 ```typescript
 const fieldList = await table.getFieldList();
 ```
 
+### getFieldIdList
+获取字段 id 列表。
+:::warning
+通过该方法获取的字段 id 列表是**无序的**，因为 `table` 不涉及 UI 展示层面的信息，如果需要获取有序的字段 id 列表，需要在 `View 模块` 调用 `view.getVisibleFieldIdList` 来获取有序的字段 id 列表
+:::
+
+```typescript
+getFieldIdList(): Promise<string[]>;
+```
+#### 示例
+```typescript
+const fieldIdList = await table.getFieldIdList();
+```
+
+### getFieldMetaById
+通过 id 获取对应的字段元信息。
+
+```typescript
+getFieldMetaById(fieldId: string): Promise<IFieldMeta>;
+
+interface IFieldMeta {
+  id: string;
+  type: FieldType;
+  name: string;
+  isPrimary: boolean;
+  description: IBaseFieldDescription;
+}
+```
+
+#### 示例
+```typescript
+const fieldMeta = await table.getFieldMetaById();
+// { id: 'f_id', name: 'text field', type: 1, isPrimary: true, description: { content: content, disableSyncToFormDesc: false } }
+```
+
+### getFieldMetaList
+获取所有字段元信息。
+
+:::warning
+通过该方法获取的字段 meta 列表是**无序的**，因为 `table` 不涉及 UI 展示层面的信息，如果需要获取有序的字段 meta 列表，需要在 `View 模块` 调用 `view.getFieldMetaList` 来获取有序的字段 id 列表
+:::
+
+```typescript
+getFieldMetaList(): Promise<IFieldMeta[]>;
+
+interface IFieldMeta {
+  id: string;
+  type: FieldType;
+  property: IFieldProperty;
+  name: string;
+  isPrimary: boolean;
+  description: IBaseFieldDescription;
+}
+```
+#### 示例
+```typescript
+const fieldMetaList = await table.getFieldMetaList();
+```
+
+### getFieldListByType
+获取当前数据表下所有指定字段类型的字段列表。
+
+```typescript
+getFieldListByType: <T extends IField>(type: FieldType) => Promise<T[]>;
+```
+
+#### 示例
+```typescript
+// 获取 table 下所有的附件字段
+const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(FieldType.Attachment);
+```
+
+### getFieldMetaListByType
+获取当前数据表下所有指定字段类型的字段元信息列表。
+
+```typescript
+getFieldMetaListByType: <T extends IFieldMeta>(type: FieldType) => Promise<T[]>;
+
+interface IFieldMeta {
+  id: string;
+  type: FieldType;
+  name: string;
+  property: IFieldProperty;
+  isPrimary: boolean;
+  description: IBaseFieldDescription;
+}
+```
+#### 示例
+```typescript
+// 获取 table 下所有的附件字段的 Meta 列表
+const attachmentFieldMetaList = await table.getFieldMetaListByType<IAttachmentFieldMeta>(FieldType.Attachment)
+```
+
+## 新增字段
+### addField
+新增字段，并返回对对应的字段 id。
+
+:::tip
+`addField` 支持直接配置字段属性，但推荐在新建字段之后通过对应的字段方法修改字段属性，更简便不易出错。
+:::
+
+```typescript
+addField: (fieldConfig: IAddFieldConfig) => Promise<FieldId>;
+
+type IAddFieldConfig = {
+  type: FieldType;
+  property?: FieldProperty;
+  name?: string;
+  description?: { // 字段描述
+    content?: string;
+    /** 是否禁止同步，如果为true，表示禁止同步该描述内容到表单的问题描述（只在新增、修改字段时生效）; 默认false */
+    disableSyncToFormDesc?: boolean;
+  };
+}
+
+type FieldId = string;
+```
+#### 示例
+```typescript
+const field = await table.addField({ type: FieldType.SingleSelect });
+const singleSelectField = await table.getField<ISingleSelectField>(field);
+await singleSelectField.addOption('Option1');
+```
+如上所示的例子，我们先新增了一个单选字段，然后再在这个字段上新增了一个选项（推荐在获取字段的时候，指定对应的类型（如 `<ISingleSelectField>`） ，以获得更好的语法提示）
+
+### onFieldAdd
+监听 Field 添加事件，返回一个取消监听函数。
+```typescript
+onFieldAdd(callback: (ev: IEventCbCtx) => void): () => void;
+```
+
+#### 示例
+```typescript
+
+const off = table.onFieldAdd((event) => {
+  console.log('event:', event);
+})
+const fieldId = await table.addField({ // 新增一个多行文本类型的字段
+  type: FieldType.Text,
+  name: 'field_test'
+})
+```
+
+## 设置字段
+### setField
+修改字段，如字段类型、字段名称和字段属性等。
+:::tip
+推荐从 `Field` 实例调用对应的字段方法来设置字段属性，更简便不易出错。
+:::
+
+```typescript
+setField(fieldId: string, fieldConfig: ISetFieldConfig): Promise<IFieldRes>;
+
+// 支持不传 name、type、property 等参数，不传参数时会合并原属性
+type ISetFieldConfig = {
+  type: FieldType;
+  property?: FieldProperty;
+  name?: string;
+  description?: { // 字段描述
+    content?: string;
+    /** 是否禁止同步，如果为true，表示禁止同步该描述内容到表单的问题描述（只在新增、修改字段时生效）; 默认false */
+    disableSyncToFormDesc?: boolean;
+  };
+}
+```
+
+#### 示例
+```typescript
+const field = await table.getField('f_idxxx');
+
+const res = await table.setField(field.id, {
+  name: 'modify_field_name'
+})
+```
+
+### onFieldModify
+监听字段修改事件，返回一个取消监听函数。
+
+```typescript
+onFieldModify(callback: (ev: IEventCbCtx) => void): () => void;
+```
+
+#### 示例
+```typescript
+
+const off = table.onFieldModify((event) => {
+  console.log('field modify:', event);
+})
+
+const fieldId = await table.addField({ // 新增一个多行文本类型的字段
+  type: FieldType.Text,
+  name: 'field_test'
+})
+
+const fieldId = await table.setField({ // 修改字段名称
+  name: 'field_modified'
+})
+```
+
 ## 删除字段
 ### deleteField
+删除指定字段。
+
 ```typescript
 deleteField: (fieldOrId: string | IField) => Promise<boolean>;
 ```
-删除一个字段(Field)
+
+#### 示例
 ```typescript
-await table.deleteField(attachmentField);
+const attachmentField = await table.addField({ FieldType.Attachment });
+// 直接传递 field 实例
+await table.deleteField(attachmentField)
+// 或者传递 fieldId
+await table.deleteField(attachmentField.id);
 ```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
+
 ### onFieldDelete
+监听 Field 删除事件，返回一个取消监听函数。
+
 ```typescript
 onFieldDelete(callback: (ev: IEventCbCtx) => void): () => void;
 ```
-监听 Field 删除事件
 
-# 记录(Record)相关
-## 新增记录
-### addRecord
+#### 示例
 ```typescript
-addRecord: (recordVale?: IRecordValue | ICell | ICell[]) => Promise<IRecordRes>;
-```
-新增一条记录(如果新增多条记录，建议使用 addRecords，否则会遇到性能问题)，ICell 可以通过各个字段 (Field) 的 createCell 方法来创建([具体实现方法](cell.md))，如果使用 RecordValue 来创建，数据结构如下所示：
-```typescript
-type IRecordValue = {
-  fields: {
-    [fieldId: string]: IOpenCellValue;
-  };
-};
-```
-返回值 `IRecordRes` 的类型定义，会返回插入记录的 recordId
-```typescript
-type IRecordRes = string;
-```
-更推荐使用 Field.createCell 的方法来创建 Cell，然后通过组合 cell 来插入一条记录，下面是一个例子:
-```typescript
-const attachmentCell = await attachmentField.createCell(imageFile);
-const recordId = await table.addRecord(attachmentCell);
-```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
 
-### addRecords
-```typescript
-addRecords: (record?: IRecordValue[] | ICell[] | Array<ICell[]>) => Promise<IRecordRes[]>;
-```
-新增多条记录，ICell 可以通过各个字段(Field)的 createCell 方法来创建([具体实现方法](cell.md))，如果使用 RecordValue 来创建，数据结构如下所示：
-```typescript
-type IRecordValue = {
-  fields: {
-    [fieldId: string]: IOpenCellValue;
-  };
-};
-```
-返回值 `IRecordRes` 的类型定义，会返回插入记录的 recordId 数组
-```typescript
-type IRecordRes = string;
-```
-更推荐使用 Field.createCell 的方法来创建 Cell，然后通过组合 cell 来插入一条记录，下面是一个例子:
-```typescript
-const attachmentCell1 = await attachmentField.createCell(imageFile);
-const attachmentCell2 = await attachmentField.createCell(textFile);
-const recordIds = await table.addRecords([[attachmentCell1],[attachmentCell2]]);
-```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
+const off = table.onFieldDelete((event) => {
+  console.log('field delete', event);
+})
 
-### addRecordByCell
-```typescript
-addRecordByCell: (cells: ICell[]) => Promise<IRecordRes>;
-```
-通过 Cell 来新增一条记录(Record)，并返回对应的 RecordId
-```typescript
-const attachmentCell = await attachmentField.createCell(imageFile);
-const recordId = await table.addRecord(attachmentCell);
-```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
+const fieldId = await table.addField({ // 新增多行文本类型的字段
+  type: FieldType.Text,
+  name: 'field_test'
+})
 
-### addRecordsByCell
-```typescript
-addRecordsByCell: (cells: Array<ICell[]>) => Promise<IRecordRes[]>;
+table.deleteField(fieldId) // 删除字段
 ```
-通过 Cell 来新增多条记录(Record)，并返回对应的 RecordId 数组
-```typescript
-const attachmentCell1 = await attachmentField.createCell(imageFile);
-const attachmentCell2 = await attachmentField.createCell(textFile);
-const recordIds = await table.addRecords([[attachmentCell1],[attachmentCell2]]);
-```
-其中 attachmentField 可以通过 `table.getField` 方法获取到
-
-### onRecordAdd
-```typescript
-onRecordAdd(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
-```
-监听 Record 添加事件
 
 ## 获取记录
+### getCellValue
+获取指定单元格的取值。
+
+```typescript
+getCellValue(fieldId: string, recordId: string): Promise<IOpenCellValue>;
+```
+
+#### 示例
+```typescript
+// 光标选中数据表中的单元格
+const { fieldId, recordId } = await bitable.base.getSelection();
+const cellValue = table.getCellValue(fieldId, recordId);
+```
+
 ### getRecordById
+通过指定 id 去获取对应记录。
+
 ```typescript
 getRecordById(recordId: string): Promise<IRecordValue>;
-```
-通过 id 去获取对应的 record (记录)，其中 IRecordValue 的类型定义如下：
-```typescript
+
 type IRecordValue = {
   fields: {
     [fieldId: string]: IOpenCellValue;
   };
 };
+```
+
+#### 示例
+```typescript
+const recordIdList = await table.getRecordIdList(); // 获取 recordId 列表
+
+const recordValue = await table.getRecordById(recordIdList[0]);
 ```
 
 ### getRecords
+批量获取 record，单次获取上限 **5000** 条。
 ```typescript
 getRecords(param: IGetRecordsParams): Promise<IGetRecordsResponse>;
-```
-批量获取 record，单次上限 500 条，其中参数类型定义如下：
-```typescript
+
 interface IGetRecordsParams {
-  pageSize?: number; // 获取数量，默认 500，最大不得超过 500
+  pageSize?: number; // 获取数量，默认 5000，最大不得超过 5000
   pageToken?: string; // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 pageToken，下次遍历可采用该 pageToken 获取查询结果
-  viewId?: string;  // 获取指定视图的 record，当传入 filter/sort 时，该属性会被忽略
+  viewId?: string;  // 获取指定视图的 record
 }
-```
-返回值定义如下:
-```typescript
+
 interface IGetRecordsResponse {
-  total: number;
-  hasMore: boolean;
-  records: IRecord[];
-  pageToken?: string;
+  total: number; // 记录总数
+  hasMore: boolean; // 是否还有更多记录
+  records: IRecord[]; // 记录列表
+  pageToken?: string; // 分页标记
 }
-```
-其中 IRecord 的类型定义如下:
-```typescript
+
 interface IRecord {
   recordId: string;
   fields: {
@@ -305,11 +382,31 @@ interface IRecord {
 }
 ```
 
-### getRecordList
+#### 示例
 ```typescript
-getRecordsList(filter?: Formula, sort?: Sort): Promise<IRecordList>;
+const records = await bitable.base.getRecords({
+  pageSize: 5000
+})
 ```
-调用 `getRecordList` 可以获取当前的记录数组，然后使用封装方法对数据执行一些操作，例如：
+
+### getRecordIdList
+获取记录 id 列表。
+
+```typescript
+getRecordIdList(): Promise<string[]>;
+```
+#### 示例
+```typescript
+const recordIdList = await table.getRecordIdList();
+```
+
+### getRecordList
+获取当前的记录列表，`Record` 模块中的相关方法可以查看 [Record 模块](./record.md)
+
+```typescript
+getRecordsList(): Promise<Record>;
+```
+
 ```typescript
 const recordList = await table.getRecordList();
 for (const record of recordList) {
@@ -317,70 +414,178 @@ for (const record of recordList) {
   const val = await cell.getValue();
 }
 ```
-可以通过查看 [Record 模块](./record.md) 获取更多的用法
-
-### getRecordIdList
-```typescript
-getRecordIdList(filter?: string, sort?: string): Promise<string[]>;
-```
-获取表中记录的 id
-
-### getCellValue
-```typescript
-getCellValue(fieldId: string, recordId: string): Promise<IOpenCellValue>;
-```
 
 ### getCellAttachmentUrls
+批量获取指定附件单元格中附件的 URL (推荐通过 [AttachmentField](./field/attachment.md) 模块去获取。)
+
 ::: warning
-接口返回的临时链接的有效时间是 10分钟
+接口返回的临时链接的有效时间是 10 分钟
 :::
 ```typescript
 getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Promise<string[]>;
 ```
-获取当前附件单元格中附件的 URL (推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL)
 
-[//]: # (### getCellThumbnailUrls)
-
-[//]: # (```typescript)
-
-[//]: # (getCellThumbnailUrls&#40;tokens: string[], fieldId: string, recordId: string&#41;: Promise<string[]>;)
-
-[//]: # (```)
-
-[//]: # (获取当前附件单元格中附件的预览 URL &#40;推荐通过 AttachmentField 去获取, AttachmentField 可以通过传入 Record/RecordId, 参数获取附件 URL&#41;)
+#### 示例
+```typescript
+const urls = await table.getCellAttachmentUrls(['token_1', 'token_2'], 'f_id', 'r_id');
+```
 
 ### getRecordShareLink
+获取指定记录的分享链接。
 ```typescript
 getRecordShareLink(recordId: string)
 ```
-获取指定记录的分享链接
+
+#### 示例
+```typescript
+const recordShareLink = await table.getRecordShareLink('r_Id')
+```
+
+## 新增记录
+### addRecord
+新增一条记录，新增成功后返回 `recordId`，支持直接传递 `RecordValue` 或单元格 `Cell` 实例。
+:::tip
+如果新增多条记录且对性能有一定要求，建议使用 [addRecords](#addrecords)。
+:::
+
+```typescript
+addRecord: (recordVale?: IRecordValue | ICell | ICell[]) => Promise<IRecordRes>;
+
+type IRecordValue = {
+  fields: {
+    [fieldId: string]: IOpenCellValue;
+  };
+};
+
+type IRecordRes = string;
+```
+
+#### 示例
+如果使用 `RecordValue` 来创建（不推荐）：
+```typescript
+const field = await table.getField('多行文本'); // 选择某个多行文本字段
+
+const res = await table.addRecord({
+  fields: {
+    [field.id]: 'new text field value'
+  }
+});
+// 'recxxx' 新增的记录 id
+```
+
+更推荐通过组合 Cell 实例来插入一条记录，[Cell](./cell.md) 可以通过各个字段的 `createCell` 方法来创建，下面是一个例子:
+```typescript
+const textField = await table.getField<TextField>('多行文本');
+
+const textCell = await textField.createCell('new text field value');
+const recordId = await table.addRecord(textCell);
+```
+
+### addRecords
+新增多条记录，新增成功后返回 `recordId` 列表。
+```typescript
+addRecords: (record?: IRecordValue[] | ICell[] | Array<ICell[]>) => Promise<IRecordRes[]>;
+
+type IRecordValue = {
+  fields: {
+    [fieldId: string]: IOpenCellValue;
+  };
+};
+
+type IRecordRes = string;
+```
+#### 示例
+如果使用 `RecordValue` 来创建（不推荐）：
+```typescript
+const field = await table.getField('多行文本'); // 选择某个多行文本字段
+
+const res = await table.addRecords([
+  {
+    fields: {
+      [field.id]: 'new text field value1'
+    }
+  },
+  {
+    fields: {
+      [field.id]: 'new text field value2'
+    }
+  },
+]);
+```
+
+更推荐通过组合 Cell 实例来插入多条记录，[Cell](./cell.md) 可以通过各个字段的 `createCell` 方法来创建，下面是一个例子:
+```typescript
+const textField = await table.getField('多行文本'); // 选择某个多行文本字段
+
+const textCell1 = await textField.createCell('new text field value1');
+const textCell2 = await textField.createCell('new text field value1');
+const recordIds = await table.addRecords([[textCell1],[textCell2]]);
+```
+
+### onRecordAdd
+监听 Record 添加事件，返回一个取消监听方法。
+```typescript
+onRecordAdd(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
+```
+
+#### 示例
+```typescript
+const field = await table.getField('多行文本'); // 根据字段名获取多行文本类型的字段
+const off = table.onRecordAdd((event) => { // 监听字段增加事件
+  console.log('record add', event);
+});
+
+const cell = field.createCell('new text field value');
+table.addRecord(cell);
+```
 
 ## 设置记录
 ### setCellValue
+设置指定单元格的值。(推荐通过 Field 来设置)
+
 ```typescript
 setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordId: string, cellValue: T): Promise<boolean>;
 ```
-设置单元格的值 (推荐通过 Field 来设置)
+
+#### 示例
+```typescript
+const recordIds = await table.getRecordIdList();
+const field = await table.getField('多行文本');
+
+// 设置某个多行文本类型的字段
+const res = await table.setCellValue(field.id, recordIds[0], 'test setCellValue')
+// true
+```
+
 ### setRecord
+修改指定记录数据。
 ```typescript
 setRecord(recordId: string, recordValue?: IRecordValue): Promise<IRecordRes>;
-```
-设置 Record 数据，并返回对应的 RecordId，其中 IRecordValue 的数据格式为：
-```typescript
+
 type IRecordValue = {
   fields: {
     [fieldId: string]: IOpenCellValue;
   };
 };
 ```
-更推荐通过 Field 来设置 Value(Field.setValue)
+
+#### 示例
+```typescript
+const recordIds = await table.getRecordIdList(); // 获取所有记录 id
+const field = await table.getField('多行文本'); // 选择多行文本字段
+
+const res = await table.setRecord(recordIds[0], {
+    fields: {
+      [field.id]: 'test setRecord'
+    }
+})
+```
 
 ### setRecords
+批量修改记录数据。
 ```typescript
 setRecords(records?: IRecord[]): Promise<IRecordRes[]>;
-```
-设置 Record 数据，并返回对应的 RecordId，其中 IRecord 的数据格式为：
-```typescript
+
 interface IRecord {
   recordId: string;
   fields: {
@@ -388,94 +593,200 @@ interface IRecord {
   };
 }
 ```
+
+#### 示例
+```typescript
+const recordIds = await table.getRecordIdList(); // 获取所有记录 id
+const field = await table.getField('多行文本'); // 选择多行文本字段
+
+await table.setRecords([
+  {
+    recordId: recordIds[0],
+    fields: {
+      [field.id]: 'test setRecords1'
+    }
+  },
+  {
+    recordId: recordIds[1],
+    fields: {
+      [field.id]: 'test setRecords2'
+    }
+  }
+])
+```
+
 ### getCellString
+获取单元格取值的**原始字符串形式**，如日期字段会返回具体的年月日字符串。
+
 ```typescript
 getCellString(fieldId: string, recordId: string): Promise<string>;
 ```
-获取 cellValue 并转化为 string 格式
+
+#### 示例
+```typescript
+const recordIds = await table.getRecordIdList();
+const dateTimeField = await table.getField('日期');
+
+const res = await table.getCellString(dateTimeField.id, recordIds[0]); 
+// 2023/10/01
+```
+
 ### onRecordModify
+监听 Record 修改事件，返回一个取消监听方法。如果记录修改前后并未发生变化，则不会触发回调函数。
+
 ```typescript
 onRecordModify(callback: (ev: IEventCbCtx<{
   recordId: string;
   fieldIds: string[];
 }>) => void): () => void;
 ```
-监听 Record 修改事件
+
+#### 示例
+```typescript
+const recordIds = await table.getRecordIdList();
+const field = await table.getFieldByName('多行文本')
+
+const off = table.onRecordModify((event) => { // 监听记录修改事件
+  console.log('record modify', event);
+})
+
+await table.setRecord(recordIds[0], { // 修改某条记录的多行文本字段
+  fields:{
+    [field.id]: 'modify value'
+  }
+})
+```
 
 ## 删除记录
 ### deleteRecord
+删除指定记录。
+
 ```typescript
 deleteRecord(recordId: string): Promise<boolean>;
 ```
-通过 RecordId 删除对应的记录
+
+#### 示例
+```typescript
+const recordIdList = await table.getRecordIdList();
+
+await table.deleteRecord(recordIdList[0]);
+```
 
 ### deleteRecords
+批量删除记录。
+
 ```typescript
 deleteRecords(recordIdList: string[]): Promise<boolean>;
 ```
-通过 RecordId 数组，批量删除对应的记录
+
+#### 示例
+```typescript
+const recordIdList = await table.getRecordIdList();
+
+// 删除前100条记录
+await table.deleteRecords(recordIdList.slice[0, 100]);
+```
+
 ### onRecordDelete
+监听 Record 删除事件，返回一个取消监听方法。
+
 ```typescript
 onRecordDelete(callback: (ev: IEventCbCtx<[recordId: string]>) => void): () => void;
 ```
-监听 Record 删除事件
 
-# 视图(View)相关
+#### 示例
+```typescript
+const off = table.onRecordDelete((event) => {
+  console.log('record delete', event);
+})
+
+const recordIdList = await table.getRecordIdList();
+table.deleteRecord(recordIdList[0]);
+```
+
 ## 获取视图
+View 模块相关能力请参考 [视图模块](./view.md)。
+
 ### getActiveView
+获取当前选择的 View 视图。
+
 ```typescript
 getActiveView: () => Promise<IView>;
 ```
-获取当前选择的视图
+
+#### 示例
+```typescript
+const view = await table.getActiveView();
+```
+
+### isViewExist
+通过 viewId 判断视图是否存在。
+```typescript
+isViewExist(viewId: string): Promise<boolean>;
+```
+
+#### 示例
+```typescript
+const isExist = await table.isViewExist('viewId');
+```
+
 
 ### getViewById
+通过 id 来获取 View 视图。
+
 ```typescript
 getViewById: (id: string) => Promise<IView>;
 ```
-通过 id 来获取 view 视图
+
+#### 示例
 ```typescript
-const view = await table.getViewById(id);
+const view = await table.getViewById(viewId);
 ```
 
 ### getViewList
+获取当前数据表的所有视图。
+
 ```typescript
 getViewList: () => Promise<IView[]>;
 ```
-获取 ViewList
+
+#### 示例
 ```typescript
 const viewList = await table.getViewList();
 ```
 
 ### getViewMetaById
+通过 id 获取视图的元信息。
 ```typescript
 getViewMetaById(viewId: string): Promise<IViewMeta>;
-```
-通过 id 去获取视图的信息，其中 IViewMeta 的类型定义如下所示：
-```typescript
+
 interface IViewMeta {
   id: string;
   name: string;
   type: ViewType;
-  property: IBaseViewProperty;
+  property: IViewProperty;
 }
+```
+
+#### 示例
+```typescript
+const viewMeta = await table.getViewById(viewId);
 ```
 
 ### getViewMetaList
+获取当前数据表下所有的视图元信息。
 ```typescript
 getViewMetaList(): Promise<IViewMeta[]>;
-```
-获取所有的视图信息，并以数组返回，其中 IViewMeta 的类型定义如下所示：
-```typescript
+
 interface IViewMeta {
   id: string;
   name: string;
   type: ViewType;
-  property: IBaseViewProperty;
+  property: IViewProperty;
 }
 ```
 
-### isViewExist
+#### 示例
 ```typescript
-isViewExist(viewId: string): Promise<boolean>;
+const viewMetaList = await table.getViewMetaList();
 ```
-通过 viewId 判断视图是否存在

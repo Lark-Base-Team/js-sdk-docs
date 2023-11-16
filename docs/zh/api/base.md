@@ -1,75 +1,108 @@
 # Base 模块
-获取 `base` 的的方法
+当前多维表格实例，多维表格相关 API 的主入口。
 
 ```typescript
-const base = bitable.base
+import { bitable } from '@lark-base-open/js-sdk';
+
+const base = bitable.base;
+```
+
+## getSelection
+获取当前多维表格激活的相关信息（当前文档 id、数据表 id、视图 id 等）。
+
+```typescript
+getSelection: () => Promise<Selection>;
+
+interface Selection {
+  baseId: string | null, 
+  tableId: string | null,
+  fieldId: string | null,
+  viewId: string | null, 
+  recordId: string | null
+}
+```
+
+#### 示例
+```typescript
+const selection = await bitable.base.getSelection();
 ```
 
 ## getActiveTable
+获取当前选中的数据表 `table`。
+
 ```typescript
 getActiveTable: () => Promise<ITable>;
 ```
-`getActiveTable` 是用来获取当前的 `table` 
+#### 示例
 ```typescript
 const table = await base.getActiveTable();
 ```
 
 ## getTable
+获取指定数据表 `table`，支持传入 `table` 的 id 或名称。
+
 ```typescript
 getTable(idOrName: string): Promise<ITable>
 ```
-传入 `table` 的名称或者 ID 都可以获取到 `table`
+
+#### 示例
 ```typescript
-const table = await base.getTable(idOrName);
+// 传入 table id
+const table = await base.getTable('t_idxxxx');
+// 传入 table name
+const table = await base.getTable('Table_For_Test');
 ```
 
 ## getTableById
+通过数据表 `id` 来获取指定数据表。
+
 ```typescript
-getTableById(id: string): ITable[];
+getTableById(tableId: string): ITable;
 ```
-通过 `id` 来获取对应的 `table`
+#### 示例
 ```typescript
-const tableById = await base.getTableById(id);
+const table = await base.getTableById('t_idxxxx');
 ```
 
 ## getTableByName
+通过数据表名称获取指定数据表。
+
 ```typescript
 getTableByName(name: string): Promise<ITable>
 ```
-传入 `table` 的名称都可以获取到 `table`
+#### 示例
 ```typescript
-const table = await base.getTableByName(name);
+const table = await base.getTableByName('Table_For_Test');
 ```
 
 ## getTableList
+获取当前多维表格下所有的数据表。
+
 ```typescript
-getTableList: () => Promise<ITable[]>;
+getTableList(): Promise<ITable[]>;
 ```
-获取所有的 `table` 
+#### 示例
 ```typescript
 const tableList = await base.table.getTableList();
 ```
 
-## getSelection
-读取当前 `tableId` 等信息
+## getTableMetaList
+获取当前多维表格下所有数据表元信息。
+
 ```typescript
-const { tableId, viewId } = await base.getSelection();
+getTableMetaList(): Promise<ITableMeta[]>
 ```
 
-## getTableMetaList
-```typescript
-getTableMetaList(): Promise<TableMeta[]>
-```
-获取当前 `base` 下所有表元信息
+##### 示例
 ```typescript
 const tableMetaList = await base.getTableMetaList();
 ```
 
 ## getPermission
+获取 Base、Table、Field、Record、Cell 等不同实体的权限，当返回 true 的时候表示有权限，返回为 false 的时候没有权限。
 ```typescript
 getPermission(params: GetPermissionParams): Promise<boolean>;
 ```
-获取 Base、Table、Field、Record、Cell 等不同实体的权限，当返回 true 的时候表示有权限，返回为 false 的时候没有权限
 
 其中 `GetPermissionParams` 的类型定义如下：
 ```typescript
@@ -116,7 +149,9 @@ interface CellPermissionParams {
   type: CellOperation;
 }
 ```
-使用的时候，需要传入对应的配置，来查询对应的权限, 下面展示一个查询字段权限的例子
+
+#### 示例
+使用的时候，需要传入对应的配置，来查询对应的权限, 下面展示一个`查询字段编辑权限`的例子：
 
 ```typescript
 const fieldInfo: FieldPermissionParams = {
@@ -129,43 +164,68 @@ const fieldInfo: FieldPermissionParams = {
 }
 const hasPermission = await base.getPermission(params);
 ```
-我们传入对应的 `entity` 是确定查询的对象为 `field`，`params` 是用来获取需要判断权限的 `field` 具体信息，`type` 则是的权限类型，在这里就是判断是否有编辑的权限。
 
 ## isEditable
+是否可以编辑当前多维表格。
 ```typescript
-gisEditable(): Promise<boolean>;
+isEditable(): Promise<boolean>;
 ```
-是否可以编辑
+##### 示例
 ```typescript
 const isEditable = await base.isEditable();
 ```
 
 ## batchUploadFile
+批量上传文件，按序返回每个文件对应的 fileToken 列表，支持传入 [File](https://developer.mozilla.org/zh-CN/docs/Web/API/File) 数组或 [FileList](https://developer.mozilla.org/zh-CN/docs/Web/API/FileList) 对象。
 ```typescript
 batchUploadFile(file: File[] | FileList): Promise<string[]>;
 ```
-批量上传文件，按序返回每个文件对应的 fileToken 列表，如果只是想创建一条带有附件的记录/修改附件单元格数据，建议查看 [AttachmentField](./field/attachment.md)。
+#### 示例
+```typescript
+// 文件上传限制
+// file name 长度不得大于 250
+// file size 不得大于 1024 * 1024 * 1024 * 2
+
+const file = new File(['Hello, World!'], 'hello.txt', { type: 'text/plain' });
+const tokens =await bitable.base.batchUploadFile([file]); // 拿到的 token 可以用于设置附件字段
+console.log(tokens) // ['BcdqbMmW4ohD7ExUq9rcGtuVn8e']
+```
+
 
 ## onTableAdd
+监听 Table 添加事件，将返回一个取消监听函数。
+
 ```typescript
 onTableAdd(callback: () => void): () => void;
 ```
-监听 Table 添加事件
+#### 示例
+```typescript
+const off = bitable.base.onTableAdd((event) => {
+  console.log('table added')
+})
+```
 
 ## onTableDelete
+监听 Table 删除事件，将返回一个取消监听函数。
 ```typescript
 onTableDelete(callback: () => void): () => void;
 ```
-监听 Table 删除事件
+#### 示例
+```typescript
+const off = bitable.base.onTableDelete((event) => {
+  console.log('table deleted')
+})
+```
 
 ## onSelectionChange
+监听当前选中（数据表、单元格、视图）改变事件，将返回一个取消监听函数。
 ```typescript
 onSelectionChange(callback: () => void): () => void;
 ```
-监听选中改变事件
 
-## onPermissionChange
+#### 示例
 ```typescript
-onPermissionChange(callback: () => void): () => void;
+const off = bitable.base.onSelectionChange((event: { data: Selection }) => {
+  console.log('current selection', event)
+})
 ```
-监听权限变化

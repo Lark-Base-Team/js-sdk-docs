@@ -31,6 +31,9 @@ type IOpenAttachment = {
 [//]: # (通过 `Record` 获取附件的缩略图 URL 地址 &#40;获取速度较快，可以用于预览展示&#41;)
 
 ## getAttachmentUrls
+::: warning
+该接口返回的临时链接的有效时间是 **10 分钟**。
+:::
 ```typescript
 getAttachmentUrls: (recordOrId: IRecordType | string) => Promise<string[]>;
 ```

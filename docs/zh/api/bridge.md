@@ -1,6 +1,6 @@
 # Bridge 模块
 
-`Bridge` 模块主要是涉及到插件应用层面的 API，例如（存取持久化数据/获取当前多维表格主题信息等),
+`Bridge` 模块主要提供了一些通用能力的 API，例如（获取当前语言信息/获取当前多维表格主题信息等),
 获取方式为：
 ```typescript
 const bridge = bitable.bridge;
