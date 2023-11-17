@@ -13,7 +13,7 @@ const view = await table.getViewById(viewId);
 ```
 
 View 可以通过下图在得知其在页面中是负责 UI 展示的，因此很多与 UI 展示形式相关的 API 都存在于 View 层，例如筛选/分组/排序等
-![](../../image/module-name.png)
+![](../../image/view/module-name.png)
 
 ## 不同类型的视图
 目前支持以下 6 种不同类型的视图，不同类型的视图可用能力存在差异：
@@ -43,7 +43,7 @@ interface IFilterInfo {
 
 `FilterInfoCondition` 代表过滤条件，每个 Condition 由`字段` + `过滤操作符` + `匹配值`三个基本元素组成。
 
-![](../../image/filter-conditions.png)
+![](../../image/view/filter-conditions.png)
 
 ```typescript
 interface FilterInfoCondition {
@@ -65,7 +65,7 @@ enum FilterConjunction {
 }
 ```
 
-![](../../image/filter-conjunction.png)
+![](../../image/view/filter-conjunction.png)
 
 不同的字段可匹配的过滤操作符和匹配值不同，具体类型如下：
 
@@ -144,7 +144,7 @@ type BaseFilterOperator =
 
 ### 排序
 视图按照一定的规则将数据表中的记录进行排序，一条排序规则由 `字段ID` + `顺序` 组成：
-![](../../image/view-sort.png)
+![](../../image/view/view-sort.png)
 
 
 ```typescript
@@ -157,7 +157,7 @@ interface ISortInfo {
 
 ### 分组
 视图按照一定的规则将数据表中的记录进行分组，一条分组规则由 `字段ID` + `顺序` 组成：
-![](../../image/view-group.png)
+![](../../image/view/view-group.png)
 
 
 ```typescript
@@ -173,4 +173,4 @@ interface IGroupInfo {
 View 模块中分组/筛选/排序等能力，在调用写入 API 之后如果**希望保存或者同步给其他用户**需要调用 `applySetting` 方法
 :::
 
-![](../../image/view-applysetting.png)
+![](../../image/view/view-applysetting.png)

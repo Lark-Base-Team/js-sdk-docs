@@ -357,10 +357,24 @@ const recordValue = await table.getRecordById(recordIdList[0]);
 ```
 
 ### getRecords
-批量获取 record，单次获取上限 **5000** 条。
-```typescript
-getRecords(param: IGetRecordsParams): Promise<IGetRecordsResponse>;
+批量获取 record 数据。
 
+:::warning
+单次获取上限 **5000** 条
+:::
+
+```typescript
+getRecords({ pageSize, pageToken, viewId }: IGetRecordsParams): Promise<IGetRecordsResponse>;
+```
+
+| 名称      | 数据类型 | 是否必填 | 描述                                                                                                                                    |
+| --------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| pageSize  | number   | 是       | 分页页面大小 size，最大值：5000                                                                                                         |
+| pageToken | string   | 否       | 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果 |
+| viewId    | string   | 否       | 视图的唯一标识符，获取指定视图下的记录                                                                                                  |
+
+相关类型定义如下：
+```typescript
 interface IGetRecordsParams {
   pageSize?: number; // 获取数量，默认 5000，最大不得超过 5000
   pageToken?: string; // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 pageToken，下次遍历可采用该 pageToken 获取查询结果
@@ -390,7 +404,7 @@ const records = await bitable.base.getRecords({
 ```
 
 ### getRecordIdList
-获取记录 id 列表。
+获取所有记录 id 列表。
 
 ```typescript
 getRecordIdList(): Promise<string[]>;
@@ -416,7 +430,7 @@ for (const record of recordList) {
 ```
 
 ### getCellAttachmentUrls
-批量获取指定附件单元格中附件的 URL (推荐通过 [AttachmentField](./field/attachment.md) 模块去获取。)
+批量获取指定附件单元格中附件的 URL，参数中的 token 需要从附件字段所属的单元格中获取。(推荐通过 [AttachmentField](./field/attachment.md) 模块去获取)
 
 ::: warning
 接口返回的临时链接的有效时间是 10 分钟
@@ -431,7 +445,7 @@ const urls = await table.getCellAttachmentUrls(['token_1', 'token_2'], 'f_id', '
 ```
 
 ### getRecordShareLink
-获取指定记录的分享链接。
+获取指定记录的分享链接，获得链接的用户，将以多维表格的权限访问。
 ```typescript
 getRecordShareLink(recordId: string)
 ```
@@ -483,6 +497,11 @@ const recordId = await table.addRecord(textCell);
 
 ### addRecords
 新增多条记录，新增成功后返回 `recordId` 列表。
+
+:::warning
+单次新增记录上限 **5000** 条
+:::
+
 ```typescript
 addRecords: (record?: IRecordValue[] | ICell[] | Array<ICell[]>) => Promise<IRecordRes[]>;
 
@@ -583,6 +602,11 @@ const res = await table.setRecord(recordIds[0], {
 
 ### setRecords
 批量修改记录数据。
+
+:::warning
+单次修改记录上限 **5000** 条
+:::
+
 ```typescript
 setRecords(records?: IRecord[]): Promise<IRecordRes[]>;
 
@@ -675,6 +699,10 @@ await table.deleteRecord(recordIdList[0]);
 ### deleteRecords
 批量删除记录。
 
+:::warning
+单次删除记录上限 **5000** 条
+:::
+
 ```typescript
 deleteRecords(recordIdList: string[]): Promise<boolean>;
 ```
@@ -684,7 +712,7 @@ deleteRecords(recordIdList: string[]): Promise<boolean>;
 const recordIdList = await table.getRecordIdList();
 
 // 删除前100条记录
-await table.deleteRecords(recordIdList.slice[0, 100]);
+await table.deleteRecords(recordIdList.slice(0, 100));
 ```
 
 ### onRecordDelete
@@ -708,6 +736,10 @@ table.deleteRecord(recordIdList[0]);
 View 模块相关能力请参考 [视图模块](./view.md)。
 
 ### getActiveView
+:::warning
+This method is under testing, please use the 0.3.5-alpha.2 version package for test
+:::
+
 获取当前选择的 View 视图。
 
 ```typescript

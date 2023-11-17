@@ -17,13 +17,28 @@ const record = await recordList.getRecordById(recordId);
 不过，还是更推荐开发者在对数据进行增删改查时，从 [`Field(字段)`](field/guide.md) 来考虑
 
 ## getCellList
+获取当前记录中所有的 `Cell`(关于 [`Cell`](cell.md))
+
 ```typescript
 getCellList: () => Promise<ICell[]>;
 ```
-获取当前记录中所有的 `Cell`(关于 [`Cell`](cell.md))
+
+#### 示例
+```typescript
+const recordList = await table.getRecordList();
+const cellList = await recordList[0].getCellList();
+```
 
 ## getCellByField
+通过 Field 来获取 `Cell`(关于 [`Cell`](cell.md))
+
 ```typescript
 getCellByField: (fieldOrId: IField | string) => Promise<ICell>;
 ```
-通过 Field 来获取 `Cell`(关于 [`Cell`](cell.md))
+
+#### 示例
+```typescript
+const recordList = await table.getRecordList();
+const textField = await table.getField('多行文本');
+const cell = await recordList[0].getCellByField(textField);
+```

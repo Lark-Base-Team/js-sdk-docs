@@ -24,7 +24,7 @@ const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(Fie
 ```
 其中，`table` `field` 等模块都都可以在下面这张图中找到对应的关系：
 
-![](../../image/module-name.png)
+![](../../image/view/module-name.png)
 
 下面介绍各个模块的概念：
 

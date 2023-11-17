@@ -25,7 +25,7 @@ const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(Fie
 ```
 The modules such as `table`, `field`, etc. can be found in the following diagram:
 
-![](../../image/module-name.png)
+![](../../image/view/module-name.png)
 
 Let's introduce the concepts of each module:
 

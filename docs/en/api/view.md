@@ -13,7 +13,7 @@ const view = await table.getViewById(viewId);
 ```
 
 View can be seen through the following figure as responsible for the UI display on the page, so many APIs related to the UI display format exist in the View layer, such as filtering/grouping/sorting, etc.
-![](../../image/module-name.png)
+![](../../image/view/module-name.png)
 
 ::: warning
 In the View layer, many interfaces, such as grouping/filtering/sorting, etc., need to call the `view.applySetting` method if you need to save or synchronize with other users after calling the API.
@@ -48,7 +48,7 @@ interface IFilterInfo {
 
 `FilterInfoCondition` represents the filter condition. Each Condition consists of three basic elements: `field` + `filter operator` + `matching value`.
 
-![](../../image/filter-conditions.png)
+![](../../image/view/filter-conditions.png)
 
 ```typescript
 interface FilterInfoCondition {
@@ -70,7 +70,7 @@ enum FilterConjunction {
 }
 ```
 
-![](../../image/filter-conjunction.png)
+![](../../image/view/filter-conjunction.png)
 
 Different fields can match different filter operators and matching values. The specific types are as follows:
 
@@ -160,7 +160,7 @@ interface ISortInfo {
 
 ### Group
 Views group records in the data table according to certain rules. A grouping rule consists of `field ID` + `order`:
-![](../../image/view-group.png)
+![](../../image/view/view-group.png)
 
 ```typescript
 interface IGroupInfo {
@@ -175,4 +175,4 @@ interface IGroupInfo {
 For grouping/filtering/sorting capabilities in the View module, after calling the write API, if you want to save or synchronize to other users, you need to call the `applySetting` method
 :::
 
-![](../../image/view-applysetting.png)
+![](../../image/view/view-applysetting.png)

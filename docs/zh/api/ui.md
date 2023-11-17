@@ -1,19 +1,27 @@
 # UI 模块
-`UI` 模块主要涉及到插件层面的 UI 相关，获取方式为
+`UI` 模块承载了用户交互相关的能力，获取方式为：
 ```typescript
 const ui = bitable.ui;
 ```
 
 ## switchToTable
+切换当前选中的数据表。
+
 ::: warning
 该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 ```typescript
 switchToTable(tableId: string): Promise<boolean>;
 ```
-切换当前选中的数据表
+
+#### 示例
+```typescript
+await bitable.ui.switchToTable('table_id');
+```
 
 ## switchToView
+切换至指定 `Table(数据表)` 下指定的 `View(视图)`，该视图必须从属于数据表，否则会调用失败。
+
 ::: warning
 该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
@@ -21,17 +29,25 @@ switchToTable(tableId: string): Promise<boolean>;
 ```typescript
 switchToView(tableId: string, viewId: string): Promise<boolean>;
 ```
-切换到对应 `table(数据表)` 下对应的 `View(视图)`
+
+#### 示例
+```typescript
+await bitable.ui.switchToView('table_id', 'view_id');
+```
 
 ## selectRecordIdList
 ::: warning
 该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
+交互式选择记录，调用这个 API 时会在全局唤起选择记录的对话框，如下图所示。用户选择完记录后点击确定，接口返回值会返回已选择记录的记录 ID 列表。
+
+![选择记录对话框](../../image/ui/select_record_id.png)
 
 ```typescript
 selectRecordIdList(tableId: string, viewId: string): Promise<string[]>;
 ```
-交互式选择记录，调用这个 API 时会在全局唤起选择记录的 Model 框，方便当前用户选择对应的记录，当前用户选择完记录之后，会返回对应的记录 ID，下面展示一个使用案例：
+
+#### 示例
 ```typescript
 const { tableId, viewId } = await bitable.base.getSelection();
 const recordIdList = await bitable.ui.selectRecordIdList(tableId, viewId);
@@ -47,8 +63,20 @@ for (const recordId of recordIdList) {
 该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
 :::
 
+全局消息提示，调用这个 API 时会在全局提示一条消息，如下图所示。
+![toast](../../image/ui/ui_toast.png)
+
 ```typescript
 showToast(options: ShowToastOptions): Promise<boolean>;
+```
+
+相关类型定义如下：
+```typescript
+type ShowToastOptions = {
+  toastType?: ToastType,
+  message: string,
+};
+
 enum ToastType {
   info = 'info',
   success = 'success',
@@ -56,18 +84,24 @@ enum ToastType {
   error = 'error',
   loading = 'loading',
 }
-type ShowToastOptions = {
-  toastType?: ToastType,
-  message: string,
-};
 ```
-全局式消息提示，调用这个 API 时会在全局提示一条消息，内容由 message 来决定（目前仅支持字符串）
+
+#### 示例
+```typescript
+await bitable.ui.showToast({
+  toastType: ToastType.info,
+  message: 'hello world'
+})
+```
 
 ##  getSelectOptionColorInfoList
+获取多维表格内置的 **55** 种选择字段中的选项颜色信息，包括选项的背景色，选中态颜色等。
+
 ```typescript
 getSelectOptionColorInfoList(): Promise<ISelectOptionColor[]>;
 ```
-获取当前选项字段的颜色信息，其中 `ISelectOptionColor` 类型定义如下：
+
+其中 `ISelectOptionColor` 类型定义如下：
 ```typescript
 interface ISelectOptionColor {
     /** 颜色方案id，可用范围为0 - 54 */
@@ -89,4 +123,9 @@ interface ISelectOptionColor {
      */
     iconAltColor: string;
 }
+```
+
+#### 示例
+```typescript
+const selectOptColorInfo = await bitable.ui.getSelectOptionColorInfoList();
 ```
