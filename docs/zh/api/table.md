@@ -398,8 +398,9 @@ interface IRecord {
 
 #### 示例
 ```typescript
-const records = await bitable.base.getRecords({
-  
+// 首先使用 getActiveTable 方法获取了当前用户选择的 table（用户当前编辑的数据表）
+const table = await bitable.base.getActiveTable();
+const records = await table.getRecords({
   pageSize: 5000
 })
 ```
