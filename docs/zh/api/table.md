@@ -399,6 +399,7 @@ interface IRecord {
 #### 示例
 ```typescript
 const records = await bitable.base.getRecords({
+  
   pageSize: 5000
 })
 ```
