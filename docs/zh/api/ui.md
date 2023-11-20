@@ -8,7 +8,7 @@ const ui = bitable.ui;
 切换当前选中的数据表。
 
 ::: warning
-该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
+该模块测试中，提前体验请使用 **0.3.5-alpha.2** 版本包并在 URL 查询参数中添加 **vb=1.0.3.6087**
 :::
 ```typescript
 switchToTable(tableId: string): Promise<boolean>;
@@ -23,7 +23,7 @@ await bitable.ui.switchToTable('table_id');
 切换至指定 `Table(数据表)` 下指定的 `View(视图)`，该视图必须从属于数据表，否则会调用失败。
 
 ::: warning
-该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
+该模块测试中，提前体验请使用 **0.3.5-alpha.2** 版本包并在 URL 查询参数中添加 **vb=1.0.3.6087**
 :::
 
 ```typescript
@@ -37,7 +37,7 @@ await bitable.ui.switchToView('table_id', 'view_id');
 
 ## selectRecordIdList
 ::: warning
-该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
+该模块测试中，提前体验请使用 **0.3.5-alpha.2** 版本包并在 URL 查询参数中添加 **vb=1.0.3.6087**
 :::
 交互式选择记录，调用这个 API 时会在全局唤起选择记录的对话框，如下图所示。用户选择完记录后点击确定，接口返回值会返回已选择记录的记录 ID 列表。
 
@@ -60,7 +60,7 @@ for (const recordId of recordIdList) {
 
 ## showToast
 ::: warning
-该模块测试中，提前体验请使用 0.3.5-alpha.2 版本包
+该模块测试中，提前体验请使用 **0.3.5-alpha.2** 版本包并在 URL 查询参数中添加 **vb=1.0.3.6087**
 :::
 
 全局消息提示，调用这个 API 时会在全局提示一条消息，如下图所示。
