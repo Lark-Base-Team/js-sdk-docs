@@ -739,7 +739,7 @@ View 模块相关能力请参考 [视图模块](./view.md)。
 
 ### getActiveView
 :::warning
-This method is under testing, please use the 0.3.5-alpha.2 version package for test
+This method is under testing, please use the 0.3.5-alpha.4 version package for test
 :::
 
 获取当前选择的 View 视图。

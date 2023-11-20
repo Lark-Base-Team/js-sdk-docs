@@ -1,7 +1,7 @@
 # Calendar View
 
 :::warning
-This module is under testing, please use the 0.3.5-alpha.2 version package with vb=1.0.3.6087 for test 
+This module is under testing, please use the 0.3.5-alpha.4 version package with vb=1.0.3.6087 for test 
 :::
 
 ## id
