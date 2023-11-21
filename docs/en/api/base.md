@@ -47,7 +47,7 @@ getTableList: () => Promise<ITable[]>;
 ```
 Retrieves all tables in the base.
 ```typescript
-const tableList = await base.table.getTableList();
+const tableList = await base.getTableList();
 ```
 
 ## getSelection

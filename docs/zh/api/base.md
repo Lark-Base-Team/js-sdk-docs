@@ -83,7 +83,7 @@ getTableList(): Promise<ITable[]>;
 ```
 #### 示例
 ```typescript
-const tableList = await base.table.getTableList();
+const tableList = await base.getTableList();
 ```
 
 ## getTableMetaList
