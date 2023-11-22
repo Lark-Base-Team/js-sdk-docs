@@ -339,6 +339,10 @@ const cellValue = table.getCellValue(fieldId, recordId);
 ### getRecordById
 通过指定 id 去获取对应记录。
 
+:::tip
+批量获取场景下，建议使用 [getRecords](./table.md#getrecords) 方法以获得更好的性能体验
+:::
+
 ```typescript
 getRecordById(recordId: string): Promise<IRecordValue>;
 
@@ -461,7 +465,7 @@ const recordShareLink = await table.getRecordShareLink('r_Id')
 ### addRecord
 新增一条记录，新增成功后返回 `recordId`，支持直接传递 `RecordValue` 或单元格 `Cell` 实例。
 :::tip
-如果新增多条记录且对性能有一定要求，建议使用 [addRecords](#addrecords)。
+批量新增场景下，建议使用 [addRecords](./table.md#addrecords) 方法以获得更好的性能体验
 :::
 
 ```typescript
@@ -564,6 +568,10 @@ table.addRecord(cell);
 ### setCellValue
 设置指定单元格的值。(推荐通过 Field 来设置)
 
+:::tip
+批量修改场景下，建议使用 [setRecords](./table.md#setrecords) 方法以获得更好的性能体验
+:::
+
 ```typescript
 setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordId: string, cellValue: T): Promise<boolean>;
 ```
@@ -580,6 +588,11 @@ const res = await table.setCellValue(field.id, recordIds[0], 'test setCellValue'
 
 ### setRecord
 修改指定记录数据。
+
+:::tip
+批量修改场景下，建议使用 [setRecords](./table.md#setrecords) 方法以获得更好的性能体验
+:::
+
 ```typescript
 setRecord(recordId: string, recordValue?: IRecordValue): Promise<IRecordRes>;
 
@@ -686,6 +699,9 @@ await table.setRecord(recordIds[0], { // 修改某条记录的多行文本字段
 ## 删除记录
 ### deleteRecord
 删除指定记录。
+:::tip
+批量删除场景下，建议使用 [deleteRecords](./table.md#deleterecords) 方法以获得更好的性能体验
+:::
 
 ```typescript
 deleteRecord(recordId: string): Promise<boolean>;
