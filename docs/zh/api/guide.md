@@ -18,9 +18,9 @@ const table = await bitable.base.getActiveTable();
 `getActiveTable` 的作用是来获取当前页面已经选择的 `table`，在 `base` 上还有很多接口可以用来获取 `table`，可以在 `Base` 模块的[文档](./base)内查看。
 
 ## Table 模块与 Field 模块
-在获取到 `table` 之后，就可以在做很多对数据的增删改查操作。
+获取到 `table` 之后，就可以做很多数据相关的增删改查操作。
 
-这里再次强调，推荐开发者从 `field(字段)` 的角度来对数据进行增删改差，因为数据每一个单元格内的数据是由其所属的字段类型决定的，因此在通过字段来实现增删改查的时候，会有很多的优化，下面是一个例子：
+推荐开发者从 `field(字段)` 的角度来对数据进行增删改差，因为数据每一个单元格内的数据是由其所属的字段类型决定的，因此在通过字段来实现增删改查的时候，会给予更多的类型提示，下面是一个例子：
 
 ```typescript
 const attachmentField = await table.getField<IAttachmentField>(fieldId);
