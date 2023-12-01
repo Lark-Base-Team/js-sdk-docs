@@ -5,24 +5,24 @@
 ### Feat:
 
 #### UI 模块
-- 新增 **UI.selectRecordIdList** 方法，该方法会在全局唤起指定数据表选择记录 Modal框，方便当前用户选择对应的记录并返回记录 id 列表
-- 新增 **UI.showToast** 方法用于在全局弹出消息提示
-- 新增 **UI.switchToTable/switchToView** 方法用于切换当前选中的数据表/视图
+- 新增 `UI.selectRecordIdList` 方法，该方法会在全局唤起指定数据表选择记录 Modal框，方便当前用户选择对应的记录并返回记录 id 列表
+- 新增 `UI.showToast` 方法用于在全局弹出消息提示
+- 新增 `UI.switchToTable/switchToView` 方法用于切换当前选中的数据表/视图
 
 #### Table 模块
-- TableMeta 添加**同步表**标识
+- TableMeta 添加`同步表`标识
 
 #### View 模块
-- 支持视图**筛选/排序/分组**能力
-- 支持开启/关闭**视图分享**并获取记录分享链接
-- 新增**多种类型视图模块能力**，如支持获取表格视图的列宽等
+- 支持视图`筛选/排序/分组`能力
+- 支持开启/关闭`视图分享`并获取记录分享链接
+- 新增`多种类型视图模块能力`，如支持获取表格视图的列宽等
 
 #### Field 模块
-- 支持**邮箱**字段
-- **查找引用字段**支持获取引用的 TableId 和 FieldId
+- 支持`邮箱`字段
+- `查找引用字段`支持获取引用的 TableId 和 FieldId
 
 ### Fix:
-- 修复 CellValue **Checkers 断言过宽**问题
+- 修复 `CellValue Checkers`断言过宽问题
 
 
 ## 0.3.0
