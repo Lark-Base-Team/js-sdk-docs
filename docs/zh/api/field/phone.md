@@ -3,31 +3,56 @@
 ```typescript
 const phoneField = await table.getField<IPhoneField>(fieldId);
 ```
-其中对应的数据类型为：
+其中字段值的类型定义为：
 ```typescript
 type IOpenPhone = string;
 ```
 
+
 ## createCell
+创建一个电话字段的 `Cell`。
+
 ```typescript
-createCell: (val: number | IOpenPhone) => Promise<ICell>;
+createCell: (val: IOpenPhone) => Promise<ICell>;
 ```
-创建一个数字字段的 `Cell`
+
+#### 示例
+```typescript
+await phoneField.createCell(123456789);
+```
 
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`。
+
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
+
+#### 示例
+```typescript
+await phoneField.getCell('r_id');
+```
 
 ## setValue
+通过 `Record` 来设置指定单元格的值，**此处写入的字符串不会校验电话格式**。
+
 ```typescript
-setValue: (recordOrId: IRecordType | string, val: number | IOpenPhone) => Promise<boolean>;
+setValue: (recordOrId: IRecordType | string, val: IOpenPhone) => Promise<boolean>;
 ```
-通过 `Record` 来设置对应的值
+
+#### 示例
+```typescript
+await phoneField.setValue('r_id', 123456789);
+```
 
 ## getValue
+通过 `Record` 来获取指定单元格的值。
+
 ```typescript
-getValue: (recordOrId: IRecordType | string) => Promise<IOpenNumber>;
+getValue: (recordOrId: IRecordType | string) => Promise<IOpenPhone>;
 ```
-通过 `Record` 来获取对应的值
+
+#### 示例
+```typescript
+await phoneField.getValue('r_id');
+```

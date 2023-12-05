@@ -169,8 +169,12 @@ export const getZhSideBar = () => (
               link: 'field/currency'
             },
             {
+              text: '单向关联字段',
+              link: 'field/singleLink'
+            },
+            {
               text: '双向关联字段',
-              link: 'field/duplex'
+              link: 'field/duplexLink'
             },
             {
               text: '公式字段',
@@ -203,6 +207,10 @@ export const getZhSideBar = () => (
             {
               text: '进度字段',
               link: 'field/progress'
+            },
+            {
+              text: '邮箱字段',
+              link: 'field/email'
             },
           ],
         }

@@ -47,4 +47,4 @@ const attachmentFieldList = await table.getFieldListByType<IAttachmentField>(Fie
 
 + ``bridge``: ``bridge`` 模块主要提供应用层的接口，提供类似主题切换事件通知等插件能力的 API，与 `UI` 模块类似，都与应用能力有关系
 
-接下来，我们搭建开发环境
+接下来，我们搭建开发环境。

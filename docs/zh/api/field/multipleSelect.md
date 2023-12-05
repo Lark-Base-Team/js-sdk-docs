@@ -4,7 +4,7 @@
 const multiSelectField = await table.getField<IMultiSelectField>(fieldId);
 ```
 
-其中对应的数据类型为：
+其中字段值的类型定义为：
 ```typescript
 // 多选值类型定义
 type IOpenMultiSelect = IOpenSingleSelect[];

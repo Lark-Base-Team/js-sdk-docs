@@ -3,7 +3,7 @@
 ```typescript
 const singleSelectField = await table.getField<ISingleSelectField>(fieldId);
 ```
-其中对应的数据类型为：
+其中字段值的类型定义为：
 ```typescript
 // 单选值类型定义
 type IOpenSingleSelect = {

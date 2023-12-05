@@ -3,50 +3,93 @@
 ```typescript
 const currencyField = await table.getField<ICurrencyField>(fieldId);
 ```
+其中字段值的类型定义为：
+```typescript
+type IOpenNumber = number;
+```
 
 ## createCell
+通过传入数值来创建对应的 `Cell`。
+
 ```typescript
-createCell: (val: number) => Promise<ICell>;
+createCell: (val: IOpenNumber) => Promise<ICell>;
 ```
-通过传入数值来创建对应的 `Cell`
+
+#### 示例 
+```typescript
+await currencyField.createCell('100'); 
+```
 
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`。
+
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
+
+#### 示例 
+```typescript
+await currencyField.getCell(recordId); 
+```
 
 ## setValue
+通过 `Record` 来设置指定单元格的值。
+
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: number) => Promise<boolean>;
 ```
-通过 `Record` 来设置对应的值
+
+#### 示例 
+```typescript
+await currencyField.setValue(recordId, '1000'); 
+```
 
 ## getValue
+通过 `Record` 来获取指定单元格的值。
+
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<number>;
 ```
-通过 `Record` 来获取对应的值
+
+#### 示例 
+```typescript
+await currencyField.getValue(recordId); 
+```
 
 ## setDecimalDigits
+设置货币精度，**精度取值范围** `0~4`。
+
 ```typescript
 setDecimalDigits: (decimalDigits: number) => Promise<IFieldRes>;
 ```
-设置货币精度
+
+#### 示例 
+```typescript
+await currencyField.setDecimalDigits(4); // 0～4
+```
 
 ## getDecimalDigits
+获取货币精度。
+
 ```typescript
 getDecimalDigits: () => Promise<number>;
 ```
-获取货币精度
+
+#### 示例 
+```typescript
+await currencyField.getDecimalDigits(); // 0～4
+```
 
 ## setCurrencyCode
+设置货币类型。
+
 ```typescript
 setCurrencyCode: (currencyCode: CurrencyCode) => Promise<IFieldRes>;
 ```
-设置货币类型，其中 ` CurrencyCode` 的类型定义如下：
+
+其中 `CurrencyCode` 的类型定义如下：
 ```typescript
-export enum CurrencyCode {
+enum CurrencyCode {
   CNY = 'CNY',
   USD = 'USD',
   EUR = 'EUR',
@@ -75,8 +118,20 @@ export enum CurrencyCode {
 }
 ```
 
+#### 示例 
+```typescript
+await currencyField.setCurrencyCode(CurrencyCode.CNY);
+```
+
 ## getCurrencyCode
+获取货币类型。
+
 ```typescript
 getCurrencyCode: () => Promise<CurrencyCode>;
 ```
-获取货币类型
+
+#### 示例 
+```typescript
+await currencyField.getCurrencyCode();
+```
+

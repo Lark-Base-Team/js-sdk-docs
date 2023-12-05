@@ -3,70 +3,104 @@
 ```typescript
 const ratingField = await table.getField<IRatingField>(fieldId);
 ```
-其中对应的数据类型为：
+其中字段值的类型定义为：
 ```typescript
 type IOpenNumber = number;
 ```
 
 ## createCell
+创建一个评分字段的 `Cell`，**写入的评分值需要落在字段配置的最小值和最大值之间**。
 ```typescript
 createCell: (val: IOpenNumber) => Promise<ICell>;
 ```
-创建一个评分字段的 `Cell`
+
+#### 示例
+```typescript
+await ratingField.createCell(5);
+```
 
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`。
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
+
+#### 示例
+```typescript
+await ratingField.getCell('r_id');
+```
 
 ## setValue
+通过 `Record` 来设置指定单元格的值，**写入的评分值需要落在字段配置的最小值和最大值之间**。
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: IOpenNumber) => Promise<boolean>;
 ```
-通过 `Record` 来设置对应的值
+
+#### 示例
+```typescript
+// eg: min~max => 0~5
+await ratingField.setValue('r_id', 4);
+```
 
 ## getValue
+通过 `Record` 来获取指定单元格的值。
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenNumber>;
 ```
-通过 `Record` 来获取对应的值
+
+#### 示例
+```typescript
+await ratingField.getValue('r_id');
+```
 
 ## getMin
+获取设置的评分最小值，**最小值取值范围 0~1**。
 ```typescript
-getMin: () => Promise<IRatingMinVal>;
+getMin: () => Promise<number>;
 ```
-获取设置的最小值，其中 `IRatingMinVal` 的类型定义为：
+#### 示例
 ```typescript
-type IRatingMinVal = 0 | 1;
+await ratingField.getMin();
 ```
 
 ## setMin
+设置评分最小值，**最小值取值范围 0~1**。
 ```typescript
-setMin: (min: IRatingMinVal) => Promise<IFieldRes>;
+setMin: (min: number) => Promise<IFieldRes>;
 ```
-设置最小值，其中 `IRatingMinVal` 的类型定义为：
+#### 示例
 ```typescript
-type IRatingMinVal = 0 | 1;
+await ratingField.setMin(0);
 ```
 
 ## getMax
+获取设置的评分最大值，**最大值取值范围 1~10**。
 ```typescript
 getMax: () => Promise<number>;
 ```
-获取设置的最大值
+
+#### 示例
+```typescript
+await ratingField.getMax();
+```
 
 ## setMax
+设置评分最大值，**最大值取值范围 1~10**。
 ```typescript
 setMax: (max: number) => Promise<IFieldRes>;
 ```
-设置最大值
+
+#### 示例
+```typescript
+await ratingField.setMax(10);
+```
 
 ## getRatingIcon
+获取评分字段的 ICON。
 ```typescript
 getRatingIcon: () => Promise<RatingIconType>;
 ```
-获取评分字段的 ICON，其中 `RatingIconType` 的值为：
+其中 `RatingIconType` 的值为：
 ```typescript
 enum RatingIconType {
   STAR = 'star',
@@ -80,20 +114,19 @@ enum RatingIconType {
 }
 ```
 
+#### 示例
+```typescript
+await ratingField.getRatingIcon();
+```
+
 ## setRatingIcon
+设置评分字段的 ICON。
+
 ```typescript
 setRatingIcon: (icon: RatingIconType) => Promise<IFieldRes>;
 ```
-设置评分字段的 ICON，其中 `RatingIconType` 的值为:
+
+#### 示例
 ```typescript
-enum RatingIconType {
-  STAR = 'star',
-  HEART = 'heart',
-  THUMBSUP = 'thumbsup',
-  FIRE = 'fire',
-  SMILE = 'smile',
-  LIGHTNING = 'lightning',
-  FLOWER = 'flower',
-  NUMBER = 'number',
-}
+await ratingField.setRatingIcon(RatingIconType.FLOWER);
 ```

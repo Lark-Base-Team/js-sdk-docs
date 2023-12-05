@@ -3,52 +3,95 @@
 ```typescript
 const groupField = await table.getField<IGroupField>(fieldId);
 ```
-其中对应的数据类型为：
+其中字段值的类型定义为：
 ```typescript
 type IOpenGroupChat = {
   id: string;
   name: string;
-  avatarUrl: string;
+  avatarUrl: string; // 群头像
   enName?: string;
-  // 群链接 token
-  linkToken?: string;
-  /** @deprecated */
-  en_name?: string;
+  linkToken?: string; // 群链接 token
 };
 ```
 
 ## createCell
+创建一个群组字段的 `Cell`。
+
 ```typescript
 createCell: (val: IOpenGroupChat[]) => Promise<ICell>;
 ```
-创建一个群组字段的 `Cell`
+
+#### 示例
+```typescript
+await groupField.createCell([
+  {
+    id: 'og_xxx',
+    name: 'group_name'
+  }
+]);
+```
 
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`。
+
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
+
+#### 示例
+```typescript
+await groupField.getCell('r_id');
+```
 
 ## setValue
+通过 `Record` 来设置指定单元格的值。
+
 ```typescript
 setValue: (recordOrId: IRecordType | string, val: IOpenGroupChat[]) => Promise<boolean>;
 ```
-通过 `Record` 来设置对应的值
+
+#### 示例
+```typescript
+await groupField.setValue('r_id', [
+  {
+    id: 'og_xxx',
+    name: 'group_name'
+  }
+]);
+```
 
 ## getValue
+通过 `Record` 来获取指定单元格的值。
+
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenGroupChat[]>;
 ```
-通过 `Record` 来获取对应的值
+
+#### 示例
+```typescript
+await groupField.getValue('r_id');
+```
 
 ## setMultiple
+设置是否可以多选。
+
 ```typescript
 setMultiple: (multiple: boolean) => Promise<IFieldRes>;
 ```
-设置是否可以多选
+
+#### 示例
+```typescript
+await groupField.setMultiple(true);
+```
 
 ## getMultiple
+获取是否可以多选。
+
 ```typescript
 getMultiple: () => Promise<boolean>;
 ```
-获取是否可以多选
+
+#### 示例
+```typescript
+await groupField.getMultiple();
+```
