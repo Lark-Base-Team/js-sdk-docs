@@ -109,6 +109,46 @@ export const getZhSideBar = () => (
               link: 'field/guide'
             },
             {
+              text: '文本字段',
+              link: 'field/text'
+            },
+            {
+              text: '单选字段',
+              link: 'field/singleSelect'
+            },
+            {
+              text: '多选字段',
+              link: 'field/multipleSelect'
+            },
+            {
+              text: '链接字段',
+              link: 'field/url'
+            },
+            {
+              text: '时间字段',
+              link: 'field/date'
+            },
+            {
+              text: '创建时间字段',
+              link: 'field/createTime'
+            },
+            {
+              text: '更新时间字段',
+              link: 'field/modifiedTime'
+            },
+            {
+              text: '人员字段',
+              link: 'field/user'
+            },
+            {
+              text: '创建人字段',
+              link: 'field/createUser'
+            },
+            {
+              text: '更新人员字段',
+              link: 'field/modifiedUser'
+            },
+            {
               text: '附件字段',
               link: 'field/attachment'
             },
@@ -125,16 +165,16 @@ export const getZhSideBar = () => (
               link: 'field/checkbox'
             },
             {
-              text: '创建人字段',
-              link: 'field/createUser'
-            },
-            {
               text: '货币字段',
               link: 'field/currency'
             },
             {
+              text: '单向关联字段',
+              link: 'field/singleLink'
+            },
+            {
               text: '双向关联字段',
-              link: 'field/duplex'
+              link: 'field/duplexLink'
             },
             {
               text: '公式字段',
@@ -153,10 +193,6 @@ export const getZhSideBar = () => (
               link: 'field/lookup'
             },
             {
-              text: '更新人员字段',
-              link: 'field/modifiedUser'
-            },
-            {
               text: '数字字段',
               link: 'field/number'
             },
@@ -173,36 +209,8 @@ export const getZhSideBar = () => (
               link: 'field/progress'
             },
             {
-              text: '多选字段',
-              link: 'field/multipleSelect'
-            },
-            {
-              text: '单选字段',
-              link: 'field/singleSelect'
-            },
-            {
-              text: '文本字段',
-              link: 'field/text'
-            },
-            {
-              text: '时间字段',
-              link: 'field/date'
-            },
-            {
-              text: '创建时间字段',
-              link: 'field/createTime'
-            },
-            {
-              text: '更新时间字段',
-              link: 'field/modifiedTime'
-            },
-            {
-              text: '链接字段',
-              link: 'field/url'
-            },
-            {
-              text: '人员字段',
-              link: 'field/user'
+              text: '邮箱字段',
+              link: 'field/email'
             },
             {
               text: '邮箱字段',

@@ -133,8 +133,12 @@ export const getEnSideBar = () => (
               link: 'field/currency'
             },
             {
+              text: 'Single Field',
+              link: 'field/singleLink'
+            },
+            {
               text: 'Duplex Field',
-              link: 'field/duplex'
+              link: 'field/duplexLink'
             },
             {
               text: 'Formula Field',

@@ -1,29 +1,33 @@
 # Formula 公式字段
+::: danger
+`Formula` 自动编号字段**不支持手动写入值**。
+:::
+
 类型定义 `IFormulaField`，使用方法示例：
 ```typescript
 const formulaField = await table.getField<IFormulaField>(fieldId);
 ```
 
-## createCell
-```typescript
-createCell: (val: IOpenFormulaCellValue) => Promise<ICell>;
-```
-创建一个公式字段的 `Cell`
-
 ## getCell
+通过对应的 `Record` 来获取对应的 `Cell`。
+
 ```typescript
 getCell: (recordOrId: IRecordType | string) => Promise<ICell>;
 ```
-通过对应的 `Record` 来获取对应的 `Cell`
 
-## setValue
+#### 示例
 ```typescript
-setValue: (recordOrId: IRecordType | string, val: IOpenFormulaCellValue) => Promise<boolean>;
+await formulaField.getCell('r_id');
 ```
-通过 `Record` 来设置对应的值
 
 ## getValue
+通过 `Record` 来获取指定单元格的值。
+
 ```typescript
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenFormulaCellValue>;
 ```
-通过 `Record` 来获取对应的值
+
+#### 示例
+```typescript
+await formulaField.getValue('r_id');
+```
