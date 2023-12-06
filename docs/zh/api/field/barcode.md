@@ -33,7 +33,7 @@ setValue: (recordOrId: IRecordType | string, val: BarcodeTransformVal) => Promis
 ```
 ### 示例
 ```typescript
-await barcodeField.setValue('barcode');
+await barcodeField.setValue('r_id', 'barcode');
 ```
 
 ## getValue

@@ -23,7 +23,7 @@ type IOpenUser = {
 getValue: (recordOrId: IRecordType | string) => Promise<IOpenUser[]>;
 ```
 
-#### 示
+#### 示例
 ```typescript
 await modifiedUserField.getValue('r_id');
 ```
