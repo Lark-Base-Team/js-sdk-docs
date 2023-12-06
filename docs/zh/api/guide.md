@@ -50,9 +50,10 @@ await attachmentCell.setValue(newFile)
 在 `setValue` 顺利执行之后，表格中对应单元格的值会发生改变，更多的 API 用法可以查看对应[文档](cell.md)。
 
 ## Record 模块
-Record 模块主要时用来存储数据，API 可以查看对应[文档](record.md)。
+Record 模块主要用来存储**行数据**，API 可以查看对应[文档](record.md)。
 
-## UI 模块 和 Bridge 模块
+## UI 模块
 UI 模块提供与用户交互相关的能力，如切换数据表、切换视图等，详细 API 可查看[UI 模块文档](ui.md)。
 
-Bridge 模块提供一些通用能力，如获取用户 id，获取当前环境信息等，详细 API 可查看 [Bridge 模块文档](bridge.md)。
+## Bridge 模块
+Bridge 模块提供了一些通用能力，如获取用户 id，获取当前环境信息等，详细 API 可查看 [Bridge 模块文档](bridge.md)。
