@@ -7,7 +7,18 @@ import { bitable } from '@lark-base-open/js-sdk';
 const base = bitable.base;
 ```
 
-## getSelection
+## 读接口
+### isEditable
+是否可以编辑当前多维表格。
+```typescript
+isEditable(): Promise<boolean>;
+```
+##### 示例
+```typescript
+const isEditable = await base.isEditable();
+```
+
+### getSelection
 获取当前多维表格激活的相关信息（当前文档 id、数据表 id、视图 id 等）。
 
 ```typescript
@@ -27,7 +38,7 @@ interface Selection {
 const selection = await bitable.base.getSelection();
 ```
 
-## getActiveTable
+### getActiveTable
 获取当前选中的数据表 `table`。
 
 ```typescript
@@ -38,7 +49,7 @@ getActiveTable: () => Promise<ITable>;
 const table = await base.getActiveTable();
 ```
 
-## getTable
+### getTable
 获取指定数据表 `table`，支持传入 `table` 的 id 或名称。
 
 ```typescript
@@ -53,7 +64,7 @@ const table = await base.getTable('t_idxxxx');
 const table = await base.getTable('Table_For_Test');
 ```
 
-## getTableById
+### getTableById
 通过数据表 `id` 来获取指定数据表。
 
 ```typescript
@@ -64,7 +75,7 @@ getTableById(tableId: string): ITable;
 const table = await base.getTableById('t_idxxxx');
 ```
 
-## getTableByName
+### getTableByName
 通过数据表名称获取指定数据表。
 
 ```typescript
@@ -75,7 +86,7 @@ getTableByName(name: string): Promise<ITable>
 const table = await base.getTableByName('Table_For_Test');
 ```
 
-## getTableList
+### getTableList
 获取当前多维表格下所有的数据表。
 
 ```typescript
@@ -86,7 +97,19 @@ getTableList(): Promise<ITable[]>;
 const tableList = await base.getTableList();
 ```
 
-## getTableMetaList
+### getTableMetaById
+通过 id 获取指定数据表的元信息。
+
+```typescript
+getTableMetaById(tableId: string): Promise<ITableMeta>
+```
+
+##### 示例
+```typescript
+const tableMeta = await base.getTableMetaById('t_id');
+```
+
+### getTableMetaList
 获取当前多维表格下所有数据表元信息。
 
 ```typescript
@@ -98,7 +121,7 @@ getTableMetaList(): Promise<ITableMeta[]>
 const tableMetaList = await base.getTableMetaList();
 ```
 
-## getPermission
+### getPermission
 获取 Base、Table、Field、Record、Cell 等不同实体的权限，当返回 true 的时候表示有权限，返回为 false 的时候没有权限。
 ```typescript
 getPermission(params: GetPermissionParams): Promise<boolean>;
@@ -165,17 +188,57 @@ const fieldInfo: FieldPermissionParams = {
 const hasPermission = await base.getPermission(params);
 ```
 
-## isEditable
-是否可以编辑当前多维表格。
+## 写接口
+### addTable
+添加数据表，支持设置表名和字段，返回创建成功数据表的 id 和索引位置。
+:::warning
+暂不支持配置字段，可以创建数据表后通过 [Table 模块](./table.md)中的方法添加字段。
+:::
 ```typescript
-isEditable(): Promise<boolean>;
+addTable(config: IAddTableConfig): Promise<{ tableId: string, index: number }>;
+
+interface IAddTableConfig {
+  name: string; // 表名
+}
 ```
-##### 示例
+#### 示例
 ```typescript
-const isEditable = await base.isEditable();
+const { tableId, index } = await bitable.base.addTable({
+    name: '测试添加数据表'
+})
 ```
 
-## batchUploadFile
+### setTable
+修改数据表，目前仅支持修改数据表的名称，修改成功会返回当前被修改数据表 id。
+
+```typescript
+setTable(tableId: string, config: ISetTableConfig): Promise<string>;
+
+interface ISetTableConfig {
+  name: string; // 表名
+}
+```
+#### 示例
+```typescript
+const tableId = await bitable.base.setTable({
+    name: '修改数据表'
+})
+```
+
+### deleteTable
+删除指定数据表。
+
+```typescript
+deleteTable(tableId: string): Promise<boolean>;
+```
+#### 示例
+```typescript
+const table = await bitable.base.getActiveTable();
+
+await bitable.base.deleteTable(table.id);
+```
+
+### batchUploadFile
 批量上传文件，按序返回每个文件对应的 fileToken 列表，支持传入 [File](https://developer.mozilla.org/zh-CN/docs/Web/API/File) 数组或 [FileList](https://developer.mozilla.org/zh-CN/docs/Web/API/FileList) 对象。
 ```typescript
 batchUploadFile(file: File[] | FileList): Promise<string[]>;
@@ -192,7 +255,8 @@ console.log(tokens) // ['BcdqbMmW4ohD7ExUq9rcGtuVn8e']
 ```
 
 
-## onTableAdd
+## 事件
+### onTableAdd
 监听 Table 添加事件，将返回一个取消监听函数。
 
 ```typescript
@@ -205,7 +269,7 @@ const off = bitable.base.onTableAdd((event) => {
 })
 ```
 
-## onTableDelete
+### onTableDelete
 监听 Table 删除事件，将返回一个取消监听函数。
 ```typescript
 onTableDelete(callback: () => void): () => void;
@@ -217,7 +281,7 @@ const off = bitable.base.onTableDelete((event) => {
 })
 ```
 
-## onSelectionChange
+### onSelectionChange
 监听当前选中（数据表、单元格、视图）改变事件，将返回一个取消监听函数。
 ```typescript
 onSelectionChange(callback: () => void): () => void;

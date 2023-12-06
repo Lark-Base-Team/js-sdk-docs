@@ -8,7 +8,6 @@ const emailField = await table.getField<IEmailField>(fieldId);
 type IOpenEmail = string;
 ```
 
-
 ## createCell
 创建一个邮箱字段的 `Cell`，**此处写入的字符串需要满足邮箱格式**。
 

@@ -174,3 +174,43 @@ View 模块中分组/筛选/排序等能力，在调用写入 API 之后如果**
 :::
 
 ![](../../image/view/view-applysetting.png)
+
+### 分享
+SDK 支持开启/关闭指定视图分享，并获取处在开启状态视图的分享链接。
+
+#### enableSharing
+开启视图分享。
+
+```typescript
+enableSharing: () => Promise<boolean>;
+```
+
+#### enableSharing
+关闭视图分享。
+
+```typescript
+disableSharing: () => Promise<boolean>;
+```
+
+#### getSharingStatus
+获取当前视图分享状态。
+
+```typescript
+getSharingStatus: () => Promise<SharingStatus>;
+
+enum SharingStatus {
+  Enabled = 'Enabled',
+  Disabled = 'Disabled'
+}
+```
+
+#### getSharingStatus
+获取当前视图分享链接。
+
+:::warning
+获取分享链接的前置条件是视图分享状态是开启的。
+:::
+
+```typescript
+getShareLink(): Promise<string>;
+```

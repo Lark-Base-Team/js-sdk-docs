@@ -28,6 +28,23 @@ getName: () => Promise<string>;
 const name = await table.getName();
 ```
 
+## getMeta
+获取数据表元数据。
+```typescript
+getMeta: () => Promise<ITableMeta>;
+
+interface ITableMeta {
+  id: string;
+  name: string
+  isSync: boolean; // 是否同步表
+}
+```
+
+#### 示例
+```typescript
+const meta = await table.getMeta();
+```
+
 ## 获取字段
 
 ### isFieldExist

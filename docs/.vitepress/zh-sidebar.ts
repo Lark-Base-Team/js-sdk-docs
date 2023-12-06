@@ -212,6 +212,10 @@ export const getZhSideBar = () => (
               text: '邮箱字段',
               link: 'field/email'
             },
+            {
+              text: '邮箱字段',
+              link: 'field/email'
+            },
           ],
         }
       ],
