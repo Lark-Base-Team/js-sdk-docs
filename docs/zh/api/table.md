@@ -243,11 +243,11 @@ const fieldId = await table.addField({ // 新增一个多行文本类型的字�
 })
 ```
 
-## 设置字段
+## 修改字段
 ### setField
 修改字段，如字段类型、字段名称和字段属性等。
 :::tip
-推荐从 `Field` 实例调用对应的字段方法来设置字段属性，更简便不易出错。
+推荐从 `Field` 实例调用对应的字段方法来修改字段属性，更简便不易出错。
 :::
 
 ```typescript
@@ -581,9 +581,9 @@ const cell = field.createCell('new text field value');
 table.addRecord(cell);
 ```
 
-## 设置记录
+## 修改记录
 ### setCellValue
-设置指定单元格的值。(推荐通过 Field 来设置)
+修改指定单元格的值。(推荐通过 Field 来修改)
 
 :::tip
 批量修改场景下，建议使用 [setRecords](./table.md#setrecords) 方法以获得更好的性能体验
@@ -598,7 +598,7 @@ setCellValue<T extends IOpenCellValue = IOpenCellValue>(fieldId: string, recordI
 const recordIds = await table.getRecordIdList();
 const field = await table.getField('多行文本');
 
-// 设置某个多行文本类型的字段
+// 修改某个多行文本类型的字段
 const res = await table.setCellValue(field.id, recordIds[0], 'test setCellValue')
 // true
 ```
@@ -856,4 +856,63 @@ interface IViewMeta {
 #### 示例
 ```typescript
 const viewMetaList = await table.getViewMetaList();
+```
+
+## 新增视图
+### addView
+给当前数据表添加视图。
+::: warning
+目前仅支持设置 `ViewType` 和 `name`，推荐创建后通过 View 模块的 API 进行视图配置。
+:::
+
+```typescript
+addView(config: IAddViewConfig): Promise<IAddViewResult>;
+
+interface IAddViewConfig {
+  name?: string;
+  type: ViewType;
+}
+
+interface IAddViewResult {
+  viewId: string;
+  index: number; // 视图顺序
+}
+```
+
+#### 示例
+```typescript
+await table.addView({ type: ViewType.Grid, name: 'test'});
+```
+
+## 修改视图
+### setView
+修改指定视图信息。
+::: warning
+目前仅支持设置 `ViewType` 和 `name`，推荐创建后通过 View 模块的 API 进行视图配置。
+:::
+
+```typescript
+setView(viewId: string, config: ISetViewConfig): Promise<ViewId>;
+
+interface ISetViewConfig {
+  name?: string;
+}
+```
+
+#### 示例
+```typescript
+await table.setView('v_id', { name: 'modified name'});
+```
+
+## 删除视图
+### deleteView
+删除指定视图。
+
+```typescript
+deleteView(viewId: string): Promise<boolean>;
+```
+
+#### 示例
+```typescript
+await table.deleteView('v_id');
 ```
