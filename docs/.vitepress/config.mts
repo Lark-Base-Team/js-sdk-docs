@@ -68,6 +68,7 @@ export default defineConfig({
           { text: 'API', link: '/en/api/guide.md' },
           { text: 'ChangeLog', link: '/en/changelog' },
           { text: 'Contact Us', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=ba0v0b79-adc7-4383-a8fc-14c75992441f' },
+          { text: 'Feedback', link: 'https://bytedance.larkoffice.com/share/base/form/shrcnDFmrzigVo1HnSzlxaQLbSe' },
         ],
         sidebar: getEnSideBar(),
       },
