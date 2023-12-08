@@ -381,7 +381,7 @@ const recordValue = await table.getRecordById(recordIdList[0]);
 批量获取 record 数据。
 
 :::warning
-单次获取上限 **5000** 条
+单次获取上限 **5000** 条。
 :::
 
 ```typescript
@@ -428,6 +428,10 @@ const records = await table.getRecords({
 
 ### getRecordIdList
 获取所有记录 id 列表。
+
+:::warning
+通过该方法获取的记录 id 列表是**无序的**，因为 `table` 不涉及 UI 展示层面的信息，如果需要获取有序的字段 id 列表，需要在 `View 模块` 调用 `view.getVisibleRecordIdList` 来获取有序的记录 id 列表
+:::
 
 ```typescript
 getRecordIdList(): Promise<string[]>;
