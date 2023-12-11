@@ -5,7 +5,7 @@ const dateTimeField = await table.getField<IDateTimeField>(fieldId);
 ```
 其中字段值的类型定义为：
 ```typescript
-type IOpenTimestamp = number; // Unix 时间戳
+type IOpenTimestamp = number; // 以毫秒为单位的 Unix 时间戳
 ```
 
 ## createCell

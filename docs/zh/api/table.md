@@ -131,7 +131,7 @@ interface IFieldMeta {
 
 #### 示例
 ```typescript
-const fieldMeta = await table.getFieldMetaById();
+const fieldMeta = await table.getFieldMetaById('f_id');
 // { id: 'f_id', name: 'text field', type: 1, isPrimary: true, description: { content: content, disableSyncToFormDesc: false } }
 ```
 
