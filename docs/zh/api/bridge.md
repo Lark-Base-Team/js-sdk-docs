@@ -13,7 +13,7 @@ const bridge = bitable.bridge;
 setData<T>(key: string, data: T): Promise<boolean>;
 ```
 
-### 示例
+#### 示例
 ```typescript
 await bitable.bridge.setData('test_key1', 'hello world');
 await bitable.bridge.setData('test_key2', 1);
@@ -27,7 +27,7 @@ await bitable.bridge.setData('test_key3', { key: 'value' });
 getData<T>(key: string): Promise<T>;
 ```
 
-### 示例
+#### 示例
 ```typescript
 await bitable.bridge.getData('test_key1') // 'hello world'
 await bitable.bridge.getData('test_key2') // 1
