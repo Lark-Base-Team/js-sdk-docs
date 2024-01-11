@@ -6,6 +6,34 @@
 const bridge = bitable.bridge;
 ```
 
+## setData
+通过指定 `key` 存储当前插件自定义数据，该自定义数据在同一插件下是共享的。
+
+```typescript
+setData<T>(key: string, data: T): Promise<boolean>;
+```
+
+### 示例
+```typescript
+await bitable.bridge.setData('test_key1', 'hello world');
+await bitable.bridge.setData('test_key2', 1);
+await bitable.bridge.setData('test_key3', { key: 'value' });
+```
+
+## getData
+通过指定 `key` 获取当前插件自定义数据。
+
+```typescript
+getData<T>(key: string): Promise<T>;
+```
+
+### 示例
+```typescript
+await bitable.bridge.getData('test_key1') // 'hello world'
+await bitable.bridge.getData('test_key2') // 1
+await bitable.bridge.getData('test_key3') // { key: 'value' }
+```
+
 ## getBitableUrl
 生成多维表格链接。
 

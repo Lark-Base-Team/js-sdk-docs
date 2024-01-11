@@ -84,6 +84,19 @@ await bitable.ui.showToast({
 })
 ```
 
+## showRecordDetailDialog
+展示指定数据表指定记录的详情弹窗，默认展示所有字段，支持指定需要展示的字段列表。
+![showRecordDetailDialog](../../image/ui/record_detail_dialog.png)
+
+```typescript
+showRecordDetailDialog(params: { tableId: string, recordId: string, fieldIdList?: string[] } ): Promise<boolean>;
+```
+
+ 示例
+```typescript
+await bitable.ui.showRecordDetailDialog({ tableId: 't_id', recordId: 'r_id' });
+```
+
 ##  getSelectOptionColorInfoList
 获取多维表格内置的 **55** 种选择字段中的选项颜色信息，包括选项的背景色，选中态颜色等。
 
