@@ -35,7 +35,7 @@ await formulaField.getValue('r_id');
 ## setFormula
 设置公式表达式，设置成功将返回该字段的 id。
 
-::: tips
+::: tip
 公式的详细用法可查看 (公式字段概述)[https://www.feishu.cn/hc/zh-CN/articles/360049067853-%E5%A4%9A%E7%BB%B4%E8%A1%A8%E6%A0%BC%E5%85%AC%E5%BC%8F%E5%AD%97%E6%AE%B5%E6%A6%82%E8%BF%B0]
 :::
 
