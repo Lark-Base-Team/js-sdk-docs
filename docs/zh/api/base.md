@@ -177,6 +177,8 @@ interface CellPermissionParams {
 使用的时候，需要传入对应的配置，来查询对应的权限, 下面展示一个`查询字段编辑权限`的例子：
 
 ```typescript
+import { PermissionEntity, OperationType } from '@lark-base-open/js-sdk';
+
 const fieldInfo: FieldPermissionParams = {
   entity: PermissionEntity.Field,
   params: {
