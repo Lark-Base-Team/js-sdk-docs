@@ -1,6 +1,6 @@
 # Formula 公式字段
 ::: danger
-`Formula` 公式字段**不支持手动写入值**。
+`Formula` 公式字段**不支持手动往单元格写入值**。
 :::
 
 类型定义 `IFormulaField`，使用方法示例：

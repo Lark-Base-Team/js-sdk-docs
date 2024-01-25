@@ -1,6 +1,6 @@
 # CreateTime 创建时间字段
 ::: danger
-`CreateTime` 创建时间字段**不支持手动写入值**。
+`CreateTime` 创建时间字段**不支持手动往单元格写入值**。
 :::
 类型定义 `ICreateTimeField`，使用方法示例：
 ```typescript

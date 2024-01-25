@@ -1,6 +1,6 @@
 # ModifiedUser 更新人字段
 ::: danger
-`ModifiedUser` 更新人字段**不支持手动写入值**。
+`ModifiedUser` 更新人字段**不支持手动往单元格写入值**。
 :::
 类型定义 `IModifiedUserField`，使用方法示例：
 ```typescript

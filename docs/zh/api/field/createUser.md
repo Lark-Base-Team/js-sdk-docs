@@ -1,6 +1,6 @@
 # CreateUser 创建人字段
 ::: danger
-`CreateUser` 创建人字段**不支持手动写入值**。
+`CreateUser` 创建人字段**不支持手动往单元格写入值**。
 :::
 类型定义 `ICreateUserField`，使用方法示例：
 ```typescript

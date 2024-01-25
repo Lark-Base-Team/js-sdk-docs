@@ -1,6 +1,6 @@
 # ModifiedTime 更新时间字段
 ::: danger
-`ModifiedTime` 更新时间字段**不支持手动写入值**。
+`ModifiedTime` 更新时间字段**不支持手动往单元格写入值**。
 :::
 类型定义 `IModifiedTimeField`，使用方法示例：
 ```typescript
