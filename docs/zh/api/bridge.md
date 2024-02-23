@@ -34,6 +34,22 @@ await bitable.bridge.getData('test_key2') // 1
 await bitable.bridge.getData('test_key3') // { key: 'value' }
 ```
 
+## onDataChange
+监听数据存储变化，任意存储 `key` 的变化都会触发回调。
+
+```typescript
+onDataChange(callback: (ev: IEventCbCtx)) => void
+```
+
+#### 示例
+```typescript
+bridge.onDataChange((event) => {
+  console.log('data change', event.data);
+})
+
+bridge.setData('test_key', 233);
+```
+
 ## getBitableUrl
 生成多维表格链接。
 
@@ -64,6 +80,10 @@ const res = await bitable.bridge.getBitableUrl({
 
 ## getUserId
 获取当前用户 ID。
+
+:::warning
+该接口返回的用户 ID 与飞书开放平台的 OpenUserId 并不通用，请勿将其作为全平台的唯一 id。
+:::
 
 ```typescript
 getUserId(): Promise<string>;
@@ -188,4 +208,16 @@ getInstanceId(): Promise<string>;
 #### 示例
 ```typescript
 const instanceId = await bitable.bridge.getInstanceId();
+```
+
+## navigateToExtension
+跳转至指定 id 对应的插件，需经过用户授权确认，用户拒绝授权或跳转失败时返回 false。
+
+```typescript
+navigateToExtension(extensionId: string): Promise<boolean>;
+```
+
+#### 示例
+```typescript
+await bitable.bridge.navigateToExtension('xxx_id');
 ```

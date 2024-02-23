@@ -1,5 +1,16 @@
 # ChangeLog
 
+## 0.3.8
+
+### Feat
+
+- 支持**表格视图**获取当前选中的所有记录 id 
+- 新增 `Bridge.navigateToExtension` 实现插件间跳转能力
+- 新增 `Bridge.onDataChange` 事件，用于监听插件数据存储变更
+
+### Fix
+- 插件相关权限将受文档权限管控
+
 ## 0.3.6
 
 ### Feat

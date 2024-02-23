@@ -64,6 +64,13 @@ getVisibleRecordIdList(): Promise<(string | undefined)[]>;
 getVisibleFieldIdList(): Promise<string[]>;
 ```
 
+## getSelectedRecordIdList
+获取当前选中的所有记录 ID 列表。
+
+```typescript
+getSelectedRecordIdList(): Promise<string[]>;
+```
+
 ## applySetting
 将设置的分组/筛选/排序等视图配置提交，同步给其他用户。
 
