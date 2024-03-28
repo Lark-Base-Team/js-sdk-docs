@@ -46,7 +46,7 @@ const recordIdList = await bitable.ui.selectRecordIdList(tableId, viewId);
 const table = await bitable.base.getActiveTable();
 const recordValList = [];
 for (const recordId of recordIdList) {
-  recordValList.push(await table.getRecord(recordId));
+  recordValList.push(await table.getRecordById(recordId));
 }
 ```
 

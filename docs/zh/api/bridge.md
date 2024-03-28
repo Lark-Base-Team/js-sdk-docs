@@ -7,7 +7,7 @@ const bridge = bitable.bridge;
 ```
 
 ## setData
-通过指定 `key` 存储当前插件自定义数据，该自定义数据在同一插件下是共享的。
+通过指定 `key` 存储当前插件自定义数据，该自定义数据在`同一文档`的`同一插件`下是共享的。
 
 ```typescript
 setData<T>(key: string, data: T): Promise<boolean>;
