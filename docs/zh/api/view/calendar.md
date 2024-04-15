@@ -1,7 +1,5 @@
 # CalendarView 日历视图
 
-
-
 ## id
 当前视图的 id
 

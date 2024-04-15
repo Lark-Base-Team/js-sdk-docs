@@ -105,10 +105,6 @@ export const getEnSideBar = () => (
           collapsed: false,
           items: [
             {
-              text: 'Field Module Guide',
-              link: 'field/guide'
-            },
-            {
               text: 'Attachment Field',
               link: 'field/attachment'
             },

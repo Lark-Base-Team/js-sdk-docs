@@ -49,6 +49,10 @@ export const getZhSideBar = () => (
               link: 'view'
             },
             {
+              text: 'Field 模块',
+              link: 'field'
+            },
+            {
               text: 'Record 模块',
               link: 'record',
             },
@@ -68,7 +72,7 @@ export const getZhSideBar = () => (
         },
         {
           text: '视图模块',
-          collapsed: false,
+          collapsed: true,
           items: [
             // {
             //   text: '视图模块引导',
@@ -102,11 +106,11 @@ export const getZhSideBar = () => (
         },
         {
           text: '字段模块',
-          collapsed: false,
+          collapsed: true,
           items: [
             {
-              text: '字段模块引导',
-              link: 'field/guide'
+              text: '基础字段',
+              link: 'field/base'
             },
             {
               text: '文本字段',
@@ -213,8 +217,18 @@ export const getZhSideBar = () => (
               link: 'field/email'
             },
           ],
+        },
+        {
+          text: '通用信息',
+          collapsed: true,
+          items: [
+            {
+              text: '错误码',
+              link: 'common/error-code'
+            }
+          ]
         }
       ],
-    },
+    }
   }
 )

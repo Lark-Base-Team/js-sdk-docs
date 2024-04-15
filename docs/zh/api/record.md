@@ -1,6 +1,6 @@
 # Record 模块
 ::: warning 
-更推荐开发者们从 [`Field(字段)`](field/guide.md) 字段角度来考虑对数据的增删改查
+更推荐开发者们从 [`Field(字段)`](field.md) 字段角度来考虑对数据的增删改查
 :::
 在 `Table` 中，可以通过 `getRecordList` 接口获取到 `RecordList`(Record 记录的一个数组集合，其中有当前 table 下所有的记录），`RecordList` 是可以遍历使用的，使用方式如下（不推荐，会有性能相关问题）:
 ```typescript
@@ -14,7 +14,7 @@ for (const record of recordList) {
 ```typescript
 const record = await recordList.getRecordById(recordId);
 ```
-不过，还是更推荐开发者在对数据进行增删改查时，从 [`Field(字段)`](field/guide.md) 来考虑
+不过，还是更推荐开发者在对数据进行增删改查时，从 [`Field(字段)`](field.md) 来考虑
 
 ## getCellList
 获取当前记录中所有的 `Cell`(关于 [`Cell`](cell.md))

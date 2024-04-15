@@ -39,7 +39,7 @@ const attachmentUrls = await attachmentField.getAttachmentUrls(recordId)
 因为附件字段中存储的并不是真正的 URL，所以在获取真正的 URL 时，需要多步，但是从字段本身的角度去考虑，我们在实现这个 API 的时候，就可以把这些工作放在字段自身的方法里实现，
 所以还是非常推荐用户对数据的增删改查以及字段属性的设置可以从字段角度去考量。
 
-除了 `IAttachmentField(附件字段)` 以外，我们还细化了很多字段，可以从 [字段引导](field/guide.md) 阅读更多资料，Table 模块也有更多的 API 方法来供给开发者使用。
+除了 `IAttachmentField(附件字段)` 以外，我们还细化了很多字段，可以从 [字段引导](field.md) 阅读更多资料，Table 模块也有更多的 API 方法来供给开发者使用。
 
 ## Cell 模块
 在上文中，通过 `attachmentField.creatCell` 方法构造出来的 `Cell` 也是一个非常重要的模块，在进行插入数据的操作时，我们推荐开发者通过 `Field` 来构造 `Cell`，来插入数据，

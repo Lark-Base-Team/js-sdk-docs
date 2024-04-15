@@ -41,7 +41,7 @@ const attachmentUrls = await attachmentField.getAttachmentUrls(recordId);
 
 Because the attachment field does not store the actual URLs, multiple steps are required to obtain the actual URLs. However, when considering from the perspective of the field, we can implement these steps in the methods of the field itself. Therefore, it is still highly recommended that you consider data manipulation, field property settings, etc. from the perspective of the field.
 
-In addition to `IAttachmentField`, we have defined many other field types. You can read more about them in the [Field Guide](field/guide.md). The Table module also has more API methods for developers to use.
+In addition to `IAttachmentField`, we have defined many other field types. You can read more about them in the [Field Guide](field.md). The Table module also has more API methods for developers to use.
 
 ## Cell Module
 In the previous section, the `Cell` constructed using the `attachmentField.createCell` method is also a very important module. When performing data insertion operations, we recommend that developers use `Field` to construct `Cell` and insert data. Once a `Cell` is successfully inserted into a `Table`, it will be associated with a record. At this time, when performing `getValue/setValue`, it will be associated with real-time data. You can change the value of the corresponding cell in the table as follows:
