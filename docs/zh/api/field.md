@@ -1,7 +1,7 @@
 # Field 模块
 字段 `Field` 即中数据表 `Table` 的`列`，字段类型决定了这一列的数据类型，如多行文本字段可承载文本、链接等数据，人员字段可承载人员信息等。
 
-通常我们通过 [Table 模块](../table) 创建或获取字段，如下所示：
+通常我们通过 [Table 模块](./table) 创建或获取字段，如下所示：
 ```typescript
 const singleSelectField = await table.getField<ISingleSelectField>(fieldNameOrId);
 ```
@@ -14,7 +14,7 @@ await singleSelectField.addOption('Option1');
 await singleSelectField.setValue(recordOrId, 'Option2');
 ```
 基于列的角度对数据进行增删改查时非常简单和便利，我们为很多字段提供了便于开发者使用的方法
-，这里展示一个通过 [附件字段](./attachment.md) 来创建一条记录的例子：
+，这里展示一个通过 [附件字段](./field/attachment.md) 来创建一条记录的例子：
 ```typescript
 const attachmentCell = await attachmentField.createCell(imageFile);
 await table.addRecord(attachmentCell);
