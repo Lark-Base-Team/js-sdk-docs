@@ -471,6 +471,25 @@ getCellAttachmentUrls(tokens: string[], fieldId: string, recordId: string): Prom
 const urls = await table.getCellAttachmentUrls(['token_1', 'token_2'], 'f_id', 'r_id');
 ```
 
+### getCellThumbnailUrls
+批量获取指定附件单元格中**缩略图的 URL**，可指定缩略图的图片质量，参数中的 token 需要从附件字段所属的单元格中获取，该接口返回的是 `base64` 格式的字符串。
+
+```typescript
+getCellThumbnailUrls(tokens: string[], fieldId: string, recordId: string, quality: ImageQuality): Promise<string[]>;
+
+enum ImageQuality {
+  Low = 120,
+  Mid = 360,
+  HIGH = 720,
+  MAX = 1280,
+}
+```
+
+#### 示例
+```typescript
+const urls = await table.getCellThumbnailUrls(['token_1', 'token_2'], 'f_id', 'r_id', ImageQuality.MAX);
+```
+
 ### getRecordShareLink
 获取指定记录的分享链接，获得链接的用户，将以多维表格的权限访问。
 ```typescript

@@ -68,16 +68,16 @@ export const getZhSideBar = () => (
               text: 'UI 模块',
               link: 'ui'
             },
+            {
+              text: 'Dashboard 模块',
+              link: 'dashboard'
+            },
           ]
         },
         {
           text: '视图模块',
           collapsed: true,
           items: [
-            // {
-            //   text: '视图模块引导',
-            //   link: 'view/guide'
-            // },
             {
               text: '表格视图',
               link: 'view/grid'
