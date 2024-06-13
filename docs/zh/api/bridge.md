@@ -81,8 +81,8 @@ const res = await bitable.bridge.getBitableUrl({
 ## getUserId
 获取当前用户 ID。
 
-:::warning
-该接口返回的用户 ID 与飞书开放平台的 OpenUserId 并不通用，请勿将其作为全平台的唯一 id。
+:::danger
+不建议使用，请替换成 [getBaseUserId](#getbaseuserid) 接口。
 :::
 
 ```typescript
@@ -92,6 +92,22 @@ getUserId(): Promise<string>;
 #### 示例
 ```typescript
 const res = await bitable.bridge.getUserId();
+```
+
+## getBaseUserId
+获取当前用户 id，该用户标识在`不同插件点位（侧边栏、连接器等）中均唯一`。
+
+:::warning
+该接口返回的用户 ID 与飞书开放平台的 OpenUserId 并不通用，请勿将其作为全平台的唯一 id。
+:::
+
+```typescript
+getBaseUserId(): Promise<string>;
+```
+
+#### 示例
+```typescript
+const res = await bitable.bridge.getBaseUserId();
 ```
 
 ## getTheme
