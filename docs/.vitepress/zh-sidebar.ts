@@ -68,10 +68,6 @@ export const getZhSideBar = () => (
               text: 'UI 模块',
               link: 'ui'
             },
-            {
-              text: 'Dashboard 模块',
-              link: 'dashboard'
-            },
           ]
         },
         {
