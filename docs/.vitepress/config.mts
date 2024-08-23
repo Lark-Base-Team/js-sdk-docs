@@ -17,7 +17,7 @@ export default defineConfig({
       { text: 'Guide', link: '/zh/start/core', activeMatch: 'zh/start/core' },
       { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
       { text: 'ChangeLog', link: '/zh/changelog' },
-      { text: '联系我们', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=c35kac73-d80b-4066-bcd0-2df6e6017188' },
+      { text: '联系我们', link: 'https://go.larkoffice.com/join-chat/bb7m3906-f1e1-47d2-ba50-372c088f75ca' },
     ],
     outline: [2, 3]
   },
@@ -47,7 +47,7 @@ export default defineConfig({
           { text: 'API', link: '/zh/api/guide', activeMatch: 'zh/api' },
           { text: 'ChangeLog', link: '/zh/changelog' },
           { text: 'FAQ', link: '/zh/FAQ' },
-          { text: '联系我们', link: 'https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=c35kac73-d80b-4066-bcd0-2df6e6017188' },
+          { text: '联系我们', link: 'https://go.larkoffice.com/join-chat/bb7m3906-f1e1-47d2-ba50-372c088f75ca' },
           { text: '反馈建议', link: 'https://bytedance.larkoffice.com/share/base/form/shrcnDFmrzigVo1HnSzlxaQLbSe' },
         ],
         sidebar: getZhSideBar(),
