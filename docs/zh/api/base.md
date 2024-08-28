@@ -181,7 +181,7 @@ import { PermissionEntity, OperationType } from '@lark-base-open/js-sdk';
 
 const fieldInfo: FieldPermissionParams = {
   entity: PermissionEntity.Field,
-  params: {
+  param: {
     tableId,
     fieldId,
   },

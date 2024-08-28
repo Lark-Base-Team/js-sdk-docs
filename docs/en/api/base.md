@@ -121,7 +121,7 @@ When using this method, you need to pass in the corresponding configuration to q
 ```typescript
 const fieldInfo: FieldPermissionParams = {
   entity: PermissionEntity.Field,
-  params: {
+  param: {
     tableId,
     fieldId,
   },
@@ -129,7 +129,7 @@ const fieldInfo: FieldPermissionParams = {
 }
 const hasPermission = await base.getPermission(params);
 ```
-In this example, we pass in the `entity` to specify that we want to query field permissions, `params` is used to specify the field we want to check, and `type` is the type of permission we want to check (in this case, editable permission).
+In this example, we pass in the `entity` to specify that we want to query field permissions, `param` is used to specify the field we want to check, and `type` is the type of permission we want to check (in this case, editable permission).
 
 ## isEditable
 ```typescript
