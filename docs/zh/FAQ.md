@@ -10,3 +10,9 @@
 
 ## 3. [Bridge.getUserId](../zh/api/bridge.md#getuserid) 方法获取到的 userId 能直接在飞书开放平台消费使用吗？
 **不可以**，该接口获取到的 `userId` 和飞书开放平台中的 `userId` 并非一一对应的关系，**两者相互独立，请勿混用**。
+
+## 4. 为什么在高级权限下分配了 Table 权限，调用权限检查 API 却返回 false？
+当通过高级权限给用户分配了 Table 的编辑和管理权限后，调用 `getPermission` API 检查 Table 权限时返回 false，这是符合预期的设计。
+
+- **原因**：Table 实体本身没有 `manageable` 权限点位，且 `editable` 在高级权限场景下会返回 false
+- **解决方案**：如需检查具体的行、列或视图权限，请将实体类型从 `Table` 改为具体的实体类型，如 `Record`、`Field` 或 `View`

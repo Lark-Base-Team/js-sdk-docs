@@ -131,6 +131,10 @@ const hasPermission = await base.getPermission(params);
 ```
 In this example, we pass in the `entity` to specify that we want to query field permissions, `param` is used to specify the field we want to check, and `type` is the type of permission we want to check (in this case, editable permission).
 
+:::warning
+**Note**: In advanced permission scenarios, checking `editable` permission for the Table entity will return false. To check permissions for specific rows, columns, or views, use `Record`, `Field`, or `View` entity types instead.
+:::
+
 ## isEditable
 ```typescript
 isEditable(): Promise<boolean>;
@@ -145,6 +149,10 @@ const isEditable = await base.isEditable();
 batchUploadFile(file: File[] | FileList): Promise<string[]>;
 ```
 Uploads multiple files and returns a list of fileTokens corresponding to each file.
+
+:::warning
+**Note**: Due to internal mechanism constraints, concurrent calls to `batchUploadFile` are prohibited as they may cause unexpected errors. It is recommended to use sequential calls or ensure the previous call completes before initiating a new request.
+:::
 
 ## onTableDelete
 ```typescript

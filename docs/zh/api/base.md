@@ -190,6 +190,21 @@ const fieldInfo: FieldPermissionParams = {
 const hasPermission = await base.getPermission(params);
 ```
 
+:::warning
+**注意**：在高级权限场景下，检查 Table 实体的 `editable` 权限会返回 false。如需检查具体的行、列或视图权限，请使用 `Record`、`Field` 或 `View` 实体类型。
+:::
+```typescript
+// 示例：高级权限场景下，检查 Table 实体的 editable 权限，可将 entity 改为 Record 
+const hasPermission = await base.getPermission({
+  entity: PermissionEntity.Record,
+  param: {
+    tableId,
+  },
+  type: OperationType.Editable,
+});
+
+```
+
 ## 写接口
 ### addTable
 添加数据表，支持设置表名和字段，返回创建成功数据表的 id 和索引位置。
@@ -241,10 +256,14 @@ await bitable.base.deleteTable(table.id);
 ```
 
 ### batchUploadFile
+:::warning
+**注意**：由于内部机制限制，禁止并发调用 `batchUploadFile` 接口，否则可能导致不可预期的错误。建议采用串行方式调用或确保前一次调用完成后再发起新的请求。
+:::
 批量上传文件，按序返回每个文件对应的 fileToken 列表，支持传入 [File](https://developer.mozilla.org/zh-CN/docs/Web/API/File) 数组或 [FileList](https://developer.mozilla.org/zh-CN/docs/Web/API/FileList) 对象。
 ```typescript
 batchUploadFile(file: File[] | FileList): Promise<string[]>;
 ```
+
 #### 示例
 ```typescript
 // 文件上传限制
@@ -255,6 +274,8 @@ const file = new File(['Hello, World!'], 'hello.txt', { type: 'text/plain' });
 const tokens =await bitable.base.batchUploadFile([file]); // 拿到的 token 可以用于设置附件字段
 console.log(tokens) // ['BcdqbMmW4ohD7ExUq9rcGtuVn8e']
 ```
+
+
 
 
 ## 事件
