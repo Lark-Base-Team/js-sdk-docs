@@ -674,8 +674,9 @@ test('t4');
 
 
 
-### getRecords
-批量获取 record 数据。目前只能获取200条数据，请使用 [getRecordsByPage](./table.md#getRecordsByPage) 方法以获得更好的性能体验。
+### getRecords（⚠️）
+不再维护，请使用 [getRecordsByPage](./table.md#getRecordsByPage) 方法以获得更好的性能体验。
+批量获取 record 数据。
 
 :::warning
 单次获取上限 **200** 条。
@@ -744,8 +745,9 @@ getRecordIdListByPage(params: IGetRecordIdListByPageParams): Promise<IGetRecordI
 
 
 
-### getRecordIdList
-获取所有记录 id 列表。最多获取200条。请使用 [getRecordIdListByPage](./table.md#getRecordIdListByPage) 方法以获得更好的性能体验。
+### getRecordIdList(⚠️)
+不再维护，请使用 [getRecordIdListByPage](./table.md#getRecordIdListByPage) 方法以获得更好的性能体验。
+获取所有记录 id 列表。最多获取200条。
 
 :::warning
 通过该方法获取的记录 id 列表是**无序的**，因为 `table` 不涉及 UI 展示层面的信息，如果需要获取有序的字段 id 列表，需要在 `View 模块` 调用 `view.getVisibleRecordIdList` 来获取有序的记录 id 列表
@@ -760,7 +762,7 @@ const recordIdList = await table.getRecordIdList();
 ```
 
 ### getRecordList(⚠️)
-不再支持，请使用[getRecordsByPage](./table.md#getRecordsByPage)替代。
+不再维护，请使用[getRecordsByPage](./table.md#getRecordsByPage)替代。
 获取当前的记录列表，`Record` 模块中的相关方法可以查看 [Record 模块](./record.md)
 
 ```typescript
