@@ -357,7 +357,7 @@ const cellValue = table.getCellValue(fieldId, recordId);
 通过指定 id 去获取对应记录。
 
 :::tip
-批量获取场景下，建议使用 [getRecords](./table.md#getrecords) 方法以获得更好的性能体验
+批量获取场景下，建议使用 [getRecordsByPage](./table.md#getRecordsByPage) 方法以获得更好的性能体验
 :::
 
 ```typescript
@@ -377,11 +377,309 @@ const recordIdList = await table.getRecordIdList(); // 获取 recordId 列表
 const recordValue = await table.getRecordById(recordIdList[0]);
 ```
 
-### getRecords
+### getRecordsByPage
+分页获取 record 数据，一次最多获取200条，本文档中所有批量获取表格数据的api，实际均基于此方法进行二次改造而成，如果要考虑性能问题，建议使用此方法一次性获取数据，再自行处理成你需要的数据格式，而不是多次调用其他获取数据的方法。
+
+
+
+```typescript
+getRecordsByPage(params: IGetRecordsByPageParams): Promise<IGetRecordsByPageResponse>;
+```
+
+| 名称      | 数据类型 | 是否必填 | 描述                                                                                                                                    |
+| --------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| params.pageSize  | number   | 否       | 分页页面大小 size，最大值：200                                                                                                         |
+| params.pageToken | string   | 否       | 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果 |
+| params.sort     | ISortInfo[] | 否       | 排序字段，默认按创建时间降序排序                                                                                             |
+| params.filter   | IGetRecordsFilterInfo | 否       | 筛选条件，默认不筛选 |
+| params.viewId    | string   | 否       | 视图的唯一标识符，获取指定视图下的记录，会令sort和filter参数失效。如果不指定viewId，则默认获取所有记录|
+| params.stringValue | boolean   | 否       | 是否返回字符串类型的字段值，默认 false。如果设置为 true，则所有字段值都将以字符串类型返回。字符串与多维表格上表现文字相同|
+
+相关类型定义如下：
+```typescript
+interface IGetRecordsByPageParams extends IPageParams {
+    filter?: IGetRecordsFilterInfo;
+    sort?: ISortInfo[];
+    viewId?: string;
+    /** 是否以字符串格式返回单元格的值（如同getCellString那样）。默认false */
+    stringValue?: boolean;
+}
+type PageToken = number;
+interface IPageParams {
+    pageSize?: number;
+    pageToken?: PageToken;
+}
+interface IGetRecordsByPageResponse extends IPageResponse {
+    records: IRecord[];
+}
+interface IRecord {
+  recordId: string;
+  fields: {
+    [fieldId: string]: IOpenCellValue;
+  };
+}
+```
+
+#### 示例
+```typescript
+import { bitable, FilterConjunction, FilterOperator, ITable } from "@lark-base-open/js-sdk";
+
+async function test(testKey: any = 't1') {
+  // 替换为你自己的tableId和filedId等
+  const t = 'tblfGIreNWkpfKyv';
+  const A = 'fldpd4z21F';
+  const B = 'fldzUTUKfP';
+  const C = 'fldUNJXD5z';
+  const D = 'fld4qDQPIl';
+  /** 修改人 */
+  const user1 = 'fldfJaC296';// q:"ou_d43e39xxxxxxxxx214e07f"
+
+  const table = await bitable.base.getTableById(t);
+  console.log('===table', table);
+
+  // filter属性较为复杂，如果是动态生成的，请务必在完全理解了以下例子后再使用，避免你的插件上线后出错。
+  const tests: any = {
+    /** 筛选出A字段包含12，且修改人是q，且B字段包含12或23的记录 */
+    t1: async (api: 'getRecordsByPage' | 'getRecordIdListByPage') => await table[api]({
+      filter: {
+        conjunction: FilterConjunction.And,
+
+        conditions: [
+          {
+            conditions: [{
+              fieldId: A,
+              operator: FilterOperator.Contains,
+              value: '12',
+            }],
+            conjunction: FilterConjunction.And,
+          },
+          {
+            conditions: [
+              {
+                fieldId: B,
+                operator: FilterOperator.Contains,
+                value: '12'
+              },
+              {
+                fieldId: B,
+                operator: FilterOperator.Contains,
+                value: '23'
+              }
+            ],
+            conjunction: FilterConjunction.Or,
+          },
+          {
+            conditions: [
+              {
+                fieldId: user1,
+                operator: FilterOperator.Is,
+                value: ["ou_e4074axxxxx946c8ff7b0ceeb"]
+              }
+            ],
+            conjunction: FilterConjunction.And,
+          }
+        ]
+      }
+    }),
+
+    /** 筛选出A包含12，且修改人是q，并且B包含12,23中任一数字。或者A包含34，并且B不包含12,23中任一数字的列 */
+    t2: async (api: 'getRecordsByPage' | 'getRecordIdListByPage') => await table[api]({
+      filter: {
+        conjunction: FilterConjunction.Or,// 连接children中的每个过滤条件
+        conditions: [
+          {
+            conjunction: FilterConjunction.And,// 连接children中的每个过滤条件
+
+            conditions: [
+              {
+                conditions: [{
+                  fieldId: A,
+                  operator: FilterOperator.Contains,
+                  value: '12',
+                }, {
+                  fieldId: user1,
+                  operator: FilterOperator.Is,
+                  value: ['ou_e4074xxxxc8ff7b0ceeb']
+                }],
+                conjunction: FilterConjunction.And,// 连接conditions中的每个过滤条件
+              },
+              {
+                conditions: [
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.Contains,
+                    value: '12'
+                  },
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.Contains,
+                    value: '23'
+                  }
+                ],
+                conjunction: FilterConjunction.Or,
+              }
+            ]
+          },
+          {
+            conjunction: FilterConjunction.And,
+
+            conditions: [
+              {
+                conditions: [{
+                  fieldId: A,
+                  operator: FilterOperator.Contains,
+                  value: '34',
+                }],
+                conjunction: FilterConjunction.And,
+              },
+              {
+                conditions: [
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.DoesNotContain,
+                    value: '12'
+                  },
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.DoesNotContain,
+                    value: '23'
+                  }
+                ],
+                conjunction: FilterConjunction.And,
+              }
+            ]
+          }
+        ]
+      }
+    }),
+    /** 筛选出A等于1，并且B包含1,2,3中任一数字。或者A等于2，并且B包含12,23中任一数字，且B中不含45的列 */
+    t3: async (api: 'getRecordsByPage' | 'getRecordIdListByPage') => await table[api]({
+      filter: {
+        conjunction: FilterConjunction.Or,
+
+        conditions: [
+          {
+            conjunction: FilterConjunction.And,
+
+            conditions: [
+              {
+                conditions: [{
+                  fieldId: A,
+                  operator: FilterOperator.Is,
+                  value: '1',
+                }],
+                conjunction: FilterConjunction.And,
+              },
+              {
+                conditions: [
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.Contains,
+                    value: '1'
+                  },
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.Contains,
+                    value: '2'
+                  },
+                  {
+                    fieldId: B,
+                    operator: FilterOperator.Contains,
+                    value: '3'
+                  }
+                ],
+                conjunction: FilterConjunction.Or,
+              }
+            ]
+          },
+          {
+            conjunction: FilterConjunction.And,
+
+            conditions: [
+              {
+                conditions: [{
+                  fieldId: A,
+                  operator: FilterOperator.Is,
+                  value: '2',
+                }],
+                conjunction: FilterConjunction.And,
+              },
+              {
+                // conditions: [],
+                conjunction: FilterConjunction.And,
+                conditions: [
+                  {
+                    conditions: [
+                      {
+                        fieldId: B,
+                        operator: FilterOperator.Contains,
+                        value: '12'
+                      },
+                      {
+                        fieldId: B,
+                        operator: FilterOperator.Contains,
+                        value: '23'
+                      }
+                    ],
+                    conjunction: FilterConjunction.Or,
+                  },
+                  {
+                    conditions: [{
+                      fieldId: B,
+                      operator: FilterOperator.DoesNotContain,
+                      value: '45',
+                    }],
+                    conjunction: FilterConjunction.And,
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }),
+
+    /** 筛选出修改人是q，且B字段包含12的记录 */
+    t4: async (api: 'getRecordsByPage' | 'getRecordIdListByPage') => await table[api]({
+      filter: {
+
+        conditions: [
+          {
+            fieldId: B,
+            operator: FilterOperator.Contains,
+            value: '12'
+          },
+          {
+            fieldId: user1,
+            operator: FilterOperator.Is,
+            value: ["ou_e4074ae53475460a60946c8ff7b0ceeb"]
+          }
+        ],
+        conjunction: FilterConjunction.And,
+      }
+    }),
+  }
+  const records = await tests[testKey]('getRecordsByPage');
+  const recordIds = await tests[testKey]('getRecordIdListByPage');
+  console.log(testKey + '===res', { records, recordIds });
+}
+test();
+test('t2');
+test('t3');
+test('t4');
+```
+
+
+
+
+
+
+### getRecords（⚠️）
+不再维护，请使用 [getRecordsByPage](./table.md#getRecordsByPage) 方法以获得更好的性能体验。
 批量获取 record 数据。
 
 :::warning
-单次获取上限 **5000** 条。
+单次获取上限 **200** 条。
 :::
 
 ```typescript
@@ -390,14 +688,14 @@ getRecords({ pageSize, pageToken, viewId }: IGetRecordsParams): Promise<IGetReco
 
 | 名称      | 数据类型 | 是否必填 | 描述                                                                                                                                    |
 | --------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| pageSize  | number   | 是       | 分页页面大小 size，最大值：5000                                                                                                         |
+| pageSize  | number   | 是       | 分页页面大小 size，最大值：200                                                                                                         |
 | pageToken | string   | 否       | 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果 |
 | viewId    | string   | 否       | 视图的唯一标识符，获取指定视图下的记录                                                                                                  |
 
 相关类型定义如下：
 ```typescript
 interface IGetRecordsParams {
-  pageSize?: number; // 获取数量，默认 5000，最大不得超过 5000
+  pageSize?: number; // 获取数量，默认 200，最大不得超过 200
   pageToken?: string; // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 pageToken，下次遍历可采用该 pageToken 获取查询结果
   viewId?: string;  // 获取指定视图的 record
 }
@@ -422,12 +720,34 @@ interface IRecord {
 // 首先使用 getActiveTable 方法获取了当前用户选择的 table（用户当前编辑的数据表）
 const table = await bitable.base.getActiveTable();
 const records = await table.getRecords({
-  pageSize: 5000
+  pageSize: 200
 })
 ```
 
-### getRecordIdList
-获取所有记录 id 列表。
+
+
+### getRecordIdListByPage
+分页获取 record id 列表，一次最多获取200条。
+
+```typescript
+getRecordIdListByPage(params: IGetRecordIdListByPageParams): Promise<IGetRecordIdListByPageResponse>;
+```
+
+| 名称      | 数据类型 | 是否必填 | 描述                                                                                                                                    |
+| --------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| params.pageSize  | number   | 否       | 分页页面大小 size，最大值：200                                                                                                         |
+| params.pageToken | string   | 否       | 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果 |
+| params.sort     | ISortInfo[] | 否       | 排序字段，默认按创建时间降序排序                                                                                             |
+| params.filter   | IGetRecordsFilterInfo | 否       | 筛选条件，默认不筛选 |
+| params.viewId    | string   | 否       | 视图的唯一标识符，获取指定视图下的记录，会令sort和filter参数失效。如果不指定viewId，则默认获取所有记录|
+
+使用方法同 [getRecordsByPage](./table.md#getRecordsByPage)
+
+
+
+### getRecordIdList(⚠️)
+不再维护，请使用 [getRecordIdListByPage](./table.md#getRecordIdListByPage) 方法以获得更好的性能体验。
+获取所有记录 id 列表。最多获取200条。
 
 :::warning
 通过该方法获取的记录 id 列表是**无序的**，因为 `table` 不涉及 UI 展示层面的信息，如果需要获取有序的字段 id 列表，需要在 `View 模块` 调用 `view.getVisibleRecordIdList` 来获取有序的记录 id 列表
@@ -441,7 +761,8 @@ getRecordIdList(): Promise<string[]>;
 const recordIdList = await table.getRecordIdList();
 ```
 
-### getRecordList
+### getRecordList(⚠️)
+不再维护，请使用[getRecordsByPage](./table.md#getRecordsByPage)替代。
 获取当前的记录列表，`Record` 模块中的相关方法可以查看 [Record 模块](./record.md)
 
 ```typescript
@@ -545,7 +866,7 @@ const recordId = await table.addRecord(textCell);
 新增多条记录，新增成功后返回 `recordId` 列表。
 
 :::warning
-单次新增记录上限 **5000** 条
+单次新增记录上限 **200** 条
 :::
 
 ```typescript
@@ -659,7 +980,7 @@ const res = await table.setRecord(recordIds[0], {
 批量修改记录数据。
 
 :::warning
-单次修改记录上限 **5000** 条
+单次修改记录上限 **200** 条
 :::
 
 ```typescript
@@ -758,7 +1079,7 @@ await table.deleteRecord(recordIdList[0]);
 批量删除记录。
 
 :::warning
-单次删除记录上限 **5000** 条
+单次删除记录上限 **200** 条
 :::
 
 ```typescript

@@ -50,8 +50,37 @@ interface IGridViewMeta {
 getFieldMetaList(): Promise<IFieldMeta[]>;
 ```
 
-## getVisibleRecordIdList
-获取可见记录的 ID 列表。
+## getVisibleRecordIdListByPage
+分页获取可见记录的 ID 列表，单页最多获取200条。
+
+```typescript
+getVisibleRecordIdListByPage(params: IGetVisibleRecordIdListByPageParams): Promise<IGetVisibleRecordIdListByPageResponse>
+
+interface IGetVisibleRecordIdListByPageParams extends IPageParams {
+    filter?: IFilterInfo;
+    sort?: ISortInfo[];
+
+}
+interface IGetVisibleRecordIdListByPageResponse extends IPageResponse {
+    recordIds: string[];
+}
+type PageToken = number;
+interface IPageParams {
+    pageSize?: number;
+    pageToken?: PageToken;
+}
+interface IPageResponse {
+    total: number;
+    hasMore: boolean;
+    pageToken?: PageToken;
+}
+
+
+```
+
+
+## getVisibleRecordIdList（⚠️）
+获取可见记录的 ID 列表，最多获取200条。
 
 ```typescript
 getVisibleRecordIdList(): Promise<(string | undefined)[]>;
@@ -78,7 +107,32 @@ getSelectedRecordIdList(): Promise<string[]>;
 applySetting(): Promise<void>;
 ```
 
-## getChildRecordIdList
+## getChildRecordIdListByPage
+分页获取指定记录的子记录 id 列表，单页最多获取200条。
+
+```typescript
+getChildRecordIdListByPage(params: IGetChildRecordIdListByPageParams): Promise<IGetChildRecordIdListByPageResponse>;
+interface IPageParams {
+    pageSize?: number;
+    pageToken?: PageToken;
+}
+interface IPageResponse {
+    total: number;
+    hasMore: boolean;
+    pageToken?: PageToken;
+}
+type PageToken = number;
+interface IGetChildRecordIdListByPageParams extends IPageParams {
+    parentRecordId: string;
+}
+interface IGetChildRecordIdListByPageResponse extends IPageResponse {
+    recordIds: string[];
+}
+```
+
+## getChildRecordIdList（⚠️）
+不再维护，请使用 [getChildRecordIdListByPage](./grid.md#getChildRecordIdListByPage) 方法以获得更好的性能体验。
+
 获取指定记录的子记录 id 列表, undefined 则表示该记录无子记录。
 
 ```typescript

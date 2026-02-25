@@ -57,7 +57,8 @@ getMeta(): Promise<IFieldMeta>;
 ```
 获取字段元信息，不同字段的元信息不同，具体类型定义可点击相应字段模块查看。
 
-## getFieldValueList
+## getFieldValueList（⚠️）
+不再维护。请使用table.getRecordsByPage方法以获得更好的性能体验。
 ```typescript
 getFieldValueList(): Promise<IFieldValue[]>;
 ```
