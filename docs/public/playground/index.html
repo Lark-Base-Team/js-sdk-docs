@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe 嵌入测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .description {
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            background-color: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #1890ff;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #1890ff;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .result {
+            background-color: #fff3cd;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .result strong:first-child {
+            color: #856404;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        .input-group button {
+            padding: 12px 24px;
+            background-color: #1890ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group button:hover {
+            background-color: #40a9ff;
+        }
+
+        .input-group button:active {
+            background-color: #096dd9;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+
+        .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 560px;
+            color: #888;
+            text-align: center;
+        }
+
+        .placeholder svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .placeholder p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        iframe {
+            width: 100%;
+            height: 560px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            background-color: #fff;
+        }
+
+        .error {
+            color: #ff4d4f;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-group input {
+                width: 100%;
+            }
+
+            .input-group button {
+                width: 100%;
+            }
+
+            .placeholder svg {
+                width: 80px;
+                height: 80px;
+            }
+
+            iframe {
+                height: 400px;
+            }
+
+            .content {
+                min-height: 440px;
+            }
+
+            .placeholder {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>iframe 嵌入测试</h1>
+            <div class="description">
+                <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px;">请使用该页面测试对应网址是否支持在iframe中嵌入,以判断是否为「<strong style="color: #1890ff;">内嵌网页插件</strong>」问题。</p>
+                
+                <div class="steps">
+                    <p style="font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 8px;"><span class="step-number">1.</span> 在使用之前请先确保对应页面地址可以正常访问</p>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 8px;"><span class="step-number">2.</span> 将用户提供的地址在当前页面中加载</p>
+                </div>
+                
+                <div class="result">
+                    <p style="font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 20px;">
+                        <strong>判断标准：</strong><br>
+                        如果用户反馈问题在该页面中仍然存在，则说明该内嵌页面本身<strong style="color: #ff4d4f;">不支持在iframe中嵌入</strong>，需要联系内嵌页面提供方解决；<br>
+                        否则，联系插件RD协助处理。
+                    </p>
+                </div>
+            </div>
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="urlInput" 
+                    placeholder="请输入可用的网址（支持 http/https）"
+                    value="https://example.com"
+                >
+                <button id="loadBtn">加载</button>
+            </div>
+            <div id="errorMsg" class="error"></div>
+        </div>
+
+        <div class="content">
+            <div id="placeholder" class="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="9" y1="9" x2="15" y2="9"></line>
+                    <line x1="9" y1="15" x2="15" y2="15"></line>
+                    <line x1="15" y1="9" x2="15" y2="15"></line>
+                    <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+                <p>未输入网址或输入的网址无效，请检查</p>
+            </div>
+            <iframe id="previewFrame" style="display: none;"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const loadBtn = document.getElementById('loadBtn');
+        const placeholder = document.getElementById('placeholder');
+        const previewFrame = document.getElementById('previewFrame');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // URL 验证函数
+        function isValidUrl(url) {
+            try {
+                const parsedUrl = new URL(url);
+                return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:';
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // 加载 URL 函数
+        function loadUrl() {
+            const url = urlInput.value.trim();
+            
+            // 清除之前的错误信息
+            errorMsg.textContent = '';
+
+            // 验证 URL
+            if (!url) {
+                errorMsg.textContent = '请输入网址';
+                showPlaceholder();
+                return;
+            }
+
+            if (!isValidUrl(url)) {
+                errorMsg.textContent = '输入的网址无效，请检查格式（必须包含 http:// 或 https://）';
+                showPlaceholder();
+                return;
+            }
+
+            // 显示 iframe 并隐藏占位符
+            placeholder.style.display = 'none';
+            previewFrame.style.display = 'block';
+            previewFrame.src = url;
+        }
+
+        // 显示占位符函数
+        function showPlaceholder() {
+            previewFrame.style.display = 'none';
+            placeholder.style.display = 'flex';
+            previewFrame.src = '';
+        }
+
+        // 绑定事件
+        loadBtn.addEventListener('click', loadUrl);
+        urlInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadUrl();
+            }
+        });
+
+        // 页面加载时检查是否有预填充的 URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const url = urlInput.value.trim();
+            if (url && isValidUrl(url)) {
+                loadUrl();
+            }
+        });
+    </script>
+</body>
+</html>
