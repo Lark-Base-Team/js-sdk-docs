@@ -14,8 +14,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress": "1.0.0-rc.25",
-    "vue": "^3.3.4"
+    "vitepress": "1.0.0-rc.25"
   },
   "dependencies": {
     "@lark-base-open/js-sdk": "0.4.1-alpha.4"
